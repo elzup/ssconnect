@@ -9,7 +9,6 @@ export function getHomeStories(): ThunkAction {
   return dispatch => {
     client.getStories(
       (stories: Story[], blogs: Blog[], articles: Article[]) => {
-        debugger
         dispatch(actions.receiveStories(stories))
         dispatch(receiveBlogs(blogs))
         dispatch(receiveArticles(articles))
