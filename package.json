@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "apisauce": "^0.14.1",
+    "camelcase-keys": "^4.1.0",
+    "normalizr": "^3.2.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",

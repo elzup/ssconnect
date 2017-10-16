@@ -1,6 +1,10 @@
 // @flow
 
 import { create } from 'apisauce'
+import { normalize, schema } from 'normalizr'
+import camelcaseKeys from 'camelcase-keys'
+import _ from 'lodash'
+
 import type { Story, Blog } from '../types'
 
 const host =
@@ -28,6 +32,18 @@ type Params = {
   q?: string,
 }
 
+const blog = new schema.Entity('blogs')
+
+// Define your comments schema
+const article = new schema.Entity('articles', {
+  blog: blog,
+})
+
+// Define your article
+const story = new schema.Entity('stories', {
+  articles: [article],
+})
+
 export function getStories(
   cb: Function,
   params: ?Params,
@@ -41,8 +57,11 @@ export function getStories(
     })
     .then(res => {
       // { stories: res.data, pageInfo: FeedClient.getPageInfo(res) }
-      debugger
-      cb(res.data)
+      const normalizedData = normalize(res.data, [story])
+      const camelizedData = camelcaseKeys(normalizedData, { deep: true })
+      const { articles, blogs, stories } = camelizedData.entities
+      const articlesFlat = _.values(articles)
+      cb(_.values(articles), _.values(blogs), _.values(stories))
     })
 }
 
