@@ -1,4 +1,5 @@
 // @flow
+import type { Action as ArticlesContainerAction } from "../containers/ArticlesContainer/actionTypes";
 import type { Action as CartContainerAction } from "../containers/CartContainer/actionTypes";
 import type { Action as ProductsContainerAction } from "../containers/ProductsContainer/actionTypes";
 import type { Action as StoriesContainerAction } from "../containers/StoriesContainer/actionTypes";
@@ -9,6 +10,7 @@ export type ReduxInitAction = {
 
 export type Action =
   | ReduxInitAction
+  | ArticlesContainerAction
   | CartContainerAction
   | ProductsContainerAction
   | StoriesContainerAction;
