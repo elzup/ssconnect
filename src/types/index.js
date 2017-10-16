@@ -10,7 +10,7 @@ export type GetState = () => State
 
 export type ThunkAction = (
   dispatch: Dispatch,
-  getState: GetState,
+  getState: GetState
 ) => void | Promise<void>
 
 type ThunkDispatch<A> = ThunkAction => A
@@ -38,4 +38,23 @@ export type QuantityById = { [id: number]: number }
 export type Cart = {
   addedIds: number[],
   quantityById: QuantityById,
+}
+
+export type Blog = {
+  id: number,
+  title: string,
+}
+
+export type Article = {
+  id: number,
+  postedAt: string,
+  blog: number,
+}
+
+export type Story = {
+  id: number,
+  title: string,
+  firstPostedAt: string,
+  tagList: string[],
+  articles: number[],
 }
