@@ -5,15 +5,15 @@ import ReactDOM from 'react-dom'
 import App from './containers/App'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore from './store'
-import { getAllProducts } from './containers/CartContainer/logic'
+import { getHomeStories } from './containers/StoriesContainer/logic'
 
 const store = configureStore()
-store.dispatch(getAllProducts())
+store.dispatch(getHomeStories())
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 )
 registerServiceWorker()

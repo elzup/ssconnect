@@ -1,7 +1,6 @@
 // @flow
 import type { Action, Story } from '../../types'
 import { Actions } from '../StoriesContainer/actionTypes'
-import { Actions as CartActions } from '../CartContainer/actionTypes'
 
 export type State = { [id: number]: Story }
 
