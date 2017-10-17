@@ -5,7 +5,7 @@ import toJson from 'enzyme-to-json'
 import Comp, { type Props } from '.'
 
 const setup = (props: Props) => {
-  const comp = shallow(<Comp {...props}>{props.children}</Comp>)
+  const comp = shallow(<Comp {...props}>{props.screens}</Comp>)
 
   return {
     comp: comp,
@@ -16,8 +16,7 @@ const setup = (props: Props) => {
 
 test('snapshot', () => {
   const props = {
-    title: 'Test Product',
-    children: 'Test Children',
+    screens: [],
   }
   const { comp } = setup(props)
   expect(toJson(comp)).toMatchSnapshot()

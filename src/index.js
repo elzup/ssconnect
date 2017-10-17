@@ -6,6 +6,7 @@ import App from './containers/App'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore from './store'
 import { getHomeStories } from './containers/StoriesContainer/logic'
+import './injectGlobal'
 
 const store = configureStore()
 store.dispatch(getHomeStories())

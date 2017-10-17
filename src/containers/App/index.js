@@ -1,10 +1,16 @@
 // @flow
 import * as React from 'react'
+import AppBar from 'material-ui/AppBar'
+import ScreensContainer from '../ScreensContainer'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const App = () => (
-  <div>
-    <h2>Shopping Cart Example</h2>
-  </div>
+  <MuiThemeProvider>
+    <div>
+      <AppBar showMenuIconButton={false} title="My AppBar" />
+      <ScreensContainer />
+    </div>
+  </MuiThemeProvider>
 )
 
 export default App
