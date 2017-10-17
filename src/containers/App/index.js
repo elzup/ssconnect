@@ -6,8 +6,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const App = () => (
   <MuiThemeProvider>
-    <AppBar showMenuIconButton={false} title="My AppBar" />
-    <ScreensContainer />
+    <div>
+      <AppBar showMenuIconButton={false} title="My AppBar" />
+      <ScreensContainer />
+    </div>
   </MuiThemeProvider>
 )
 
