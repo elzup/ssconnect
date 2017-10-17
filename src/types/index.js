@@ -58,3 +58,11 @@ export type Story = {
   tagList: string[],
   articles: number[],
 }
+
+export type Screen = {
+  id: number,
+  page: number,
+  type: 'home' | 'search' | 'base',
+  tag: string,
+  q: string,
+}
