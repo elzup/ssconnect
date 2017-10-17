@@ -1,5 +1,4 @@
 // @flow
-
 import type { Screen } from "../../types";
 
 export const RECEIVE_SCREENS: "ScreensContainer/RECEIVE_SCREENS" =
