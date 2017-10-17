@@ -7,6 +7,7 @@ import BlogsContainer from "./containers/BlogsContainer/reducer";
 import ScreensContainer from "./containers/ScreensContainer/reducer";
 import StoriesContainer from "./containers/StoriesContainer/reducer";
 import StoryById from "./containers/StoryById/reducer";
+import System from "./containers/System/reducer";
 
 export default combineReducers({
   ArticleById,
@@ -15,5 +16,6 @@ export default combineReducers({
   BlogsContainer,
   ScreensContainer,
   StoriesContainer,
-  StoryById
+  StoryById,
+  System
 });

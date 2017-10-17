@@ -11,7 +11,7 @@ const Screens = ({ screens }: Props) => (
     {screens.map(s => (
       <div>
         <h3>{s.id}</h3>
-        <div>{s.tag}</div>
+        <div>Q: {s.q}</div>
       </div>
     ))}
   </div>

@@ -6,6 +6,7 @@ import type { State as BlogsContainer } from "../containers/BlogsContainer/reduc
 import type { State as ScreensContainer } from "../containers/ScreensContainer/reducer";
 import type { State as StoriesContainer } from "../containers/StoriesContainer/reducer";
 import type { State as StoryById } from "../containers/StoryById/reducer";
+import type { State as System } from "../containers/System/reducer";
 
 export type State = {
   ArticleById: ArticleById,
@@ -14,5 +15,6 @@ export type State = {
   BlogsContainer: BlogsContainer,
   ScreensContainer: ScreensContainer,
   StoriesContainer: StoriesContainer,
-  StoryById: StoryById
+  StoryById: StoryById,
+  System: System
 };

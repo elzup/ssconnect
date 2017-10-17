@@ -66,3 +66,8 @@ export type Screen = {
   tag: string,
   q: string,
 }
+
+export type System = {
+  selectedTab: number,
+  loaded: number,
+}

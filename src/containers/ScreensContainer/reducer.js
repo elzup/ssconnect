@@ -10,14 +10,14 @@ export const initialState: State = [
     page: 1,
     type: 'base',
     tag: '',
-    q: '',
+    q: 'タブ1',
   },
   {
     id: 1,
     page: 4,
     type: 'base',
     tag: '',
-    q: '京子',
+    q: 'タブ2',
   },
 ]
 
