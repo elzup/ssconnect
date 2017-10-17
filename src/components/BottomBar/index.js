@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { Screen, System } from '../../types'
-
-import FontIcon from 'material-ui/FontIcon'
+import FontAwesome from 'react-fontawesome'
 
 import {
   BottomNavigation,
@@ -16,9 +15,15 @@ export type Props = {
 }
 
 const BottomBar = ({ screens, switchTab, system }: Props) => (
-  <BottomNavigation selectedIndex={system.selectedTab}>
+  <BottomNavigation
+    selectedIndex={system.selectedTab}
+    style={{
+      bottom: '0px',
+      position: 'absolute',
+    }}
+  >
     {screens.map(s => {
-      const icon = <FontIcon className="material-icons">restore</FontIcon>
+      const icon = <FontAwesome name="rocket" size="2x" />
       return (
         <BottomNavigationItem
           key={s.id}
