@@ -2,6 +2,7 @@
 import * as React from 'react'
 import type { Screen, System } from '../../types'
 import FontAwesome from 'react-fontawesome'
+import _ from 'lodash'
 
 import {
   BottomNavigation,

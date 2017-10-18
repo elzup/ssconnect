@@ -62,9 +62,11 @@ export type Story = {
 export type Screen = {
   id: number,
   page: number,
-  type: 'home' | 'search' | 'base',
+  type: 'new' | 'home' | 'search' | 'base',
   tag: string,
   q: string,
+  storyIds: number[],
+  loaded: boolean,
 }
 
 export type System = {

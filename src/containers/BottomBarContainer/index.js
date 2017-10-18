@@ -4,11 +4,12 @@ import { connect, type Connector } from 'react-redux'
 import type { State, Screen } from '../../types'
 import BottomBar, { type Props } from '../../components/BottomBar'
 import { switchTab } from '../System/actions'
+import _ from 'lodash'
 
 type OProps = {}
 
 const ms = (state: State) => ({
-  screens: state.ScreensContainer,
+  screens: _.values(state.ScreensContainer),
   system: state.System,
 })
 
