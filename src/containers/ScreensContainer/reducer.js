@@ -9,19 +9,15 @@ export const initialState: State = {
     id: 0,
     page: 1,
     type: 'new',
-    tag: '',
-    q: '',
     loaded: false,
-    storyIds: [],
   },
   '1': {
     id: 1,
     page: 4,
-    type: 'base',
+    type: 'search',
     tag: '',
-    q: 'タブ2',
+    q: '櫻子',
     loaded: false,
-    storyIds: [],
   },
 }
 

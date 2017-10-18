@@ -5,11 +5,11 @@ import ReactDOM from 'react-dom'
 import App from './containers/App'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore from './store'
-import { getHomeStories } from './containers/StoriesContainer/logic'
+import { loadScreenStoryAll } from './containers/ScreensContainer/logic'
 import './injectGlobal'
 
 const store = configureStore()
-store.dispatch(getHomeStories())
+store.dispatch(loadScreenStoryAll())
 
 ReactDOM.render(
   <Provider store={store}>
