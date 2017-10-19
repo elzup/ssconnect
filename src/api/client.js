@@ -9,7 +9,8 @@ import type { Story, Blog, QueryParams, PageInfo, Screen } from '../types'
 
 const host =
   process.env.NODE_ENV == 'development'
-    ? 'http://localhost:3001'
+    ? // ? 'http://localhost:3001'
+      'https://ssconnect.elzup.com'
     : 'https://ssconnect.elzup.com'
 const TIMEOUT = 1000
 
