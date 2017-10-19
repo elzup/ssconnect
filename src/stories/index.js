@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import styled from 'styled-components'
 
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
@@ -55,10 +56,19 @@ const blogs: BlogById = {
   },
 }
 
+const PhoneWrap = styled.div`
+  width: 375px;
+  height: 667px;
+  margin: 10px;
+  box-shadow: 0px 0px 10px 0px;
+`
+
 storiesOf('StoryCell', module)
   .addDecorator(muiTheme())
   .add('normal', () => (
-    <StoryCell story={story} articles={articles} blogs={blogs} />
+    <PhoneWrap>
+      <StoryCell story={story} articles={articles} blogs={blogs} />
+    </PhoneWrap>
   ))
 
 const screens: Screen[] = [
@@ -86,15 +96,21 @@ const system: System = {
 storiesOf('ButtonBar', module)
   .addDecorator(muiTheme())
   .add('normal', () => (
-    <ButtonBar
-      screens={screens}
-      switchTab={id => {
-        console.log(`switch to ${id}`)
-      }}
-      system={system}
-    />
+    <PhoneWrap>
+      <ButtonBar
+        screens={screens}
+        switchTab={id => {
+          console.log(`switch to ${id}`)
+        }}
+        system={system}
+      />
+    </PhoneWrap>
   ))
 
 storiesOf('LoadingIndicator', module)
   .addDecorator(muiTheme())
-  .add('normal', () => <LoadingIndicator />)
+  .add('normal', () => (
+    <PhoneWrap>
+      <LoadingIndicator />
+    </PhoneWrap>
+  ))
