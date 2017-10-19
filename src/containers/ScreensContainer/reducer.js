@@ -13,7 +13,7 @@ export const initialState: State = {
   },
   '1': {
     id: 1,
-    page: 4,
+    page: 1,
     type: 'search',
     tag: '',
     q: '櫻子',
@@ -27,7 +27,11 @@ export default function(state: State = initialState, action: Action): State {
       const storyIds = action.stories.map(story => story.id)
       return {
         ...state,
-        [action.screenId]: { ...state[action.screenId], storyIds },
+        [action.screenId]: {
+          ...state[action.screenId],
+          storyIds,
+          loaded: true,
+        },
       }
     default:
       return state

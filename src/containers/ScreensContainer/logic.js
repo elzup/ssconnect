@@ -5,6 +5,7 @@ import _ from 'lodash'
 import { receiveStories } from '../StoriesContainer/actions'
 import { receiveBlogs } from '../BlogsContainer/actions'
 import { receiveArticles } from '../ArticlesContainer/actions'
+import { loadedScreenStories } from '../ScreensContainer/actions'
 
 export function loadScreenStoryAll(): ThunkAction {
   return (dispatch, getState) => {
@@ -20,8 +21,9 @@ export function loadScreenStory(screen: Screen): ThunkAction {
       screen,
       (stories: Story[], blogs: Blog[], articles: Article[]) => {
         dispatch(receiveStories(stories))
+        dispatch(receiveStories(stories))
         dispatch(receiveBlogs(blogs))
-        dispatch(receiveArticles(articles))
+        dispatch(loadedScreenStories(screen.id, stories))
       }
     )
   }
