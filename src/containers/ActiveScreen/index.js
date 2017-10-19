@@ -3,6 +3,7 @@ import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
 import type { State, Screen } from '../../types'
 import { getActiveScreen } from '../ScreensContainer/selectors'
+import LoadingIndicator from '../../components/LoadingIndicator'
 
 type Props = {
   screen: Screen,
@@ -10,8 +11,11 @@ type Props = {
 
 class ActiveScreen extends React.Component<Props> {
   render() {
-    const { props } = this
-    return <div>{props.screen.q}</div>
+    const { screen } = this.props
+    if (!screen.loaded) {
+      return <LoadingIndicator />
+    }
+    return <div>{screen.storyIds.length}</div>
   }
 }
 
