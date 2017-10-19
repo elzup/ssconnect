@@ -17,14 +17,11 @@ export function loadScreenStoryAll(): ThunkAction {
 
 export function loadScreenStory(screen: Screen): ThunkAction {
   return dispatch => {
-    client.getStories(
-      screen,
-      (stories: Story[], blogs: Blog[], articles: Article[]) => {
-        dispatch(receiveStories(stories))
-        dispatch(receiveStories(stories))
-        dispatch(receiveBlogs(blogs))
-        dispatch(loadedScreenStories(screen.id, stories))
-      }
-    )
+    client.getStories(screen, ({ stories, blogs, articles }) => {
+      dispatch(receiveStories(stories))
+      dispatch(receiveArticles(articles))
+      dispatch(receiveBlogs(blogs))
+      dispatch(loadedScreenStories(screen.id, stories))
+    })
   }
 }

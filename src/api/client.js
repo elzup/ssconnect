@@ -36,9 +36,15 @@ function permitQuery(screen: Screen): QueryParams {
   }
 }
 
+type GetStoriesCallback = ({
+  stories: Story[],
+  articles: Article[],
+  blogs: Blog[],
+}) => void
+
 export function getStories(
   screen: Screen,
-  cb: Function,
+  cb: GetStoriesCallback,
   timeout: number = TIMEOUT
 ) {
   const params = permitQuery(screen)
@@ -46,9 +52,7 @@ export function getStories(
     // { stories: res.data, pageInfo: FeedClient.getPageInfo(res) }
     const normalizedData = normalizeStories(res.data)
     const camelizedData = camelcaseKeys(normalizedData, { deep: true })
-    const { articles, blogs, stories } = camelizedData.entities
-    const articlesFlat = _.values(articles)
-    cb(_.values(articles), _.values(blogs), _.values(stories))
+    cb(_.mapValues(camelizedData.entities, _.values))
   })
 }
 
