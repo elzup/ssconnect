@@ -18,23 +18,37 @@ const api = create({
   timeout: TIMEOUT,
 })
 
+function permitQuery(screen: Screen): QueryParams {
+  switch (screen.type) {
+    case 'new': {
+      const { page } = screen
+      return { page, tag: '', q: '' }
+    }
+    case 'search': {
+      const { page, tag, q } = screen
+      return { page, tag, q }
+    }
+    default: {
+      // NOTE: Why can remove?
+      return { page: 0, tag: '', q: '' }
+    }
+  }
+}
+
 export function getStories(
-  params: QueryParams,
+  screen: Screen,
   cb: Function,
   timeout: number = TIMEOUT
 ) {
-  const res = api
-    .get('/v1/stories', {
-      ...params,
-    })
-    .then(res => {
-      // { stories: res.data, pageInfo: FeedClient.getPageInfo(res) }
-      const normalizedData = normalizeStories(res.data)
-      const camelizedData = camelcaseKeys(normalizedData, { deep: true })
-      const { articles, blogs, stories } = camelizedData.entities
-      const articlesFlat = _.values(articles)
-      cb(_.values(articles), _.values(blogs), _.values(stories))
-    })
+  const params = permitQuery(screen)
+  const res = api.get('/v1/stories', params).then(res => {
+    // { stories: res.data, pageInfo: FeedClient.getPageInfo(res) }
+    const normalizedData = normalizeStories(res.data)
+    const camelizedData = camelcaseKeys(normalizedData, { deep: true })
+    const { articles, blogs, stories } = camelizedData.entities
+    const articlesFlat = _.values(articles)
+    cb(_.values(articles), _.values(blogs), _.values(stories))
+  })
 }
 
 function getPageInfo(res: any): PageInfo {
