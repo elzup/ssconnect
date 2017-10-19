@@ -61,7 +61,7 @@ export type Blog = {|
 export type Article = {|
   id: number,
   postedAt: string,
-  blogId: number,
+  blog: number,
 |}
 
 export type Story = {
@@ -69,7 +69,7 @@ export type Story = {
   title: string,
   firstPostedAt: string,
   tagList: string[],
-  articleId: number[],
+  articles: number[],
 }
 
 export type ScreenNoLoaded = {
