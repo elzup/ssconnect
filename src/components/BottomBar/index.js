@@ -24,11 +24,18 @@ const BottomBar = ({ screens, switchTab, system }: Props) => (
     }}
   >
     {screens.map(s => {
-      const icon = <FontAwesome name="rocket" size="2x" />
+      let icon = <FontAwesome name="home" size="2x" />
+      let label = '新着'
+      switch (s.type) {
+        case 'search': {
+          icon = <FontAwesome name="search" size="2x" />
+          label = s.q
+        }
+      }
       return (
         <BottomNavigationItem
           key={s.id}
-          label={s.q}
+          label={label}
           icon={icon}
           onClick={() => switchTab(s.id)}
         />

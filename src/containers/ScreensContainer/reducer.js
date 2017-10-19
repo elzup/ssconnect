@@ -1,5 +1,5 @@
 // @flow
-import type { Action, Screen } from '../../types'
+import type { Action, Screen, ScreenBase, ScreenNews } from '../../types'
 import { Actions } from './actionTypes'
 
 export type State = { [id: number | string]: Screen }

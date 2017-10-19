@@ -80,9 +80,8 @@ export type ScreenLoaded = {
   loaded: true,
   storyIds: number[],
 }
-export type ScreenLoadInfo = ScreenNoLoaded | ScreenLoaded
 
-export type ScreenBase = ScreenLoadInfo & {
+export type ScreenBase = {
   id: number,
   page: number,
 }
@@ -97,7 +96,11 @@ export type ScreenNews = ScreenBase & {
   type: 'new',
 }
 
-export type Screen = ScreenSearch | ScreenNews
+export type Screen =
+  | (ScreenSearch & ScreenLoaded)
+  | (ScreenSearch & ScreenNoLoaded)
+  | (ScreenNews & ScreenLoaded)
+  | (ScreenNews & ScreenNoLoaded)
 
 export type System = {|
   selectedTab: number,
