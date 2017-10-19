@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react'
-import type { Story, Blog, Article } from '../../types'
+import type { Story, BlogById, ArticleById } from '../../types'
 import styled from 'styled-components'
 
 export type Props = {
   story: Story,
-  blog: Blog,
-  article: Article,
+  blogs: BlogById,
+  articles: ArticleById,
 }
 
 const Cell = styled.div`
@@ -16,7 +16,7 @@ const Cell = styled.div`
   background: orange;
 `
 
-const StoryCell = ({ story, blog, article }: Props) => {
+const StoryCell = ({ story, blogs, articles }: Props) => {
   return <Cell>{story.title}</Cell>
 }
 

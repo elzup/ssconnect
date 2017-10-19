@@ -57,12 +57,15 @@ export type Blog = {|
   id: number,
   title: string,
 |}
+export type BlogById = { [id: number | string]: Blog }
 
 export type Article = {|
   id: number,
   postedAt: string,
   blog: number,
+  url: string,
 |}
+export type ArticleById = { [id: number | string]: Article }
 
 export type Story = {
   id: number,
@@ -71,6 +74,7 @@ export type Story = {
   tagList: string[],
   articles: number[],
 }
+export type StoryById = { [id: number | string]: Story }
 
 export type ScreenNoLoaded = {
   loaded: false,
