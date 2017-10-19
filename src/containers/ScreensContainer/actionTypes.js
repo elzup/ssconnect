@@ -1,16 +1,17 @@
 // @flow
-import type { Screen } from "../../types";
+import type { Screen, Story } from "../../types";
 
-export const RECEIVE_SCREENS: "ScreensContainer/RECEIVE_SCREENS" =
-  "ScreensContainer/RECEIVE_SCREENS";
+export const LOADED_SCREEN_STORIES: "ScreensContainer/LOADED_SCREEN_STORIES" =
+  "ScreensContainer/LOADED_SCREEN_STORIES";
 
 export const Actions = {
-  RECEIVE_SCREENS
+  LOADED_SCREEN_STORIES
 };
 
-export type ReceiveScreens = {
-  type: typeof RECEIVE_SCREENS,
-  screens: Screen[]
+export type LoadedScreenStories = {
+  type: typeof LOADED_SCREEN_STORIES,
+  screenId: number,
+  stories: Story[]
 };
 
-export type Action = ReceiveScreens;
+export type Action = LoadedScreenStories;

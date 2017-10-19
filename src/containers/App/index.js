@@ -1,14 +1,17 @@
 // @flow
 import * as React from 'react'
 import AppBar from 'material-ui/AppBar'
-import ScreensContainer from '../ScreensContainer'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
+import ActiveScreen from '../ActiveScreen'
+import BottomBarContainer from '../BottomBarContainer'
 
 const App = () => (
   <MuiThemeProvider>
     <div>
       <AppBar showMenuIconButton={false} title="My AppBar" />
-      <ScreensContainer />
+      <ActiveScreen />
+      <BottomBarContainer />
     </div>
   </MuiThemeProvider>
 )

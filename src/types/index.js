@@ -40,16 +40,29 @@ export type Cart = {
   quantityById: QuantityById,
 }
 
-export type Blog = {
-  id: number,
-  title: string,
+export type PageInfo = {
+  page: number,
+  total: number,
+  prev: number | false,
+  next: number | false,
 }
 
-export type Article = {
+export type QueryParams = {
+  page: number,
+  tag: string,
+  q: string,
+}
+
+export type Blog = {|
+  id: number,
+  title: string,
+|}
+
+export type Article = {|
   id: number,
   postedAt: string,
   blog: number,
-}
+|}
 
 export type Story = {
   id: number,
@@ -59,15 +72,37 @@ export type Story = {
   articles: number[],
 }
 
-export type Screen = {
-  id: number,
-  page: number,
-  type: 'home' | 'search' | 'base',
-  tag: string,
-  q: string,
+export type ScreenNoLoaded = {
+  loaded: false,
 }
 
-export type System = {
+export type ScreenLoaded = {
+  loaded: true,
+  storyIds: number[],
+}
+
+export type ScreenBase = {
+  id: number,
+  page: number,
+}
+
+export type ScreenSearch = ScreenBase & {
+  type: 'search',
+  q: string,
+  tag: string,
+}
+
+export type ScreenNews = ScreenBase & {
+  type: 'new',
+}
+
+export type Screen =
+  | (ScreenSearch & ScreenLoaded)
+  | (ScreenSearch & ScreenNoLoaded)
+  | (ScreenNews & ScreenLoaded)
+  | (ScreenNews & ScreenNoLoaded)
+
+export type System = {|
   selectedTab: number,
   loaded: number,
-}
+|}

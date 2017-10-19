@@ -1,12 +1,16 @@
 // @flow
-import type { Screen } from "../../types";
+import type { Screen, Story } from "../../types";
 
-import { RECEIVE_SCREENS } from "./actionTypes";
-import type { ReceiveScreens } from "./actionTypes";
+import { LOADED_SCREEN_STORIES } from "./actionTypes";
+import type { LoadedScreenStories } from "./actionTypes";
 
-export function receiveScreens(screens: Screen[]): ReceiveScreens {
+export function loadedScreenStories(
+  screenId: number,
+  stories: Story[]
+): LoadedScreenStories {
   return {
-    type: RECEIVE_SCREENS,
-    screens
+    type: LOADED_SCREEN_STORIES,
+    screenId,
+    stories
   };
 }
