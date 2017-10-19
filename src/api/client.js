@@ -5,7 +5,14 @@ import camelcaseKeys from 'camelcase-keys'
 import _ from 'lodash'
 import { normalizeStories } from './normalize'
 
-import type { Story, Blog, QueryParams, PageInfo, Screen } from '../types'
+import type {
+  Story,
+  Blog,
+  QueryParams,
+  PageInfo,
+  Screen,
+  Article,
+} from '../types'
 
 const host =
   process.env.NODE_ENV == 'development'
