@@ -59,13 +59,21 @@ export type Blog = {|
 |}
 export type BlogById = { [id: number | string]: Blog }
 
-export type Article = {|
+export type Article = {
   id: number,
   postedAt: string,
   blog: number,
   url: string,
-|}
+}
 export type ArticleById = { [id: number | string]: Article }
+
+export type ArticleComp = {
+  id: number,
+  postedAt: string,
+  url: string,
+  blog: Blog,
+  story: Story,
+}
 
 export type Story = {
   id: number,

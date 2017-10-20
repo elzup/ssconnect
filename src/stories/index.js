@@ -17,7 +17,7 @@ import type {
   Screen,
   Story,
   Article,
-  ArticleById,
+  ArticleComp,
   Blog,
   BlogById,
   System,
@@ -30,30 +30,17 @@ const story: Story = {
   firstPostedAt: '2016-02-16T07:55:00.000Z',
   articles: [75603, 97311],
 }
-const articles: ArticleById = {
-  '75603': {
-    id: 75603,
-    url: 'http://ayamevip.com/archives/46843668.html',
-    postedAt: '2016-02-16T07:55:00.000Z',
-    blog: 3,
-  },
-  '97311': {
-    id: 97311,
-    url: 'http://blog.livedoor.jp/mode_ss/archives/52009474.html',
-    postedAt: '2016-02-17T16:00:00.000Z',
-    blog: 5,
-  },
+const blog: Blog = {
+  id: 3,
+  title: 'あやめ速報',
 }
 
-const blogs: BlogById = {
-  '3': {
-    id: 3,
-    title: 'あやめ速報',
-  },
-  '5': {
-    id: 5,
-    title: 'えすえすmode',
-  },
+const article: ArticleComp = {
+  id: 75603,
+  url: 'http://ayamevip.com/archives/46843668.html',
+  postedAt: '2016-02-16T07:55:00.000Z',
+  blog,
+  story,
 }
 
 const PhoneWrap = styled.div`
@@ -67,7 +54,7 @@ storiesOf('StoryCell', module)
   .addDecorator(muiTheme())
   .add('normal', () => (
     <PhoneWrap>
-      <StoryCell story={story} articles={articles} blogs={blogs} />
+      <StoryCell article={article} />
     </PhoneWrap>
   ))
 

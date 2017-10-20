@@ -1,22 +1,32 @@
 // @flow
 import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
-import type { State, Product } from '../../types'
-import * as selectors from './selectors'
+import type { State } from '../../types'
+import StoryCellContainer from '../StoryCellContainer'
+import styled from 'styled-components'
 
-type Props = {}
+type Props = {
+  storyIds: number[],
+}
+
+const Wrap = styled.div`
+  height: ${p => p.height};
+  overflow-y: scroll;
+`
 
 class Container extends React.Component<Props> {
   render() {
-    const { props } = this
-    return <div>{props}</div>
+    const { storyIds } = this.props
+    return (
+      <Wrap style={{ height: window.innerHeight }}>
+        {storyIds.map(id => <StoryCellContainer key={id} storyId={id} />)}
+      </Wrap>
+    )
   }
 }
 
-const ms = (state: State) => ({
-  TODO: selectors.TODO,
-})
+const ms = (state: State, ownProps: Props) => ownProps
 
-const conn: Connector<{}, Props> = connect(ms, { TODO })
+const conn: Connector<Props, Props> = connect(ms, {})
 
 export default conn(Container)

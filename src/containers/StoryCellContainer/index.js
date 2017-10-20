@@ -3,14 +3,14 @@ import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
 import type { State, Product } from '../../types'
 import StoryCell, { type Props } from '../../components/StoryCell'
-import { getStoryFull } from '../StoryById/selectors'
+import { getArticleCompOldest } from '../ArticleById/selectors'
 
 type OProps = {
   storyId: number,
 }
 
 const ms = (state: State, ownProps: OProps) => ({
-  ...getStoryFull(state, ownProps.storyId),
+  article: getArticleCompOldest(state, ownProps.storyId),
 })
 
 // TODO
