@@ -1,22 +1,26 @@
 // @flow
 import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
-import type { State, Product } from '../../types'
-import * as selectors from './selectors'
+import type { State } from '../../types'
+import StoryCellContainer from '../StoryCellContainer'
 
-type Props = {}
+type Props = {
+  storyIds: number[],
+}
 
 class Container extends React.Component<Props> {
   render() {
-    const { props } = this
-    return <div>{props}</div>
+    const { storyIds } = this.props
+    return (
+      <div>
+        {storyIds.map(id => <StoryCellContainer key={id} storyId={id} />)}
+      </div>
+    )
   }
 }
 
-const ms = (state: State) => ({
-  TODO: selectors.TODO,
-})
+const ms = (state: State, ownProps: Props) => ownProps
 
-const conn: Connector<{}, Props> = connect(ms, { TODO })
+const conn: Connector<Props, Props> = connect(ms, {})
 
 export default conn(Container)
