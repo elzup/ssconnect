@@ -10,7 +10,7 @@ type Props = {
 }
 
 const Wrap = styled.div`
-  height: ${p => p.height};
+  height: ${p => p.height}px;
   overflow-y: scroll;
 `
 
@@ -18,7 +18,7 @@ class Container extends React.Component<Props> {
   render() {
     const { storyIds } = this.props
     return (
-      <Wrap style={{ height: window.innerHeight }}>
+      <Wrap height={window.innerHeight - 66 - 56}>
         {storyIds.map(id => <StoryCellContainer key={id} storyId={id} />)}
       </Wrap>
     )
