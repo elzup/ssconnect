@@ -114,7 +114,6 @@ export type Screen =
   | (ScreenNews & ScreenLoaded)
   | (ScreenNews & ScreenNoLoaded)
 
-export type System = {|
+export type System = {
   selectedTab: number,
-  loaded: number,
-|}
+}
