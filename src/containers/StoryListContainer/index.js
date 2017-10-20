@@ -3,18 +3,24 @@ import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
 import type { State } from '../../types'
 import StoryCellContainer from '../StoryCellContainer'
+import styled from 'styled-components'
 
 type Props = {
   storyIds: number[],
 }
 
+const Wrap = styled.div`
+  height: ${p => p.height};
+  overflow-y: scroll;
+`
+
 class Container extends React.Component<Props> {
   render() {
     const { storyIds } = this.props
     return (
-      <div>
+      <Wrap style={{ height: window.innerHeight }}>
         {storyIds.map(id => <StoryCellContainer key={id} storyId={id} />)}
-      </div>
+      </Wrap>
     )
   }
 }
