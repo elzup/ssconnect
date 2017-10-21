@@ -16,7 +16,6 @@ const Wrapper = styled.div`
 
 const Cell = styled.div`
   padding: 10px;
-  width: 100%;
 `
 
 const Header = styled.div`
@@ -37,8 +36,7 @@ const TagLabel = styled.div`
   border: 1px dotted gray;
   font-size: 0.8em;
   padding: 0 4px;
-  border-radius: 3px;
-  border-right: solid gray 2px;
+  border-radius: 5px;
 `
 
 const StoryCell = ({ article }: Props) => {
