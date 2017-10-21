@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker'
 import configureStore from './store'
 import { loadScreenStoryAll } from './containers/ScreensContainer/logic'
 import './injectGlobal'
+import './initialize'
 
 const store = configureStore()
 store.dispatch(loadScreenStoryAll())

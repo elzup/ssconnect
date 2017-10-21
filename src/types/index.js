@@ -6,9 +6,7 @@ import type { State as _State } from './state'
 
 type RehydrateAction = {
   type: 'persist/REHYDRATE',
-  payload: {
-    System: System,
-  },
+  payload: _State,
 }
 
 export type State = _State

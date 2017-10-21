@@ -1,5 +1,5 @@
 // @flow
-import { REHYDRATE } from 'redux-persist/constants'
+// import { REHYDRATE } from 'redux-persist/constants'
 
 import type { Action, System } from '../../types'
 import { Actions } from './actionTypes'
