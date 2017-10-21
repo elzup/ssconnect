@@ -17,9 +17,8 @@ export default function(state: State = initialState, action: Action): State {
         ...state,
         selectedTab: action.target,
       }
-
-    case REHYDRATE:
-      return action.payload.System
+    case 'persist/REHYDRATE':
+      return action.payload.System || state
 
     default:
       return state
