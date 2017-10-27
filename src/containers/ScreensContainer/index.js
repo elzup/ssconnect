@@ -15,38 +15,35 @@ type Props = {
 
 class Container extends React.Component<Props> {
   render() {
-    return (
-      <div>
-        <AppBar showMenuIconButton={false} title="My AppBar" />
-        {this.renderBody()}
-      </div>
-    )
-  }
-
-  renderBody() {
     const { props } = this
     return (
       <div>
-        {props.screens.map(screen => {
-          if (!screen.loaded) {
-            return <LoadingIndicator key={screen.id} />
-          }
-          return (
-            <div
-              style={{
-                display:
-                  props.system.selectedTab === screen.id ? 'block' : 'none',
-              }}
-            >
-              <StoryListContainer key={screen.id} storyIds={screen.storyIds} />
-            </div>
-          )
-        })}
+        {props.screens.map(screen =>
+          this.renderScreen(screen, props.system.selectedTab === screen.id),
+        )}
       </div>
     )
   }
 
-  renderScreen(screen: Screen) {}
+  renderScreen(screen: Screen, display: boolean) {
+    return (
+      <div
+        style={{
+          display: display ? 'block' : 'none',
+        }}
+      >
+        <AppBar showMenuIconButton={false} title={screen.loaded} />
+        {this.renderScreenMain(screen)}
+      </div>
+    )
+  }
+
+  renderScreenMain(screen: Screen) {
+    if (!screen.loaded) {
+      return <LoadingIndicator key={screen.id} />
+    }
+    return <StoryListContainer key={screen.id} storyIds={screen.storyIds} />
+  }
 }
 
 const ms = (state: State) => ({
