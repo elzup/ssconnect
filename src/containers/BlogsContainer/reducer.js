@@ -1,16 +1,16 @@
 // @flow
-import type { Action } from "../../types";
-import { Actions } from "./actionTypes";
+import type { Action } from '../../types'
+import { Actions } from './actionTypes'
 
-export type State = number[];
+export type State = number[]
 
-export const initialState: State = [];
+export const initialState: State = []
 
 export default function(state: State = initialState, action: Action): State {
   switch (action.type) {
     case Actions.RECEIVE_BLOGS:
-      return action.blogs.map(blogs => blogs.id);
+      return action.blogs.map(blogs => blogs.id)
     default:
-      return state;
+      return state
   }
 }

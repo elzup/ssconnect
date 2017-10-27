@@ -52,7 +52,7 @@ type GetStoriesCallback = ({
 export function getStories(
   screen: Screen,
   cb: GetStoriesCallback,
-  timeout: number = TIMEOUT
+  timeout: number = TIMEOUT,
 ) {
   const params = permitQuery(screen)
   const res = api.get('/v1/stories', params).then(res => {

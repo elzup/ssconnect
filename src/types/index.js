@@ -16,7 +16,7 @@ export type GetState = () => State
 
 export type ThunkAction = (
   dispatch: Dispatch,
-  getState: GetState
+  getState: GetState,
 ) => void | Promise<void>
 
 type ThunkDispatch<A> = ThunkAction => A

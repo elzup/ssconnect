@@ -8,7 +8,7 @@ export const initialState: State = {}
 
 export default function(
   state: State = initialState,
-  action: Action
+  action: Action,
 ): Exact<State> {
   switch (action.type) {
     case Actions.RECEIVE_STORIES:
