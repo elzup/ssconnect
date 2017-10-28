@@ -23,7 +23,7 @@ export function getArticleCompOldest(state: State, id: number): ArticleComp {
 export function getArticleComp(
   state: State,
   article: Article,
-  story: Story
+  story: Story,
 ): ArticleComp {
   const blog = getBlog(state, article.blog)
   return {

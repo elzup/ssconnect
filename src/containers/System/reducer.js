@@ -1,5 +1,5 @@
 // @flow
-import { REHYDRATE } from 'redux-persist/constants'
+// import { REHYDRATE } from 'redux-persist/constants'
 
 import type { Action, System } from '../../types'
 import { Actions } from './actionTypes'
@@ -17,9 +17,8 @@ export default function(state: State = initialState, action: Action): State {
         ...state,
         selectedTab: action.target,
       }
-
-    case REHYDRATE:
-      return action.payload.System
+    case 'persist/REHYDRATE':
+      return action.payload.System || state
 
     default:
       return state

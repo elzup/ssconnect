@@ -47,20 +47,20 @@ type GetStoriesCallback = ({
   stories: Story[],
   articles: Article[],
   blogs: Blog[],
+  pageInfo: PageInfo,
 }) => void
 
-export function getStories(
+export async function getStories(
   screen: Screen,
-  cb: GetStoriesCallback,
-  timeout: number = TIMEOUT
-) {
+  timeout: number = TIMEOUT,
+): Promise<GetStoriesCallback> {
   const params = permitQuery(screen)
-  const res = api.get('/v1/stories', params).then(res => {
-    // { stories: res.data, pageInfo: FeedClient.getPageInfo(res) }
-    const normalizedData = normalizeStories(res.data)
-    const camelizedData = camelcaseKeys(normalizedData, { deep: true })
-    cb(_.mapValues(camelizedData.entities, _.values))
-  })
+  const res = await api.get('/v1/stories', params)
+  // { stories: res.data, pageInfo: FeedClient.getPageInfo(res) }
+  const normalizedData = normalizeStories(res.data)
+  const camelizedData = camelcaseKeys(normalizedData, { deep: true })
+  const pageInfo = getPageInfo(res)
+  return { ..._.mapValues(camelizedData.entities, _.values), pageInfo }
 }
 
 function getPageInfo(res: any): PageInfo {

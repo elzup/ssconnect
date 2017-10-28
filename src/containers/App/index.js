@@ -2,13 +2,13 @@
 import * as React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import ActiveScreen from '../ActiveScreen'
+import ScreensContainer from '../ScreensContainer'
 import BottomBarContainer from '../BottomBarContainer'
 
 const App = () => (
   <MuiThemeProvider>
     <div>
-      <ActiveScreen />
+      <ScreensContainer />
       <BottomBarContainer />
     </div>
   </MuiThemeProvider>

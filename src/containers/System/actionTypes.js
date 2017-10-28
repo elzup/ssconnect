@@ -1,15 +1,15 @@
 // @flow
-import type { Screen } from "../../types";
+import type { Screen } from '../../types'
 
-export const SWITCH_TAB: "System/SWITCH_TAB" = "System/SWITCH_TAB";
+export const SWITCH_TAB: 'System/SWITCH_TAB' = 'System/SWITCH_TAB'
 
 export const Actions = {
-  SWITCH_TAB
-};
+  SWITCH_TAB,
+}
 
 export type SwitchTab = {
   type: typeof SWITCH_TAB,
-  target: number
-};
+  target: number,
+}
 
-export type Action = SwitchTab;
+export type Action = SwitchTab
