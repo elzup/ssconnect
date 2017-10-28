@@ -37,6 +37,7 @@ class Container extends React.Component<Props> {
   }
 
   renderScreen(screen: Screen, display: boolean) {
+    const title = screen.type === 'new' ? 'Home' : screen.q
     return (
       <div
         style={{
@@ -44,7 +45,7 @@ class Container extends React.Component<Props> {
         }}
       >
         <Fixer>
-          <AppBar showMenuIconButton={false} title={screen.loaded} />
+          <AppBar showMenuIconButton={false} title={title} />
         </Fixer>
         <FixerMargin>{this.renderScreenMain(screen)}</FixerMargin>
       </div>
