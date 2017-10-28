@@ -13,46 +13,69 @@ export type Props = {
   pageChange: (page: number) => {},
 }
 
+export type State = {
+  page: number,
+}
+
 const Wrapper = styled.div`
+  width: 100%;
+`
+
+const Controls = styled.div`
   display: flex;
   width: 100%;
 `
 
-const Component = ({ pageInfo, pageChange }: Props) => {
-  return (
-    <Wrapper>
-      <FlatButton
-        backgroundColor="gray"
-        label="←"
-        onClick={() => {
-          if (pageInfo.prev === false) {
-            return
-          }
-          pageChange(pageInfo.prev)
-        }}
-      />
-      <Slider
-        min={0}
-        max={pageInfo.total}
-        step={1}
-        defaultValue={pageInfo.page}
-        style={{ width: '100%' }}
-        onChange={(_, value) => {
-          pageChange(value)
-        }}
-      />
+class Component extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      page: props.pageInfo.page,
+    }
+  }
+  render() {
+    const { pageInfo, pageChange } = this.props
+    return (
+      <Wrapper>
+        <Controls>
+          <FlatButton
+            backgroundColor="gray"
+            label="←"
+            onClick={() => {
+              if (pageInfo.prev === false) {
+                return
+              }
+              pageChange(pageInfo.prev)
+            }}
+          />
+          <Slider
+            min={0}
+            max={pageInfo.total}
+            step={1}
+            defaultValue={pageInfo.page}
+            style={{ width: '100%' }}
+            onChange={(_, value) => {
+              this.setState({ page: value })
+            }}
+            onDragStop={() => {
+              pageChange(this.state.page)
+            }}
+          />
 
-      <FlatButton
-        backgroundColor="gray"
-        label="→"
-        onClick={() => {
-          if (pageInfo.next === false) {
-            return
-          }
-          pageChange(pageInfo.next)
-        }}
-      />
-    </Wrapper>
-  )
+          <FlatButton
+            backgroundColor="gray"
+            label="→"
+            onClick={() => {
+              if (pageInfo.next === false) {
+                return
+              }
+              pageChange(pageInfo.next)
+            }}
+          />
+        </Controls>
+        <p>{this.state.page}</p>
+      </Wrapper>
+    )
+  }
 }
 export default Component
