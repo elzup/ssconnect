@@ -104,22 +104,51 @@ storiesOf('LoadingIndicator', module)
     </PhoneWrap>
   ))
 
-const pageInfo: PageInfo = {
-  prev: 3,
-  page: 4,
-  next: 5,
-  total: 100,
-}
-
 storiesOf('PagingBar', module)
   .addDecorator(muiTheme())
   .add('normal', () => (
     <PhoneWrap>
       <PagingBar
-        pageInfo={pageInfo}
+        pageInfo={{
+          prev: 3,
+          page: 4,
+          next: 5,
+          total: 100,
+        }}
         pageChange={v => {
           console.log(v)
         }}
+      />
+      <PagingBar
+        pageInfo={{
+          prev: 1000,
+          page: 1001,
+          next: 1002,
+          total: 9999,
+        }}
+        pageChange={console.log}
+      />
+    </PhoneWrap>
+  ))
+  .add('parts', () => (
+    <PhoneWrap>
+      <PagingBar
+        pageInfo={{
+          prev: false,
+          page: 1,
+          next: 2,
+          total: 100,
+        }}
+        pageChange={console.log}
+      />
+      <PagingBar
+        pageInfo={{
+          prev: 99,
+          page: 100,
+          next: false,
+          total: 100,
+        }}
+        pageChange={console.log}
       />
     </PhoneWrap>
   ))

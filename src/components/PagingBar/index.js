@@ -10,7 +10,7 @@ import type { Screen, System, PageInfo } from '../../types'
 
 export type Props = {
   pageInfo: PageInfo,
-  pageChange: (page: number) => {},
+  pageChange: Function,
 }
 
 export type State = {
@@ -73,7 +73,9 @@ class Component extends React.Component<Props, State> {
             }}
           />
         </Controls>
-        <p>{this.state.page}</p>
+        <p>
+          {this.state.page}/{pageInfo.total}
+        </p>
       </Wrapper>
     )
   }
