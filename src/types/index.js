@@ -97,6 +97,7 @@ export type ScreenNoLoaded = {
 export type ScreenLoaded = {
   loaded: true,
   storyIds: number[],
+  pageInfo: PageInfo,
 }
 
 export type ScreenBase = {

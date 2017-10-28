@@ -1,7 +1,9 @@
 // @flow
 import type { ThunkAction, Article, Story, Blog, Screen } from '../../types'
-import * as client from '../../api/client'
 import _ from 'lodash'
+import moment from 'moment'
+
+import * as client from '../../api/client'
 import { receiveStories } from '../StoriesContainer/actions'
 import { receiveBlogs } from '../BlogsContainer/actions'
 import { receiveArticles } from '../ArticlesContainer/actions'
@@ -16,12 +18,26 @@ export function loadScreenStoryAll(): ThunkAction {
 }
 
 export function loadScreenStory(screen: Screen): ThunkAction {
-  return dispatch => {
-    client.getStories(screen, ({ stories, blogs, articles }) => {
-      dispatch(receiveStories(stories))
-      dispatch(receiveArticles(articles))
-      dispatch(receiveBlogs(blogs))
-      dispatch(loadedScreenStories(screen.id, stories))
-    })
+  return async dispatch => {
+    const { stories, blogs, articles, pageInfo } = await client.getStories(
+      screen,
+    )
+    dispatch(receiveStories(stories))
+    dispatch(receiveArticles(articles))
+    dispatch(receiveBlogs(blogs))
+
+    const storyIds = stories
+      .sort(
+        (a, b) =>
+          moment(a.firstPostedAt).isBefore(moment(b.firstPostedAt)) ? 1 : -1,
+      )
+      .map(story => story.id)
+    const newScreen = {
+      id: screen.id,
+      storyIds,
+      pageInfo,
+      loaded: true,
+    }
+    dispatch(loadedScreenStories(newScreen))
   }
 }
