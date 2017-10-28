@@ -18,7 +18,7 @@ class Container extends React.Component<Props> {
   render() {
     const { storyIds } = this.props
     return (
-      <Wrap height={window.innerHeight - 66 - 56}>
+      <Wrap>
         {storyIds.map(id => <StoryCellContainer key={id} storyId={id} />)}
       </Wrap>
     )

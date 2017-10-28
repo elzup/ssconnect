@@ -8,10 +8,21 @@ import LoadingIndicator from '../../components/LoadingIndicator'
 import StoryListContainer from '../StoryListContainer'
 import AppBar from 'material-ui/AppBar'
 
+import styled from 'styled-components'
+
 type Props = {
   screens: Screen[],
   system: System,
 }
+
+const Fixer = styled.div`
+  position: fixed;
+  width: 100%;
+`
+
+const FixerMargin = styled.div`
+  padding: 64px 0 54px;
+`
 
 class Container extends React.Component<Props> {
   render() {
@@ -32,8 +43,10 @@ class Container extends React.Component<Props> {
           display: display ? 'block' : 'none',
         }}
       >
-        <AppBar showMenuIconButton={false} title={screen.loaded} />
-        {this.renderScreenMain(screen)}
+        <Fixer>
+          <AppBar showMenuIconButton={false} title={screen.loaded} />
+        </Fixer>
+        <FixerMargin>{this.renderScreenMain(screen)}</FixerMargin>
       </div>
     )
   }
