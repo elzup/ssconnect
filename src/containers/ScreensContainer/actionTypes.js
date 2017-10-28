@@ -1,5 +1,5 @@
 // @flow
-import type { Screen, Story, PageInfo } from '../../types'
+import type { ScreenLoaded, Story, PageInfo } from '../../types'
 
 export const LOADED_SCREEN_STORIES: 'ScreensContainer/LOADED_SCREEN_STORIES' =
   'ScreensContainer/LOADED_SCREEN_STORIES'
@@ -10,7 +10,9 @@ export const Actions = {
 
 export type LoadedScreenStories = {
   type: typeof LOADED_SCREEN_STORIES,
-  screen: $Shape<Screen>,
+  screenId: number,
+  storyIds: number[],
+  pageInfo: PageInfo,
 }
 
 export type Action = LoadedScreenStories

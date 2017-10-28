@@ -1,5 +1,12 @@
 // @flow
-import type { ThunkAction, Article, Story, Blog, Screen } from '../../types'
+import type {
+  ThunkAction,
+  Article,
+  Story,
+  Blog,
+  Screen,
+  ScreenLoaded,
+} from '../../types'
 import _ from 'lodash'
 import moment from 'moment'
 
@@ -32,12 +39,7 @@ export function loadScreenStory(screen: Screen): ThunkAction {
           moment(a.firstPostedAt).isBefore(moment(b.firstPostedAt)) ? 1 : -1,
       )
       .map(story => story.id)
-    const newScreen = {
-      id: screen.id,
-      storyIds,
-      pageInfo,
-      loaded: true,
-    }
-    dispatch(loadedScreenStories(newScreen))
+
+    dispatch(loadedScreenStories(screen.id, storyIds, pageInfo))
   }
 }

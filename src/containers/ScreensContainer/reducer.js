@@ -27,9 +27,11 @@ export default function(state: State = initialState, action: Action): State {
     case Actions.LOADED_SCREEN_STORIES:
       return {
         ...state,
-        [action.screen.id]: {
-          ...state[action.screen.id],
-          ...action.screen,
+        [action.screenId]: {
+          ...state[action.screenId],
+          storyIds: action.storyIds,
+          pageInfo: action.pageInfo,
+          loaded: true,
         },
       }
     default:
