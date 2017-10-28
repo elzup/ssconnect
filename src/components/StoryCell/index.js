@@ -40,7 +40,7 @@ const TagLabel = styled.div`
 `
 
 const StoryCell = ({ article }: Props) => {
-  const timestamp = moment(article.postedAt).fromNow()
+  const timestamp = moment(article.story.firstPostedAt).fromNow()
   return (
     <Wrapper>
       <Cell>

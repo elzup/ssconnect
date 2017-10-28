@@ -1,6 +1,7 @@
 // @flow
 import type { Action, Screen, ScreenBase, ScreenNews } from '../../types'
 import { Actions } from './actionTypes'
+import moment from 'moment'
 
 export type State = { [id: number | string]: Screen }
 
@@ -24,7 +25,12 @@ export const initialState: State = {
 export default function(state: State = initialState, action: Action): State {
   switch (action.type) {
     case Actions.LOADED_SCREEN_STORIES:
-      const storyIds = action.stories.map(story => story.id)
+      const storyIds = action.stories
+        .sort(
+          (a, b) =>
+            moment(a.firstPostedAt).isBefore(moment(b.firstPostedAt)) ? 1 : -1,
+        )
+        .map(story => story.id)
       return {
         ...state,
         [action.screenId]: {
