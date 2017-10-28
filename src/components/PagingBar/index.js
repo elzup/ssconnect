@@ -41,6 +41,7 @@ class Component extends React.Component<Props, State> {
           <FlatButton
             backgroundColor="gray"
             label="←"
+            disabled={pageInfo.prev === false}
             onClick={() => {
               if (pageInfo.prev === false) {
                 return
@@ -65,6 +66,7 @@ class Component extends React.Component<Props, State> {
           <FlatButton
             backgroundColor="gray"
             label="→"
+            disabled={pageInfo.next === false}
             onClick={() => {
               if (pageInfo.next === false) {
                 return
