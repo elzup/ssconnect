@@ -26,9 +26,15 @@ export function loadScreenStoryAll(): ThunkAction {
 
 export function loadScreenStory(screen: Screen): ThunkAction {
   return async dispatch => {
-    const { stories, blogs, articles, pageInfo } = await client.getStories(
-      screen,
-    )
+    const res = await client.getStories(screen).catch(err => {
+      console.log(err)
+      return false
+    })
+    if (res === false) {
+      console.log('load error')
+      return
+    }
+    const { stories, blogs, articles, pageInfo } = res
     dispatch(receiveStories(stories))
     dispatch(receiveArticles(articles))
     dispatch(receiveBlogs(blogs))
