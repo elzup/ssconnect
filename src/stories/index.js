@@ -11,10 +11,12 @@ import { muiTheme } from 'storybook-addon-material-ui'
 import '../injectGlobal'
 
 import ButtonBar from '../components/BottomBar'
+import PagingBar from '../components/PagingBar'
 import LoadingIndicator from '../components/LoadingIndicator'
 import StoryCell from '../components/StoryCell'
 import type {
   Screen,
+  PageInfo,
   Story,
   Article,
   ArticleComp,
@@ -99,5 +101,25 @@ storiesOf('LoadingIndicator', module)
   .add('normal', () => (
     <PhoneWrap>
       <LoadingIndicator />
+    </PhoneWrap>
+  ))
+
+const pageInfo: PageInfo = {
+  prev: 3,
+  page: 4,
+  next: 5,
+  total: 100,
+}
+
+storiesOf('PagingBar', module)
+  .addDecorator(muiTheme())
+  .add('normal', () => (
+    <PhoneWrap>
+      <PagingBar
+        pageInfo={pageInfo}
+        pageChange={v => {
+          console.log(v)
+        }}
+      />
     </PhoneWrap>
   ))

@@ -4,6 +4,7 @@ import FontAwesome from 'react-fontawesome'
 import _ from 'lodash'
 import styled from 'styled-components'
 import Slider from 'material-ui/Slider'
+import FlatButton from 'material-ui/FlatButton'
 
 import type { Screen, System, PageInfo } from '../../types'
 
@@ -13,44 +14,44 @@ export type Props = {
 }
 
 const Wrapper = styled.div`
-  position: fixed;
-  bottom: 0;
-  margin-bottom: 0;
+  display: flex;
   width: 100%;
 `
 
 const Component = ({ pageInfo, pageChange }: Props) => {
   return (
     <Wrapper>
-      <button
+      <FlatButton
+        backgroundColor="gray"
+        label="←"
         onClick={() => {
           if (pageInfo.prev === false) {
             return
           }
           pageChange(pageInfo.prev)
         }}
-      >
-        {' '}
-        ←{' '}
-      </button>
+      />
       <Slider
-        defaultValue={0.5}
-        onChange={value => {
+        min={0}
+        max={pageInfo.total}
+        step={1}
+        defaultValue={pageInfo.page}
+        style={{ width: '100%' }}
+        onChange={(_, value) => {
           pageChange(value)
         }}
       />
 
-      <button
+      <FlatButton
+        backgroundColor="gray"
+        label="→"
         onClick={() => {
           if (pageInfo.next === false) {
             return
           }
           pageChange(pageInfo.next)
         }}
-      >
-        {' '}
-        ←{' '}
-      </button>
+      />
     </Wrapper>
   )
 }
