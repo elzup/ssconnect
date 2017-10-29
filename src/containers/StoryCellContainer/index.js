@@ -1,7 +1,6 @@
 // @flow
-import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
-import type { State, Product } from '../../types'
+import type { State } from '../../types'
 import StoryCell, { type Props } from '../../components/StoryCell'
 import { getArticleCompOldest } from '../ArticleById/selectors'
 

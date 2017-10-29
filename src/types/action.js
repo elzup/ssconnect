@@ -4,6 +4,7 @@ import type { Action as BlogsContainerAction } from '../containers/BlogsContaine
 import type { Action as ScreensContainerAction } from '../containers/ScreensContainer/actionTypes'
 import type { Action as StoriesContainerAction } from '../containers/StoriesContainer/actionTypes'
 import type { Action as SystemAction } from '../containers/System/actionTypes'
+import type { Action as TagByIdAction } from '../containers/TagById/actionTypes'
 
 export type ReduxInitAction = {
   type: '@@INIT',
@@ -16,3 +17,4 @@ export type Action =
   | ScreensContainerAction
   | StoriesContainerAction
   | SystemAction
+  | TagByIdAction

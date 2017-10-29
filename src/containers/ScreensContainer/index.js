@@ -3,6 +3,8 @@ import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
 import _ from 'lodash'
 
+import SearchForm from '../SearchFormContainer'
+
 import type { State, Screen, System } from '../../types'
 import LoadingIndicator from '../../components/LoadingIndicator'
 import StoryListContainer from '../StoryListContainer'
@@ -40,6 +42,7 @@ class Container extends React.Component<Props> {
     const title = screen.type === 'new' ? 'Home' : screen.q
     return (
       <div
+        key={screen.id}
         style={{
           display: display ? 'block' : 'none',
         }}
@@ -55,6 +58,13 @@ class Container extends React.Component<Props> {
   renderScreenMain(screen: Screen) {
     if (!screen.loaded) {
       return <LoadingIndicator key={screen.id} />
+    }
+    if (screen.type === 'search') {
+      return (
+        <div>
+          <SearchForm />
+        </div>
+      )
     }
     return <StoryListContainer key={screen.id} screen={screen} />
   }

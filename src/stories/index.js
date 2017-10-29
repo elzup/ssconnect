@@ -1,10 +1,8 @@
-// @flow
 import React from 'react'
 import styled from 'styled-components'
 
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { linkTo } from '@storybook/addon-links'
 
 import { muiTheme } from 'storybook-addon-material-ui'
 
@@ -12,18 +10,10 @@ import '../injectGlobal'
 
 import ButtonBar from '../components/BottomBar'
 import PagingBar from '../components/PagingBar'
+import SearchForm from '../components/SearchForm'
 import LoadingIndicator from '../components/LoadingIndicator'
 import StoryCell from '../components/StoryCell'
-import type {
-  Screen,
-  PageInfo,
-  Story,
-  Article,
-  ArticleComp,
-  Blog,
-  BlogById,
-  System,
-} from '../types'
+import type { Screen, Story, ArticleComp, Blog, System } from '../types'
 
 const story: Story = {
   id: 1,
@@ -86,13 +76,7 @@ storiesOf('ButtonBar', module)
   .addDecorator(muiTheme())
   .add('normal', () => (
     <PhoneWrap>
-      <ButtonBar
-        screens={screens}
-        switchTab={id => {
-          console.log(`switch to ${id}`)
-        }}
-        system={system}
-      />
+      <ButtonBar screens={screens} switchTab={action} system={system} />
     </PhoneWrap>
   ))
 
@@ -109,22 +93,26 @@ storiesOf('PagingBar', module)
   .add('normal', () => (
     <PhoneWrap>
       <PagingBar
-        pageInfo={{
-          prev: 3,
+        screen={{
           page: 4,
-          next: 5,
-          total: 100,
+          pageInfo: {
+            prev: 3,
+            page: 4,
+            next: 5,
+            total: 100,
+          },
         }}
-        pageChange={v => {
-          console.log(v)
-        }}
+        pageChange={console.log}
       />
       <PagingBar
-        pageInfo={{
-          prev: 1000,
-          page: 1001,
-          next: 1002,
-          total: 9999,
+        screen={{
+          page: 4,
+          pageInfo: {
+            prev: 1000,
+            page: 1001,
+            next: 1002,
+            total: 9999,
+          },
         }}
         pageChange={console.log}
       />
@@ -133,22 +121,48 @@ storiesOf('PagingBar', module)
   .add('parts', () => (
     <PhoneWrap>
       <PagingBar
-        pageInfo={{
-          prev: false,
-          page: 1,
-          next: 2,
-          total: 100,
+        screen={{
+          page: 4,
+          pageInfo: {
+            prev: false,
+            page: 1,
+            next: 2,
+            total: 100,
+          },
         }}
         pageChange={console.log}
       />
       <PagingBar
-        pageInfo={{
-          prev: 99,
-          page: 100,
-          next: false,
-          total: 100,
+        screen={{
+          page: 4,
+          pageInfo: {
+            prev: 99,
+            page: 100,
+            next: false,
+            total: 100,
+          },
         }}
         pageChange={console.log}
+      />
+    </PhoneWrap>
+  ))
+
+storiesOf('Search Form', module)
+  .addDecorator(muiTheme())
+  .add('normal', () => (
+    <PhoneWrap>
+      <SearchForm
+        searchSubmit={action('search')}
+        tags={[
+          '干物妹！うまるちゃんR',
+          'キノの旅',
+          '少女終末旅行',
+          'クジラの子らは砂上に歌う',
+          '宝石の国',
+          'いぬやしき',
+          '十二大戦',
+          'Fate/Apocrypha',
+        ]}
       />
     </PhoneWrap>
   ))

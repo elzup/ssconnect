@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import FontAwesome from 'react-fontawesome'
-import _ from 'lodash'
 import styled from 'styled-components'
 
 import {
@@ -24,23 +23,45 @@ const Wrapper = styled.div`
   width: 100%;
 `
 
+function typeConsts(screen: Screen): { iconName: string, label: string } {
+  switch (screen.type) {
+    case 'new': {
+      return {
+        iconName: 'home',
+        label: '新着',
+      }
+    }
+    case 'search': {
+      return {
+        iconName: 'search',
+        label: '検索',
+      }
+    }
+    case 'profile': {
+      return {
+        iconName: 'tag',
+        label: screen.q,
+      }
+    }
+    default: {
+      return {
+        iconName: '',
+        label: '',
+      }
+    }
+  }
+}
+
 const BottomBar = ({ screens, switchTab, system }: Props) => (
   <Wrapper>
     <BottomNavigation selectedIndex={system.selectedTab}>
       {screens.map(s => {
-        let icon = <FontAwesome name="home" size="2x" />
-        let label = '新着'
-        switch (s.type) {
-          case 'search': {
-            icon = <FontAwesome name="search" size="2x" />
-            label = s.q
-          }
-        }
+        const { iconName, label } = typeConsts(s)
         return (
           <BottomNavigationItem
             key={s.id}
             label={label}
-            icon={icon}
+            icon={<FontAwesome name={iconName} size="2x" />}
             onClick={() => switchTab(s.id)}
           />
         )

@@ -1,6 +1,4 @@
 // @flow
-import type { Screen } from '../../types'
-
 export const SWITCH_TAB: 'System/SWITCH_TAB' = 'System/SWITCH_TAB'
 
 export const Actions = {

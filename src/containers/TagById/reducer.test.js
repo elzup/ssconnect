@@ -1,14 +1,11 @@
 // @flow
 import reducer, { initialState } from './reducer'
-import * as actions from './actions'
+import * as actions from '../TagById/actions'
 
 test('provide the initial state', () => {
   expect(reducer(undefined, { type: '@@INIT' })).toEqual(initialState)
 })
 
-// TODO
-test('handle SWITCH_TAB', () => {
-  expect(reducer(initialState, actions.switchTab(2))).toEqual({
-    selectedTab: 2,
-  })
+test('handle RECEIVE_TAGS', () => {
+  expect(reducer(initialState, actions.receiveTags([]))).toEqual({})
 })

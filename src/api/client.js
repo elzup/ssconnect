@@ -1,13 +1,14 @@
 // @flow
 
 import camelcaseKeys from 'camelcase-keys'
-import _ from 'lodash'
 import { normalizeStories } from './normalize'
 import request from 'superagent'
+import _ from 'lodash'
 
 import type {
   Story,
   Blog,
+  Tag,
   QueryParams,
   PageInfo,
   Screen,
@@ -22,13 +23,11 @@ const UseHeader = {
 }
 
 const host =
-  process.env.NODE_ENV == 'development'
+  process.env.NODE_ENV === 'development'
     ? // ? 'http://localhost:3001'
       'https://ssconnect.elzup.com'
     : 'https://ssconnect.elzup.com'
 const TIMEOUT = 1000
-
-const requestHeaders = _.values(UseHeader).join(', ')
 
 const baseHeaders = {
   'Content-Type': 'application/json',
@@ -41,6 +40,10 @@ function permitQuery(screen: Screen): QueryParams {
       return { page, tag: '', q: '' }
     }
     case 'search': {
+      const { page, tag, q } = screen
+      return { page, tag, q }
+    }
+    case 'profile': {
       const { page, tag, q } = screen
       return { page, tag, q }
     }
@@ -69,11 +72,7 @@ export async function getStories(
     .set(baseHeaders)
   const res = await new Promise((resolve, reject) => {
     storiesRequest.end((err, res) => {
-      if (err) {
-        reject(err)
-      } else {
-        resolve(res)
-      }
+      resolve(err || res)
     })
   })
 
@@ -92,4 +91,15 @@ function getPageInfo(res: any): PageInfo {
     next: parseInt(res.headers[UseHeader.next], 10) || false,
     prev: parseInt(res.headers[UseHeader.prev], 10) || false,
   }
+}
+
+export async function getTags(timeout: number = TIMEOUT): Promise<Tag[]> {
+  const tagsRequest = request.get(host + '/v1/tags').set(baseHeaders)
+  const res = await new Promise((resolve, reject) => {
+    tagsRequest.end((err, res) => {
+      resolve(err || res)
+    })
+  })
+
+  return _.values(camelcaseKeys(res.body, { deep: true }))
 }

@@ -1,8 +1,8 @@
 // @flow
-import type { Action, Article } from '../../types'
-import { Actions } from '../ArticlesContainer/actionTypes'
+import type { Action, Tag } from '../../types'
+import { Actions } from '../TagById/actionTypes'
 
-export type State = { [id: number]: Article }
+export type State = { [id: number]: Tag }
 
 export const initialState: State = {}
 
@@ -11,14 +11,15 @@ export default function(
   action: Action,
 ): Exact<State> {
   switch (action.type) {
-    case Actions.RECEIVE_ARTICLES:
+    case Actions.RECEIVE_TAGS:
       return {
         ...state,
-        ...action.articles.reduce((obj, article) => {
-          obj[article.id] = article
+        ...action.tags.reduce((obj, tag) => {
+          obj[tag.id] = tag
           return obj
         }, {}),
       }
+
     default:
       return state
   }

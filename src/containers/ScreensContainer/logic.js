@@ -1,20 +1,15 @@
 // @flow
-import type {
-  ThunkAction,
-  Article,
-  Story,
-  Blog,
-  Screen,
-  ScreenLoaded,
-} from '../../types'
+import type { ThunkAction, Screen } from '../../types'
 import _ from 'lodash'
 import moment from 'moment'
 
 import * as client from '../../api/client'
 import { receiveStories } from '../StoriesContainer/actions'
 import { receiveBlogs } from '../BlogsContainer/actions'
+import { switchTab } from '../System/actions'
 import { receiveArticles } from '../ArticlesContainer/actions'
-import * as actions from '../ScreensContainer/actions'
+import * as actions from './actions'
+import * as selectors from './selectors'
 
 export function loadScreenStoryAll(): ThunkAction {
   return (dispatch, getState) => {
@@ -54,5 +49,14 @@ export function pageChange(screen: Screen, newPage: number): ThunkAction {
   return async (dispatch, getState) => {
     await dispatch(actions.pageChange(screen.id, newPage))
     dispatch(loadScreenStory(getState().ScreensContainer[screen.id]))
+  }
+}
+
+export function searchSubmit(q: string, tag: string): ThunkAction {
+  return async (dispatch, getState) => {
+    await dispatch(actions.makeScreenProfile(q, tag))
+    const screen = selectors.getNewScreen(getState())
+    dispatch(switchTab(screen.id))
+    dispatch(loadScreenStory(screen))
   }
 }

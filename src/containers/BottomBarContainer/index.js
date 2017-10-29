@@ -1,7 +1,6 @@
 // @flow
-import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
-import type { State, Screen } from '../../types'
+import type { State } from '../../types'
 import BottomBar, { type Props } from '../../components/BottomBar'
 import { switchTab } from '../System/actions'
 import _ from 'lodash'
