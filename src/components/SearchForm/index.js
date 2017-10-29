@@ -5,9 +5,10 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { List, ListItem } from 'material-ui/List'
 import FontAwesome from 'react-fontawesome'
 import styled from 'styled-components'
+import type { Tag } from '../../types'
 
 export type Props = {
-  tags: string[],
+  tags: Tag[],
   searchSubmit: Function,
 }
 
@@ -45,7 +46,7 @@ class Component extends React.Component<Props, State> {
   render() {
     const { props, state } = this
     const filteredTags = props.tags.filter(
-      tag => tag.indexOf(state.tagText) !== -1,
+      tag => tag.name.indexOf(state.tagText) !== -1,
     )
     return (
       <Wrapper>
@@ -94,18 +95,18 @@ class Component extends React.Component<Props, State> {
         <List>
           {filteredTags.map(tag => {
             // HACKME
-            const selected = tag === state.tagText
+            const selected = tag.name === state.tagText
             return (
               <ListItem
-                key={tag}
+                key={tag.id}
                 rightIcon={
                   <FontAwesome
                     name={selected ? 'times-circle-o' : 'circle-thin'}
                   />
                 }
-                primaryText={tag}
+                primaryText={tag.name}
                 onClick={() => {
-                  this.setState({ tagText: selected ? '' : tag })
+                  this.setState({ tagText: selected ? '' : tag.name })
                 }}
                 secondaryText="..."
               />
