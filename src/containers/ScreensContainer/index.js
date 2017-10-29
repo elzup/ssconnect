@@ -40,6 +40,7 @@ class Container extends React.Component<Props> {
     const title = screen.type === 'new' ? 'Home' : screen.q
     return (
       <div
+        key={screen.id}
         style={{
           display: display ? 'block' : 'none',
         }}
