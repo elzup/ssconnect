@@ -86,7 +86,6 @@ export async function getStories(
 }
 
 function getPageInfo(res: any): PageInfo {
-  debugger
   return {
     page: parseInt(res.headers[UseHeader.page], 10),
     total: parseInt(res.headers[UseHeader.total], 10),

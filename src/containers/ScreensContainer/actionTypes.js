@@ -3,9 +3,12 @@ import type { ScreenLoaded, Story, PageInfo } from '../../types'
 
 export const LOADED_SCREEN_STORIES: 'ScreensContainer/LOADED_SCREEN_STORIES' =
   'ScreensContainer/LOADED_SCREEN_STORIES'
+export const PAGE_CHANGE: 'ScreensContainer/PAGE_CHANGE' =
+  'ScreensContainer/PAGE_CHANGE'
 
 export const Actions = {
   LOADED_SCREEN_STORIES,
+  PAGE_CHANGE,
 }
 
 export type LoadedScreenStories = {
@@ -15,4 +18,10 @@ export type LoadedScreenStories = {
   pageInfo: PageInfo,
 }
 
-export type Action = LoadedScreenStories
+export type PageChange = {
+  type: typeof PAGE_CHANGE,
+  screenId: number,
+  newPage: number,
+}
+
+export type Action = LoadedScreenStories | PageChange

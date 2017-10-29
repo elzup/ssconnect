@@ -29,21 +29,11 @@ class Container extends React.Component<Props> {
     }
     return (
       <Wrap>
-        <PagingBar
-          pageInfo={props.screen.pageInfo}
-          pageChange={props.pageChange}
-        />
+        <PagingBar screen={props.screen} pageChange={props.pageChange} />
         {props.screen.storyIds.map(id => (
           <StoryCellContainer key={id} storyId={id} />
         ))}
-        <PagingBar
-          pageInfo={
-            props.screen.loaded
-              ? props.screen.pageInfo
-              : { next: 0, prev: 0, total: 0, page: 0 }
-          }
-          pageChange={props.pageChange}
-        />
+        <PagingBar screen={props.screen} pageChange={props.pageChange} />
       </Wrap>
     )
   }
@@ -51,6 +41,8 @@ class Container extends React.Component<Props> {
 
 const ms = (state: State, ownProps: OProps) => ownProps
 
-const conn: Connector<OProps, Props> = connect(ms, { pageChange })
+const conn: Connector<OProps, Props> = connect(ms, {
+  pageChange,
+})
 
 export default conn(Container)

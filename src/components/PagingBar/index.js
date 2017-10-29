@@ -9,7 +9,7 @@ import FlatButton from 'material-ui/FlatButton'
 import type { Screen, System, PageInfo } from '../../types'
 
 export type Props = {
-  pageInfo: PageInfo,
+  screen: Screen,
   pageChange: Function,
 }
 
@@ -34,11 +34,15 @@ class Component extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      page: props.pageInfo.page,
+      page: props.screen.loaded ? props.screen.pageInfo.page : 0,
     }
   }
   render() {
-    const { pageInfo, pageChange } = this.props
+    const { screen, pageChange } = this.props
+    if (!screen.loaded) {
+      return null
+    }
+    const { pageInfo } = screen
     return (
       <Wrapper>
         <Controls>
@@ -51,7 +55,7 @@ class Component extends React.Component<Props, State> {
               if (pageInfo.prev === false) {
                 return
               }
-              pageChange(pageInfo.prev)
+              pageChange(screen, pageInfo.prev)
             }}
           />
           <Slider
@@ -64,7 +68,7 @@ class Component extends React.Component<Props, State> {
               this.setState({ page: value })
             }}
             onDragStop={() => {
-              pageChange(this.state.page)
+              pageChange(screen, this.state.page)
             }}
           />
 
@@ -77,7 +81,7 @@ class Component extends React.Component<Props, State> {
               if (pageInfo.next === false) {
                 return
               }
-              pageChange(pageInfo.next)
+              pageChange(screen, pageInfo.next)
             }}
           />
         </Controls>

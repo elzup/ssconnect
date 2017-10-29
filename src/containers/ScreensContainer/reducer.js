@@ -2,6 +2,7 @@
 import type { Action, Screen, ScreenBase, ScreenNews } from '../../types'
 import { Actions } from './actionTypes'
 import moment from 'moment'
+import _ from 'lodash'
 
 export type State = { [id: number | string]: Screen }
 
@@ -24,6 +25,16 @@ export const initialState: State = {
 
 export default function(state: State = initialState, action: Action): State {
   switch (action.type) {
+    case Actions.PAGE_CHANGE:
+      return {
+        ...state,
+        [action.screenId]: {
+          ..._.omit(state[action.screenId], ['storyIds', 'pageInfo']),
+          page: action.newPage,
+          loaded: false,
+        },
+      }
+
     case Actions.LOADED_SCREEN_STORIES:
       return {
         ...state,

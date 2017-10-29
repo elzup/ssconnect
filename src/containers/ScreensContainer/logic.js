@@ -14,7 +14,7 @@ import * as client from '../../api/client'
 import { receiveStories } from '../StoriesContainer/actions'
 import { receiveBlogs } from '../BlogsContainer/actions'
 import { receiveArticles } from '../ArticlesContainer/actions'
-import { loadedScreenStories } from '../ScreensContainer/actions'
+import * as actions from '../ScreensContainer/actions'
 
 export function loadScreenStoryAll(): ThunkAction {
   return (dispatch, getState) => {
@@ -46,12 +46,12 @@ export function loadScreenStory(screen: Screen): ThunkAction {
       )
       .map(story => story.id)
 
-    dispatch(loadedScreenStories(screen.id, storyIds, pageInfo))
+    dispatch(actions.loadedScreenStories(screen.id, storyIds, pageInfo))
   }
 }
 
 export function pageChange(screen: Screen, newPage: number): ThunkAction {
   return async dispatch => {
-    console.log(newPage)
+    dispatch(actions.pageChange(screen.id, newPage))
   }
 }
