@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+# SSconnect
+
 
 ![https://user-images.githubusercontent.com/2284908/32147529-45526bde-bd2c-11e7-904d-5f0277724287.gif](https://user-images.githubusercontent.com/2284908/32147529-45526bde-bd2c-11e7-904d-5f0277724287.gif)
 
