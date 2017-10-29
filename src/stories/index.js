@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import styled from 'styled-components'
 
@@ -109,22 +108,26 @@ storiesOf('PagingBar', module)
   .add('normal', () => (
     <PhoneWrap>
       <PagingBar
-        pageInfo={{
-          prev: 3,
+        screen={{
           page: 4,
-          next: 5,
-          total: 100,
+          pageInfo: {
+            prev: 3,
+            page: 4,
+            next: 5,
+            total: 100,
+          },
         }}
-        pageChange={v => {
-          console.log(v)
-        }}
+        pageChange={console.log}
       />
       <PagingBar
-        pageInfo={{
-          prev: 1000,
-          page: 1001,
-          next: 1002,
-          total: 9999,
+        screen={{
+          page: 4,
+          pageInfo: {
+            prev: 1000,
+            page: 1001,
+            next: 1002,
+            total: 9999,
+          },
         }}
         pageChange={console.log}
       />
@@ -133,20 +136,26 @@ storiesOf('PagingBar', module)
   .add('parts', () => (
     <PhoneWrap>
       <PagingBar
-        pageInfo={{
-          prev: false,
-          page: 1,
-          next: 2,
-          total: 100,
+        screen={{
+          page: 4,
+          pageInfo: {
+            prev: false,
+            page: 1,
+            next: 2,
+            total: 100,
+          },
         }}
         pageChange={console.log}
       />
       <PagingBar
-        pageInfo={{
-          prev: 99,
-          page: 100,
-          next: false,
-          total: 100,
+        screen={{
+          page: 4,
+          pageInfo: {
+            prev: 99,
+            page: 100,
+            next: false,
+            total: 100,
+          },
         }}
         pageChange={console.log}
       />
