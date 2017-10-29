@@ -8,9 +8,14 @@ import { searchSubmit } from '../ScreensContainer/logic'
 
 type OProps = {}
 
-const ms = (state: State) => ({
-  tags: _.values(state.TagById),
-})
+const ms = (state: State) => {
+  // HACKME
+  const tags = _.values(state.TagById)
+  tags.sort((a, b) => b.taggingsCount - a.taggingsCount)
+  return {
+    tags,
+  }
+}
 
 const conn: Connector<OProps, Props> = connect(ms, {
   searchSubmit,

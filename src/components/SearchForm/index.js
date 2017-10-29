@@ -108,7 +108,7 @@ class Component extends React.Component<Props, State> {
                 onClick={() => {
                   this.setState({ tagText: selected ? '' : tag.name })
                 }}
-                secondaryText="..."
+                secondaryText={`(${tag.taggingsCount})`}
               />
             )
           })}
