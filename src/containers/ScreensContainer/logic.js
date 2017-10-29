@@ -8,8 +8,24 @@ import { receiveStories } from '../StoriesContainer/actions'
 import { receiveBlogs } from '../BlogsContainer/actions'
 import { switchTab } from '../System/actions'
 import { receiveArticles } from '../ArticlesContainer/actions'
+import { loadTags } from '../TagById/logic'
 import * as actions from './actions'
 import * as selectors from './selectors'
+
+function sleep(ms: number) {
+  return new Promise(r => setTimeout(r, ms))
+}
+
+export function thunkWorld(): ThunkAction {
+  return async (dispatch, getState) => {
+    while (!getState().System.rehydrated) {
+      console.log('a')
+      await sleep(1000)
+    }
+    dispatch(loadScreenStoryAll())
+    dispatch(loadTags())
+  }
+}
 
 export function loadScreenStoryAll(): ThunkAction {
   return (dispatch, getState) => {
@@ -58,5 +74,12 @@ export function searchSubmit(q: string, tag: string): ThunkAction {
     const screen = selectors.getNewScreen(getState())
     dispatch(switchTab(screen.id))
     dispatch(loadScreenStory(screen))
+  }
+}
+
+export function deleteSubmit(screenId: number): ThunkAction {
+  return async (dispatch, getState) => {
+    await dispatch(switchTab(screenId - 1))
+    await dispatch(actions.deleteScreenProfile(screenId))
   }
 }
