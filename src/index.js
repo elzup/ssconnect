@@ -6,11 +6,13 @@ import App from './containers/App'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore from './store'
 import { loadScreenStoryAll } from './containers/ScreensContainer/logic'
+import { loadTags } from './containers/TagById/logic'
 import './injectGlobal'
 import './initialize'
 
 const store = configureStore()
 store.dispatch(loadScreenStoryAll())
+store.dispatch(loadTags())
 
 ReactDOM.render(
   <Provider store={store}>

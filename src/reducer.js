@@ -8,6 +8,7 @@ import ScreensContainer from './containers/ScreensContainer/reducer'
 import StoriesContainer from './containers/StoriesContainer/reducer'
 import StoryById from './containers/StoryById/reducer'
 import System from './containers/System/reducer'
+import TagById from './containers/TagById/reducer'
 
 export default combineReducers({
   ArticleById,
@@ -18,4 +19,5 @@ export default combineReducers({
   StoriesContainer,
   StoryById,
   System,
+  TagById,
 })
