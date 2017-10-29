@@ -1,12 +1,19 @@
 // @flow
 import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
-import type { State } from '../../types'
+import type { State, PageInfo, Screen } from '../../types'
 import StoryCellContainer from '../StoryCellContainer'
+import PagingBar from '../../components/PagingBar'
 import styled from 'styled-components'
+import { pageChange } from '../ScreensContainer/logic'
 
 type Props = {
-  storyIds: number[],
+  screen: Screen,
+  pageChange: Function,
+}
+
+type OProps = {
+  screen: Screen,
 }
 
 const Wrap = styled.div`
@@ -16,17 +23,26 @@ const Wrap = styled.div`
 
 class Container extends React.Component<Props> {
   render() {
-    const { storyIds } = this.props
+    const { props } = this
+    if (!props.screen.loaded) {
+      return null
+    }
     return (
       <Wrap>
-        {storyIds.map(id => <StoryCellContainer key={id} storyId={id} />)}
+        <PagingBar screen={props.screen} pageChange={props.pageChange} />
+        {props.screen.storyIds.map(id => (
+          <StoryCellContainer key={id} storyId={id} />
+        ))}
+        <PagingBar screen={props.screen} pageChange={props.pageChange} />
       </Wrap>
     )
   }
 }
 
-const ms = (state: State, ownProps: Props) => ownProps
+const ms = (state: State, ownProps: OProps) => ownProps
 
-const conn: Connector<Props, Props> = connect(ms, {})
+const conn: Connector<OProps, Props> = connect(ms, {
+  pageChange,
+})
 
 export default conn(Container)

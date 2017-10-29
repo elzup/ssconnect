@@ -43,7 +43,11 @@ const StoryCell = ({ article }: Props) => {
   const timestamp = moment(article.story.firstPostedAt).fromNow()
   return (
     <Wrapper>
-      <Cell>
+      <Cell
+        onClick={() => {
+          window.open(article.url)
+        }}
+      >
         <Header>
           <span>{article.blog.title}</span>
           <span>{timestamp}</span>

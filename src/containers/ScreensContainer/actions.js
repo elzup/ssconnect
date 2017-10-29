@@ -1,14 +1,25 @@
 // @flow
-import type { Screen, Story, PageInfo } from '../../types'
+import type { ScreenLoaded, Story, PageInfo } from '../../types'
 
-import { LOADED_SCREEN_STORIES } from './actionTypes'
-import type { LoadedScreenStories } from './actionTypes'
+import { LOADED_SCREEN_STORIES, PAGE_CHANGE } from './actionTypes'
+import type { LoadedScreenStories, PageChange } from './actionTypes'
 
 export function loadedScreenStories(
-  screen: $Shape<Screen>,
+  screenId: number,
+  storyIds: number[],
+  pageInfo: PageInfo,
 ): LoadedScreenStories {
   return {
     type: LOADED_SCREEN_STORIES,
-    screen,
+    screenId,
+    storyIds,
+    pageInfo,
+  }
+}
+export function pageChange(screenId: number, newPage: number): PageChange {
+  return {
+    type: PAGE_CHANGE,
+    screenId,
+    newPage,
   }
 }
