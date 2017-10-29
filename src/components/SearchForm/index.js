@@ -6,7 +6,7 @@ import { List, ListItem } from 'material-ui/List'
 import FontAwesome from 'react-fontawesome'
 import styled from 'styled-components'
 
-type Props = {
+export type Props = {
   tags: string[],
   searchSubmit: Function,
 }

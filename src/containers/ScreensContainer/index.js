@@ -3,6 +3,8 @@ import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
 import _ from 'lodash'
 
+import SearchForm from '../SearchFormContainer'
+
 import type { State, Screen, System } from '../../types'
 import LoadingIndicator from '../../components/LoadingIndicator'
 import StoryListContainer from '../StoryListContainer'
@@ -60,8 +62,7 @@ class Container extends React.Component<Props> {
     if (screen.type === 'search') {
       return (
         <div>
-          <input type="text" />
-          <StoryListContainer key={screen.id} screen={screen} />
+          <SearchForm />
         </div>
       )
     }
