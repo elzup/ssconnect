@@ -56,7 +56,7 @@ class Container extends React.Component<Props> {
     if (!screen.loaded) {
       return <LoadingIndicator key={screen.id} />
     }
-    return <StoryListContainer key={screen.id} storyIds={screen.storyIds} />
+    return <StoryListContainer key={screen.id} screen={screen} />
   }
 }
 

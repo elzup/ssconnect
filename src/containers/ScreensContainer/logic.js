@@ -49,3 +49,9 @@ export function loadScreenStory(screen: Screen): ThunkAction {
     dispatch(loadedScreenStories(screen.id, storyIds, pageInfo))
   }
 }
+
+export function pageChange(screen: Screen, newPage: number): ThunkAction {
+  return async dispatch => {
+    console.log(newPage)
+  }
+}
