@@ -1,13 +1,13 @@
 // @flow
 
 import camelcaseKeys from 'camelcase-keys'
-import _ from 'lodash'
 import { normalizeStories } from './normalize'
 import request from 'superagent'
 
 import type {
   Story,
   Blog,
+  Tag,
   QueryParams,
   PageInfo,
   Screen,
@@ -71,11 +71,7 @@ export async function getStories(
     .set(baseHeaders)
   const res = await new Promise((resolve, reject) => {
     storiesRequest.end((err, res) => {
-      if (err) {
-        reject(err)
-      } else {
-        resolve(res)
-      }
+      resolve(err || res)
     })
   })
 
@@ -94,4 +90,15 @@ function getPageInfo(res: any): PageInfo {
     next: parseInt(res.headers[UseHeader.next], 10) || false,
     prev: parseInt(res.headers[UseHeader.prev], 10) || false,
   }
+}
+
+export async function getTags(timeout: number = TIMEOUT): Promise<Tag[]> {
+  const tagsRequest = request.get(host + '/v1/tags').set(baseHeaders)
+  const res = await new Promise((resolve, reject) => {
+    tagsRequest.end((err, res) => {
+      resolve(err || res)
+    })
+  })
+
+  return camelcaseKeys(res.body, { deep: true })
 }

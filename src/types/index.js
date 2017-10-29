@@ -137,3 +137,9 @@ export type Screen = ScreenLoaded | ScreenNoLoaded
 export type System = {
   selectedTab: number,
 }
+
+export type Tag = {
+  id: number,
+  name: string,
+  taggingsCount: number,
+}
