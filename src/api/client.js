@@ -3,6 +3,7 @@
 import camelcaseKeys from 'camelcase-keys'
 import { normalizeStories } from './normalize'
 import request from 'superagent'
+import _ from 'lodash'
 
 import type {
   Story,
