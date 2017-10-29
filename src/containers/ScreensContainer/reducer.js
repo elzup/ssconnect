@@ -33,6 +33,9 @@ export const initialState: State = {
 
 export default function(state: State = initialState, action: Action): State {
   switch (action.type) {
+    case Actions.DELETE_SCREEN_PROFILE:
+      return _.omit(state, [`${action.screenId}`])
+
     case Actions.MAKE_SCREEN_PROFILE:
       const id = Object.keys(state).length
       return {

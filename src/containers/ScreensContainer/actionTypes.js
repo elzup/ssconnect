@@ -7,11 +7,14 @@ export const PAGE_CHANGE: 'ScreensContainer/PAGE_CHANGE' =
   'ScreensContainer/PAGE_CHANGE'
 export const MAKE_SCREEN_PROFILE: 'ScreensContainer/MAKE_SCREEN_PROFILE' =
   'ScreensContainer/MAKE_SCREEN_PROFILE'
+export const DELETE_SCREEN_PROFILE: 'ScreensContainer/DELETE_SCREEN_PROFILE' =
+  'ScreensContainer/DELETE_SCREEN_PROFILE'
 
 export const Actions = {
   LOADED_SCREEN_STORIES,
   PAGE_CHANGE,
   MAKE_SCREEN_PROFILE,
+  DELETE_SCREEN_PROFILE,
 }
 
 export type LoadedScreenStories = {
@@ -33,4 +36,13 @@ export type MakeScreenProfile = {
   tag: string,
 }
 
-export type Action = LoadedScreenStories | PageChange | MakeScreenProfile
+export type DeleteScreenProfile = {
+  type: typeof DELETE_SCREEN_PROFILE,
+  screenId: number,
+}
+
+export type Action =
+  | LoadedScreenStories
+  | PageChange
+  | MakeScreenProfile
+  | DeleteScreenProfile

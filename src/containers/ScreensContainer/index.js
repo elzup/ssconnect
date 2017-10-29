@@ -2,8 +2,11 @@
 import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
 import _ from 'lodash'
+import FlatButton from 'material-ui/FlatButton'
+import FontAwesome from 'react-fontawesome'
 
 import SearchForm from '../SearchFormContainer'
+import { deleteSubmit } from './logic'
 
 import type { State, Screen, System } from '../../types'
 import LoadingIndicator from '../../components/LoadingIndicator'
@@ -15,6 +18,7 @@ import styled from 'styled-components'
 type Props = {
   screens: Screen[],
   system: System,
+  deleteSubmit: Function,
 }
 
 const Fixer = styled.div`
@@ -25,6 +29,17 @@ const Fixer = styled.div`
 const FixerMargin = styled.div`
   padding: 64px 0 54px;
 `
+
+function getTitle(screen: Screen): string {
+  if (screen.type === 'new') {
+    return '新着'
+  } else if (screen.type === 'search') {
+    return '検索'
+  } else if (screen.type === 'profile') {
+    return _.compact([screen.q, screen.tag]).join(' | ')
+  }
+  return ''
+}
 
 class Container extends React.Component<Props> {
   render() {
@@ -39,7 +54,6 @@ class Container extends React.Component<Props> {
   }
 
   renderScreen(screen: Screen, display: boolean) {
-    const title = screen.type === 'new' ? 'Home' : screen.q
     return (
       <div
         key={screen.id}
@@ -48,7 +62,18 @@ class Container extends React.Component<Props> {
         }}
       >
         <Fixer>
-          <AppBar showMenuIconButton={false} title={title} />
+          <AppBar
+            showMenuIconButton={false}
+            title={getTitle(screen)}
+            iconElementRight={
+              <FlatButton
+                icon={<FontAwesome name="minus" />}
+                onClick={() => {
+                  this.props.deleteSubmit(screen.id)
+                }}
+              />
+            }
+          />
         </Fixer>
         <FixerMargin>{this.renderScreenMain(screen)}</FixerMargin>
       </div>
@@ -75,6 +100,6 @@ const ms = (state: State) => ({
   system: state.System,
 })
 
-const conn: Connector<{}, Props> = connect(ms, {})
+const conn: Connector<{}, Props> = connect(ms, { deleteSubmit })
 
 export default conn(Container)

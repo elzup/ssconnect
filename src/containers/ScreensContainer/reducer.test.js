@@ -80,3 +80,10 @@ test('handle MAKE_SCREEN_PROFILE', () => {
     },
   })
 })
+
+test('handle DELETE_SCREEN_PROFILE', () => {
+  expect(reducer(initialState, actions.deleteScreenProfile(2))).toEqual({
+    '0': { id: 0, page: 1, type: 'new', loaded: false },
+    '1': { id: 1, page: 1, type: 'search', tag: '', q: '', loaded: false },
+  })
+})

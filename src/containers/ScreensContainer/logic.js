@@ -60,3 +60,10 @@ export function searchSubmit(q: string, tag: string): ThunkAction {
     dispatch(loadScreenStory(screen))
   }
 }
+
+export function deleteSubmit(screenId: number): ThunkAction {
+  return async (dispatch, getState) => {
+    await dispatch(switchTab(screenId - 1))
+    await dispatch(actions.deleteScreenProfile(screenId))
+  }
+}

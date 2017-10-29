@@ -5,11 +5,13 @@ import {
   LOADED_SCREEN_STORIES,
   PAGE_CHANGE,
   MAKE_SCREEN_PROFILE,
+  DELETE_SCREEN_PROFILE,
 } from './actionTypes'
 import type {
   LoadedScreenStories,
   PageChange,
   MakeScreenProfile,
+  DeleteScreenProfile,
 } from './actionTypes'
 
 export function loadedScreenStories(
@@ -36,5 +38,11 @@ export function makeScreenProfile(q: string, tag: string): MakeScreenProfile {
     type: MAKE_SCREEN_PROFILE,
     q,
     tag,
+  }
+}
+export function deleteScreenProfile(screenId: number): DeleteScreenProfile {
+  return {
+    type: DELETE_SCREEN_PROFILE,
+    screenId,
   }
 }
