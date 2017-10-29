@@ -43,7 +43,10 @@ class Component extends React.Component<Props, State> {
     }
   }
   render() {
-    const { props } = this
+    const { props, state } = this
+    const filteredTags = props.tags.filter(
+      tag => tag.indexOf(state.tagText) !== -1,
+    )
     return (
       <Wrapper>
         <Row>
@@ -54,7 +57,7 @@ class Component extends React.Component<Props, State> {
               </IconWrap>
               <TextField
                 hintText="キーワード・作品・キャラ"
-                value={this.state.qText}
+                value={state.qText}
                 onChange={(event: Object, newValue: string) => {
                   this.setState({
                     qText: newValue,
@@ -68,7 +71,7 @@ class Component extends React.Component<Props, State> {
               </IconWrap>
               <TextField
                 hintText="タグ"
-                value={this.state.tagText}
+                value={state.tagText}
                 onChange={(event: Object, newValue: string) => {
                   console.log(newValue)
                   this.setState({
@@ -82,20 +85,21 @@ class Component extends React.Component<Props, State> {
             style={{ margin: 5, paddingTop: 25, width: 50 }}
             label="検索"
             onClick={() => {
-              this.props.searchSubmit(this.state.qText, this.state.tagText)
+              props.searchSubmit(state.qText, state.tagText)
             }}
           />
         </Row>
         <p>タグ数:{props.tags.length}</p>
+        <p>絞り込み:{filteredTags.length}</p>
         <List>
-          {props.tags.map(tag => {
+          {filteredTags.map(tag => {
             // HACKME
-            const selected = tag === this.state.tagText
+            const selected = tag === state.tagText
             return (
               <ListItem
                 rightIcon={
                   <FontAwesome
-                    name={selected ? 'check-circle-o' : 'circle-thin'}
+                    name={selected ? 'times-circle-o' : 'circle-thin'}
                   />
                 }
                 primaryText={tag}
