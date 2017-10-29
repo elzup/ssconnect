@@ -82,7 +82,7 @@ class Component extends React.Component<Props, State> {
             </Row>
           </Inputs>
           <RaisedButton
-            style={{ margin: 5, paddingTop: 25, width: 50 }}
+            style={{ margin: 5, height: 50, width: 50 }}
             label="検索"
             onClick={() => {
               props.searchSubmit(state.qText, state.tagText)
@@ -97,6 +97,7 @@ class Component extends React.Component<Props, State> {
             const selected = tag === state.tagText
             return (
               <ListItem
+                key={tag}
                 rightIcon={
                   <FontAwesome
                     name={selected ? 'times-circle-o' : 'circle-thin'}

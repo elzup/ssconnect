@@ -86,13 +86,7 @@ storiesOf('ButtonBar', module)
   .addDecorator(muiTheme())
   .add('normal', () => (
     <PhoneWrap>
-      <ButtonBar
-        screens={screens}
-        switchTab={id => {
-          console.log(`switch to ${id}`)
-        }}
-        system={system}
-      />
+      <ButtonBar screens={screens} switchTab={action} system={system} />
     </PhoneWrap>
   ))
 
@@ -168,7 +162,7 @@ storiesOf('Search Form', module)
   .add('normal', () => (
     <PhoneWrap>
       <SearchForm
-        searchSubmit={(q, tag) => console.log(q, tag)}
+        searchSubmit={action('search')}
         tags={[
           '干物妹！うまるちゃんR',
           'キノの旅',
