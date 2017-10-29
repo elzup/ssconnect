@@ -26,6 +26,10 @@ const Controls = styled.div`
   width: 100%;
 `
 
+const Infos = styled.div`
+  text-align: center;
+`
+
 class Component extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
@@ -39,9 +43,10 @@ class Component extends React.Component<Props, State> {
       <Wrapper>
         <Controls>
           <FlatButton
-            backgroundColor="gray"
             label="←"
+            primary
             disabled={pageInfo.prev === false}
+            style={{ margin: '15px 0' }}
             onClick={() => {
               if (pageInfo.prev === false) {
                 return
@@ -54,7 +59,7 @@ class Component extends React.Component<Props, State> {
             max={pageInfo.total}
             step={1}
             defaultValue={pageInfo.page}
-            style={{ width: '100%' }}
+            style={{ width: '100%', margin: '0' }}
             onChange={(_, value) => {
               this.setState({ page: value })
             }}
@@ -64,9 +69,10 @@ class Component extends React.Component<Props, State> {
           />
 
           <FlatButton
-            backgroundColor="gray"
             label="→"
+            primary
             disabled={pageInfo.next === false}
+            style={{ margin: '15px 0' }}
             onClick={() => {
               if (pageInfo.next === false) {
                 return
@@ -75,9 +81,9 @@ class Component extends React.Component<Props, State> {
             }}
           />
         </Controls>
-        <p>
+        <Infos>
           {this.state.page}/{pageInfo.total}
-        </p>
+        </Infos>
       </Wrapper>
     )
   }
