@@ -101,5 +101,5 @@ export async function getTags(timeout: number = TIMEOUT): Promise<Tag[]> {
     })
   })
 
-  return camelcaseKeys(res.body, { deep: true })
+  return _.values(camelcaseKeys(res.body, { deep: true }))
 }
