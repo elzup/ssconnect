@@ -13,7 +13,6 @@
 		"precommit": "lint-staged"
 	},
 	"dependencies": {
-		"apisauce": "^0.14.1",
 		"camelcase-keys": "^4.1.0",
 		"lodash": "^4.17.4",
 		"material-ui": "^0.19.4",
@@ -27,7 +26,8 @@
 		"redux": "^3.7.2",
 		"redux-persist": "^4.10.1",
 		"redux-thunk": "^2.2.0",
-		"styled-components": "^2.2.1"
+		"styled-components": "^2.2.1",
+		"superagent": "^3.8.0"
 	},
 	"devDependencies": {
 		"@storybook/addon-actions": "^3.2.12",
@@ -46,6 +46,9 @@
 		"storybook-addon-material-ui": "^0.8.2"
 	},
 	"lint-staged": {
-		"*.js": ["prettier --config ./.prettierrc --write", "git add"]
+		"*.js": [
+			"prettier --config ./.prettierrc --write",
+			"git add"
+		]
 	}
 }
