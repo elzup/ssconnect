@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import FontAwesome from 'react-fontawesome'
-import _ from 'lodash'
 import styled from 'styled-components'
 
 import {
@@ -44,10 +43,12 @@ function typeConsts(screen: Screen): { iconName: string, label: string } {
         label: screen.q,
       }
     }
-  }
-  return {
-    iconName: '',
-    label: '',
+    default: {
+      return {
+        iconName: '',
+        label: '',
+      }
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
-import type { State, PageInfo, Screen } from '../../types'
+import type { State, Screen } from '../../types'
 import StoryCellContainer from '../StoryCellContainer'
 import PagingBar from '../../components/PagingBar'
 import styled from 'styled-components'

@@ -1,12 +1,10 @@
 // @flow
 import * as React from 'react'
-import FontAwesome from 'react-fontawesome'
-import _ from 'lodash'
 import styled from 'styled-components'
 import Slider from 'material-ui/Slider'
 import FlatButton from 'material-ui/FlatButton'
 
-import type { ScreenLoaded, System, PageInfo } from '../../types'
+import type { ScreenLoaded } from '../../types'
 
 export type Props = {
   screen: ScreenLoaded,

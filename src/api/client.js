@@ -22,13 +22,11 @@ const UseHeader = {
 }
 
 const host =
-  process.env.NODE_ENV == 'development'
+  process.env.NODE_ENV === 'development'
     ? // ? 'http://localhost:3001'
       'https://ssconnect.elzup.com'
     : 'https://ssconnect.elzup.com'
 const TIMEOUT = 1000
-
-const requestHeaders = _.values(UseHeader).join(', ')
 
 const baseHeaders = {
   'Content-Type': 'application/json',

@@ -1,7 +1,6 @@
 // @flow
 import type { State } from '../../types'
 import { getArticlesByStory } from '../ArticleById/selectors'
-import { getBlog } from '../BlogById/selectors'
 
 export const getStory = (state: State, id: number) => state.StoryById[id]
 

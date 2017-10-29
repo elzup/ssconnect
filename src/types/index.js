@@ -15,7 +15,7 @@ export type Action = _Action | RehydrateAction
 export type GetState = () => State
 
 export type ThunkAction = (
-  dispatch: Dispatch,
+  dispatch: ReduxDispatch,
   getState: GetState,
 ) => void | Promise<void>
 
@@ -65,6 +65,14 @@ export type Blog = {|
 |}
 export type BlogById = { [id: number | string]: Blog }
 
+export type Story = {
+  id: number,
+  title: string,
+  firstPostedAt: string,
+  tagList: string[],
+  articles: number[],
+}
+
 export type Article = {
   id: number,
   postedAt: string,
@@ -81,13 +89,6 @@ export type ArticleComp = {
   story: Story,
 }
 
-export type Story = {
-  id: number,
-  title: string,
-  firstPostedAt: string,
-  tagList: string[],
-  articles: number[],
-}
 export type StoryById = { [id: number | string]: Story }
 
 export type ScreenNoLoadedProp = {

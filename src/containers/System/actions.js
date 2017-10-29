@@ -1,6 +1,4 @@
 // @flow
-import type { Screen } from '../../types'
-
 import { SWITCH_TAB } from './actionTypes'
 import type { SwitchTab } from './actionTypes'
 

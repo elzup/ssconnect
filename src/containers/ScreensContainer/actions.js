@@ -1,5 +1,5 @@
 // @flow
-import type { ScreenLoaded, Story, PageInfo } from '../../types'
+import type { PageInfo } from '../../types'
 
 import { LOADED_SCREEN_STORIES, PAGE_CHANGE } from './actionTypes'
 import type { LoadedScreenStories, PageChange } from './actionTypes'

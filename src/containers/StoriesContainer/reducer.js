@@ -1,7 +1,6 @@
 // @flow
 import type { Action } from '../../types'
 import { Actions } from './actionTypes'
-import { Actions as ScreensContainerActions } from '../ScreensContainer/actionTypes'
 
 export type State = number[]
 

@@ -3,7 +3,6 @@ import * as React from 'react'
 import type { ArticleComp } from '../../types'
 import styled from 'styled-components'
 import moment from 'moment'
-moment.locale('ja')
 
 export type Props = {
   article: ArticleComp,

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { linkTo } from '@storybook/addon-links'
 
 import { muiTheme } from 'storybook-addon-material-ui'
 
@@ -14,16 +13,7 @@ import PagingBar from '../components/PagingBar'
 import SearchForm from '../components/SearchForm'
 import LoadingIndicator from '../components/LoadingIndicator'
 import StoryCell from '../components/StoryCell'
-import type {
-  Screen,
-  PageInfo,
-  Story,
-  Article,
-  ArticleComp,
-  Blog,
-  BlogById,
-  System,
-} from '../types'
+import type { Screen, Story, ArticleComp, Blog, System } from '../types'
 
 const story: Story = {
   id: 1,

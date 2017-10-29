@@ -1,5 +1,5 @@
 // @flow
-import type { ScreenLoaded, Story, PageInfo } from '../../types'
+import type { PageInfo } from '../../types'
 
 export const LOADED_SCREEN_STORIES: 'ScreensContainer/LOADED_SCREEN_STORIES' =
   'ScreensContainer/LOADED_SCREEN_STORIES'

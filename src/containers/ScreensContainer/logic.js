@@ -1,12 +1,5 @@
 // @flow
-import type {
-  ThunkAction,
-  Article,
-  Story,
-  Blog,
-  Screen,
-  ScreenLoaded,
-} from '../../types'
+import type { ThunkAction, Screen } from '../../types'
 import _ from 'lodash'
 import moment from 'moment'
 

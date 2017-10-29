@@ -1,7 +1,6 @@
 // @flow
-import type { Action, Screen, ScreenBase, ScreenNews } from '../../types'
+import type { Action, Screen } from '../../types'
 import { Actions } from './actionTypes'
-import moment from 'moment'
 import _ from 'lodash'
 
 export type State = { [id: number | string]: Screen }
