@@ -9,6 +9,7 @@ test('provide the initial state', () => {
 // TODO
 test('handle SWITCH_TAB', () => {
   expect(reducer(initialState, actions.switchTab(2))).toEqual({
+    rehydrated: false,
     selectedTab: 2,
   })
 })
