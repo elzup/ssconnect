@@ -27,7 +27,7 @@ const host =
     ? // ? 'http://localhost:3001'
       'https://ssconnect.elzup.com'
     : 'https://ssconnect.elzup.com'
-const TIMEOUT = 1000
+const TIMEOUT = 5000
 
 const baseHeaders = {
   'Content-Type': 'application/json',
