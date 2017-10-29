@@ -11,6 +11,7 @@ import '../injectGlobal'
 
 import ButtonBar from '../components/BottomBar'
 import PagingBar from '../components/PagingBar'
+import SearchForm from '../components/SearchForm'
 import LoadingIndicator from '../components/LoadingIndicator'
 import StoryCell from '../components/StoryCell'
 import type {
@@ -158,6 +159,26 @@ storiesOf('PagingBar', module)
           },
         }}
         pageChange={console.log}
+      />
+    </PhoneWrap>
+  ))
+
+storiesOf('Search Form', module)
+  .addDecorator(muiTheme())
+  .add('normal', () => (
+    <PhoneWrap>
+      <SearchForm
+        searchSubmit={(q, tag) => console.log(q, tag)}
+        tags={[
+          '干物妹！うまるちゃんR',
+          'キノの旅',
+          '少女終末旅行',
+          'クジラの子らは砂上に歌う',
+          '宝石の国',
+          'いぬやしき',
+          '十二大戦',
+          'Fate/Apocrypha',
+        ]}
       />
     </PhoneWrap>
   ))
