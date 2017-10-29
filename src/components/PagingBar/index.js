@@ -6,10 +6,10 @@ import styled from 'styled-components'
 import Slider from 'material-ui/Slider'
 import FlatButton from 'material-ui/FlatButton'
 
-import type { Screen, System, PageInfo } from '../../types'
+import type { ScreenLoaded, System, PageInfo } from '../../types'
 
 export type Props = {
-  screen: Screen,
+  screen: ScreenLoaded,
   pageChange: Function,
 }
 
@@ -34,14 +34,11 @@ class Component extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      page: props.screen.loaded ? props.screen.pageInfo.page : 0,
+      page: props.screen.pageInfo.page,
     }
   }
   render() {
     const { screen, pageChange } = this.props
-    if (!screen.loaded) {
-      return null
-    }
     const { pageInfo } = screen
     return (
       <Wrapper>

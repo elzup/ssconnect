@@ -90,11 +90,11 @@ export type Story = {
 }
 export type StoryById = { [id: number | string]: Story }
 
-export type ScreenNoLoaded = {
+export type ScreenNoLoadedProp = {
   loaded: false,
 }
 
-export type ScreenLoaded = {
+export type ScreenLoadedProp = {
   loaded: true,
   storyIds: number[],
   pageInfo: PageInfo,
@@ -115,11 +115,15 @@ export type ScreenNews = ScreenBase & {
   type: 'new',
 }
 
-export type Screen =
-  | (ScreenSearch & ScreenLoaded)
-  | (ScreenSearch & ScreenNoLoaded)
+export type ScreenLoaded =
+  | (ScreenSearch & ScreenLoadedProp)
   | (ScreenNews & ScreenLoaded)
+
+export type ScreenNoLoaded =
+  | (ScreenSearch & ScreenNoLoaded)
   | (ScreenNews & ScreenNoLoaded)
+
+export type Screen = ScreenLoaded | ScreenNoLoaded
 
 export type System = {
   selectedTab: number,
