@@ -31,7 +31,7 @@ const BottomBar = ({ screens, switchTab, system }: Props) => (
         let icon = <FontAwesome name="home" size="2x" />
         let label = '新着'
         switch (s.type) {
-          case 'search': {
+          case 'profile': {
             icon = <FontAwesome name="search" size="2x" />
             label = s.q
           }

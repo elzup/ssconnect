@@ -105,6 +105,12 @@ export type ScreenBase = {
   page: number,
 }
 
+export type ScreenProfile = ScreenBase & {
+  type: 'profile',
+  q: string,
+  tag: string,
+}
+
 export type ScreenSearch = ScreenBase & {
   type: 'search',
   q: string,
@@ -116,10 +122,12 @@ export type ScreenNews = ScreenBase & {
 }
 
 export type ScreenLoaded =
+  | (ScreenProfile & ScreenLoadedProp)
   | (ScreenSearch & ScreenLoadedProp)
   | (ScreenNews & ScreenLoaded)
 
 export type ScreenNoLoaded =
+  | (ScreenProfile & ScreenNoLoaded)
   | (ScreenSearch & ScreenNoLoaded)
   | (ScreenNews & ScreenNoLoaded)
 

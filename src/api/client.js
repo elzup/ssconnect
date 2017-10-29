@@ -44,6 +44,10 @@ function permitQuery(screen: Screen): QueryParams {
       const { page, tag, q } = screen
       return { page, tag, q }
     }
+    case 'profile': {
+      const { page, tag, q } = screen
+      return { page, tag, q }
+    }
     default: {
       // NOTE: Why can remove?
       return { page: 0, tag: '', q: '' }
