@@ -4,6 +4,7 @@ import _ from 'lodash'
 
 import type { State } from '../../types'
 import Component, { type Props } from '../../components/SearchForm'
+import { searchSubmit } from '../ScreensContainer/logic'
 
 type OProps = {}
 
@@ -12,7 +13,7 @@ const ms = (state: State) => ({
 })
 
 const conn: Connector<OProps, Props> = connect(ms, {
-  searchSubmit: () => {},
+  searchSubmit,
 })
 
 export default conn(Component)
