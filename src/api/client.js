@@ -81,7 +81,13 @@ export async function getStories(
   const camelizedData = camelcaseKeys(normalizedData, { deep: true })
   const pageInfo = getPageInfo(res)
 
-  return { ..._.mapValues(camelizedData.entities, _.values), pageInfo }
+  return {
+    stories: [],
+    articles: [],
+    blogs: [],
+    ..._.mapValues(camelizedData.entities, _.values),
+    pageInfo,
+  }
 }
 
 function getPageInfo(res: any): PageInfo {
