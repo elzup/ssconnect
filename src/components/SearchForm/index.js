@@ -2,6 +2,7 @@
 import * as React from 'react'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import { List, ListItem } from 'material-ui/List'
 import FontAwesome from 'react-fontawesome'
 import styled from 'styled-components'
 
@@ -42,6 +43,7 @@ class Component extends React.Component<Props, State> {
     }
   }
   render() {
+    const { props } = this
     return (
       <Wrapper>
         <Row>
@@ -54,7 +56,6 @@ class Component extends React.Component<Props, State> {
                 hintText="キーワード・作品・キャラ"
                 value={this.state.qText}
                 onChange={(event: Object, newValue: string) => {
-                  console.log(newValue)
                   this.setState({
                     qText: newValue,
                   })
@@ -63,7 +64,7 @@ class Component extends React.Component<Props, State> {
             </Row>
             <Row>
               <IconWrap>
-                <FontAwesome name="search" />
+                <FontAwesome name="tag" />
               </IconWrap>
               <TextField
                 hintText="タグ"
@@ -71,7 +72,7 @@ class Component extends React.Component<Props, State> {
                 onChange={(event: Object, newValue: string) => {
                   console.log(newValue)
                   this.setState({
-                    qText: newValue,
+                    tagText: newValue,
                   })
                 }}
               />
@@ -85,6 +86,15 @@ class Component extends React.Component<Props, State> {
             }}
           />
         </Row>
+        <List>
+          {props.tags.map(tag => (
+            <ListItem
+              rightIcon={<FontAwesome name="circle-thin" />}
+              primaryText={tag}
+              secondaryText="..."
+            />
+          ))}
+        </List>
       </Wrapper>
     )
   }
