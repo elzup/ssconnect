@@ -68,7 +68,7 @@ class Component extends React.Component<Props, State> {
               </IconWrap>
               <TextField
                 hintText="タグ"
-                value={this.state.qText}
+                value={this.state.tagText}
                 onChange={(event: Object, newValue: string) => {
                   console.log(newValue)
                   this.setState({
@@ -86,14 +86,26 @@ class Component extends React.Component<Props, State> {
             }}
           />
         </Row>
+        <p>タグ数:{props.tags.length}</p>
         <List>
-          {props.tags.map(tag => (
-            <ListItem
-              rightIcon={<FontAwesome name="circle-thin" />}
-              primaryText={tag}
-              secondaryText="..."
-            />
-          ))}
+          {props.tags.map(tag => {
+            // HACKME
+            const selected = tag === this.state.tagText
+            return (
+              <ListItem
+                rightIcon={
+                  <FontAwesome
+                    name={selected ? 'check-circle-o' : 'circle-thin'}
+                  />
+                }
+                primaryText={tag}
+                onClick={() => {
+                  this.setState({ tagText: selected ? '' : tag })
+                }}
+                secondaryText="..."
+              />
+            )
+          })}
         </List>
       </Wrapper>
     )
