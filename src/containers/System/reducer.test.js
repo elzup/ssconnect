@@ -8,5 +8,7 @@ test('provide the initial state', () => {
 
 // TODO
 test('handle SWITCH_TAB', () => {
-  expect(reducer(initialState, actions.switchTab(1))).toEqual({})
+  expect(reducer(initialState, actions.switchTab(2))).toEqual({
+    selectedTab: 2,
+  })
 })

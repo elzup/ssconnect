@@ -56,6 +56,14 @@ class Container extends React.Component<Props> {
     if (!screen.loaded) {
       return <LoadingIndicator key={screen.id} />
     }
+    if (screen.type === 'search') {
+      return (
+        <div>
+          <input type="text" />
+          <StoryListContainer key={screen.id} screen={screen} />
+        </div>
+      )
+    }
     return <StoryListContainer key={screen.id} screen={screen} />
   }
 }
