@@ -1,6 +1,6 @@
 // @flow
 
-import camelcaseKeys from 'camelcase-keys'
+import camelcaseKeysRecursive from 'camelcase-keys-recursive'
 import { normalizeStories } from './normalize'
 import request from 'superagent'
 import _ from 'lodash'
@@ -78,7 +78,7 @@ export async function getStories(
 
   // { stories: res.data, pageInfo: FeedClient.getPageInfo(res) }
   const normalizedData = normalizeStories(res.body)
-  const camelizedData = camelcaseKeys(normalizedData, { deep: true })
+  const camelizedData = camelcaseKeysRecursive(normalizedData, { deep: true })
   const pageInfo = getPageInfo(res)
 
   return {
@@ -107,5 +107,5 @@ export async function getTags(timeout: number = TIMEOUT): Promise<Tag[]> {
     })
   })
 
-  return _.values(camelcaseKeys(res.body, { deep: true }))
+  return _.values(camelcaseKeysRecursive(res.body, { deep: true }))
 }

@@ -15,7 +15,7 @@
   },
   "homepage": "https://ssconnect.github.io/ssconnect",
   "dependencies": {
-    "camelcase-keys": "^3.0.0",
+    "camelcase-keys-recursive": "^0.8.2",
     "lodash": "^4.17.4",
     "material-ui": "^0.19.4",
     "moment": "^2.19.1",
@@ -56,6 +56,9 @@
     "storybook-addon-material-ui": "^0.8.2"
   },
   "lint-staged": {
-    "*.js": ["prettier --config ./.prettierrc --write", "git add"]
+    "*.js": [
+      "prettier --config ./.prettierrc --write",
+      "git add"
+    ]
   }
 }
