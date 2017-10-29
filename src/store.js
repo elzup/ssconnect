@@ -8,15 +8,14 @@ import { persistStore, autoRehydrate } from 'redux-persist'
 export default () => {
   const middleware = [thunk]
 
-  const store: Store = createStore(
-    reducer,
-    compose(
-      applyMiddleware(...middleware),
-      autoRehydrate(),
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__(),
-    ),
-  )
+  const devtool =
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+  const composer = !!devtool
+    ? compose(applyMiddleware(...middleware), autoRehydrate(), devtool)
+    : compose(applyMiddleware(...middleware), autoRehydrate())
+
+  const store: Store = createStore(reducer, composer)
   persistStore(store)
   return store
 }
