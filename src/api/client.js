@@ -15,10 +15,10 @@ import type {
 } from '../types'
 
 const UseHeader = {
-  page: 'X-Page',
-  total: 'X-Total-Pages',
-  next: 'X-Next-Page',
-  prev: 'X-Prev-Page',
+  page: 'x-page',
+  total: 'x-total-pages',
+  next: 'x-next-page',
+  prev: 'x-prev-page',
 }
 
 const host =
@@ -86,10 +86,11 @@ export async function getStories(
 }
 
 function getPageInfo(res: any): PageInfo {
+  debugger
   return {
-    page: parseInt(res.header[UseHeader.page], 10),
-    total: parseInt(res.header[UseHeader.total], 10),
-    next: parseInt(res.header[UseHeader.next], 10) || false,
-    prev: parseInt(res.header[UseHeader.prev], 10) || false,
+    page: parseInt(res.headers[UseHeader.page], 10),
+    total: parseInt(res.headers[UseHeader.total], 10),
+    next: parseInt(res.headers[UseHeader.next], 10) || false,
+    prev: parseInt(res.headers[UseHeader.prev], 10) || false,
   }
 }
