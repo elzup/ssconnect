@@ -49,7 +49,7 @@ class Container extends React.Component<Props> {
         }}
       >
         <Fixer>
-          <AppBar screen={screen} />
+          <AppBar screen={screen} deleteSubmit={this.props.deleteSubmit} />
         </Fixer>
         <FixerMargin>{this.renderScreenMain(screen)}</FixerMargin>
       </div>

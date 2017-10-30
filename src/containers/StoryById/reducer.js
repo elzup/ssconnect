@@ -2,9 +2,12 @@
 import type { Action, Story } from '../../types'
 import { Actions } from '../StoriesContainer/actionTypes'
 
-export type State = { [id: number]: Story }
+export type State = { [id: number | string]: Story }
 
 export const initialState: State = {}
+export const initialStoryState: $Shape<Story> = {
+  readed: false,
+}
 
 export default function(
   state: State = initialState,
@@ -15,7 +18,7 @@ export default function(
       return {
         ...state,
         ...action.stories.reduce((obj, story) => {
-          obj[story.id] = story
+          obj[story.id] = { ...initialStoryState, ...state[story.id], ...story }
           return obj
         }, {}),
       }

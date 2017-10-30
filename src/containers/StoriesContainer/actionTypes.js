@@ -10,7 +10,7 @@ export const Actions = {
 
 export type ReceiveStories = {
   type: typeof RECEIVE_STORIES,
-  stories: Story[],
+  stories: $Shape<Story>[],
 }
 
 export type Action = ReceiveStories
