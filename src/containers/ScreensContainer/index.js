@@ -2,8 +2,6 @@
 import * as React from 'react'
 import { connect, type Connector } from 'react-redux'
 import _ from 'lodash'
-import FlatButton from 'material-ui/FlatButton'
-import FontAwesome from 'react-fontawesome'
 
 import SearchForm from '../SearchFormContainer'
 import { deleteSubmit } from './logic'
@@ -11,7 +9,7 @@ import { deleteSubmit } from './logic'
 import type { State, Screen, System } from '../../types'
 import LoadingIndicator from '../../components/LoadingIndicator'
 import StoryListContainer from '../StoryListContainer'
-import AppBar from 'material-ui/AppBar'
+import AppBar from '../../components/AppBar'
 
 import styled from 'styled-components'
 
@@ -29,17 +27,6 @@ const Fixer = styled.div`
 const FixerMargin = styled.div`
   padding: 64px 0 54px;
 `
-
-function getTitle(screen: Screen): string {
-  if (screen.type === 'new') {
-    return '新着'
-  } else if (screen.type === 'search') {
-    return '検索'
-  } else if (screen.type === 'profile') {
-    return _.compact([screen.q, screen.tag]).join(' | ')
-  }
-  return ''
-}
 
 class Container extends React.Component<Props> {
   render() {
@@ -62,18 +49,7 @@ class Container extends React.Component<Props> {
         }}
       >
         <Fixer>
-          <AppBar
-            showMenuIconButton={false}
-            title={getTitle(screen)}
-            iconElementRight={
-              <FlatButton
-                icon={<FontAwesome name="minus" />}
-                onClick={() => {
-                  this.props.deleteSubmit(screen.id)
-                }}
-              />
-            }
-          />
+          <AppBar screen={screen} />
         </Fixer>
         <FixerMargin>{this.renderScreenMain(screen)}</FixerMargin>
       </div>
