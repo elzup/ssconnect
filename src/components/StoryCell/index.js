@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 
 const Cell = styled.div`
   padding: 10px;
+  opacity: ${p => (p.readed ? '.5' : '1')};
 `
 
 const Header = styled.div`
@@ -43,6 +44,7 @@ const StoryCell = ({ article }: Props) => {
   return (
     <Wrapper>
       <Cell
+        readed={article.story.readed}
         onClick={() => {
           window.open(article.url)
         }}

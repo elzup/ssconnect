@@ -53,6 +53,16 @@ storiesOf('StoryCell', module)
     </PhoneWrap>
   ))
 
+storiesOf('StoryCell', module)
+  .addDecorator(muiTheme())
+  .add('readed', () => (
+    <PhoneWrap>
+      <StoryCell
+        article={{ ...article, story: { ...article.story, readed: true } }}
+      />
+    </PhoneWrap>
+  ))
+
 const screens: Screen[] = [
   {
     id: 1,
