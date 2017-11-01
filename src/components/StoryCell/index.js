@@ -6,6 +6,7 @@ import moment from 'moment'
 
 export type Props = {
   article: ArticleComp,
+  openedArticle: Function,
 }
 
 const Wrapper = styled.div`
@@ -39,7 +40,7 @@ const TagLabel = styled.div`
   border-radius: 5px;
 `
 
-const StoryCell = ({ article }: Props) => {
+const StoryCell = ({ article, openedArticle }: Props) => {
   const timestamp = moment(article.story.firstPostedAt).fromNow()
   return (
     <Wrapper>
@@ -47,6 +48,7 @@ const StoryCell = ({ article }: Props) => {
         readed={article.story.readed}
         onClick={() => {
           window.open(article.url)
+          openedArticle(article, article.story)
         }}
       >
         <Header>

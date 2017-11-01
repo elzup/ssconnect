@@ -13,7 +13,7 @@ const stories: State = {
     firstPostedAt: '',
     tagList: [],
     title: '',
-    readed: true,
+    readed: false,
   },
 }
 
@@ -45,7 +45,7 @@ test('handle RECEIVE_STORIES', () => {
       firstPostedAt: '',
       tagList: [],
       title: '',
-      readed: true,
+      readed: false,
     },
     '2': {
       id: 2,
@@ -54,6 +54,19 @@ test('handle RECEIVE_STORIES', () => {
       tagList: [],
       title: '',
       readed: false,
+    },
+  })
+})
+
+test('handle READED_STORY', () => {
+  expect(reducer(stories, actions.readedStory(1))).toEqual({
+    '1': {
+      id: 1,
+      articles: [1, 2, 3],
+      firstPostedAt: '',
+      tagList: [],
+      title: '',
+      readed: true,
     },
   })
 })
