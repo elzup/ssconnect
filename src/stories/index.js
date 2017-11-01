@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import styled from 'styled-components'
 
@@ -20,8 +21,10 @@ const story: Story = {
   title: '櫻子｢名探偵櫻子ちゃんだ！｣',
   tagList: ['ゆるゆり'],
   firstPostedAt: '2016-02-16T07:55:00.000Z',
+  readed: false,
   articles: [75603, 97311],
 }
+
 const blog: Blog = {
   id: 3,
   title: 'あやめ速報',
@@ -68,7 +71,7 @@ const screens: Screen[] = [
 ]
 
 const system: System = {
-  loaded: 0,
+  rehydrated: true,
   selectedTab: 1,
 }
 
@@ -102,7 +105,7 @@ storiesOf('PagingBar', module)
             total: 100,
           },
         }}
-        pageChange={console.log}
+        pageChange={action}
       />
       <PagingBar
         screen={{
@@ -114,7 +117,7 @@ storiesOf('PagingBar', module)
             total: 9999,
           },
         }}
-        pageChange={console.log}
+        pageChange={action}
       />
     </PhoneWrap>
   ))
@@ -130,7 +133,7 @@ storiesOf('PagingBar', module)
             total: 100,
           },
         }}
-        pageChange={console.log}
+        pageChange={action}
       />
       <PagingBar
         screen={{
@@ -142,27 +145,26 @@ storiesOf('PagingBar', module)
             total: 100,
           },
         }}
-        pageChange={console.log}
+        pageChange={action}
       />
     </PhoneWrap>
   ))
+
+const tags = [
+  '干物妹！うまるちゃんR',
+  'キノの旅',
+  '少女終末旅行',
+  'クジラの子らは砂上に歌う',
+  '宝石の国',
+  'いぬやしき',
+  '十二大戦',
+  'Fate/Apocrypha',
+].map((v, k) => ({ id: k + 1, name: v, taggingsCount: k * 20 }))
 
 storiesOf('Search Form', module)
   .addDecorator(muiTheme())
   .add('normal', () => (
     <PhoneWrap>
-      <SearchForm
-        searchSubmit={action('search')}
-        tags={[
-          '干物妹！うまるちゃんR',
-          'キノの旅',
-          '少女終末旅行',
-          'クジラの子らは砂上に歌う',
-          '宝石の国',
-          'いぬやしき',
-          '十二大戦',
-          'Fate/Apocrypha',
-        ]}
-      />
+      <SearchForm searchSubmit={action('search')} tags={tags} />
     </PhoneWrap>
   ))
