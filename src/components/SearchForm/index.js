@@ -83,6 +83,7 @@ class Component extends React.Component<Props, State> {
             </Row>
           </Inputs>
           <RaisedButton
+            primary
             style={{ margin: 5, height: 50, width: 50 }}
             label="検索"
             onClick={() => {

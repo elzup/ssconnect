@@ -9,3 +9,7 @@ test('provide the initial state', () => {
 test('handle RECEIVE_STORIES', () => {
   expect(reducer(initialState, actions.receiveStories([]))).toEqual([])
 })
+
+test('handle READED_STORY', () => {
+  expect(reducer(initialState, actions.readedStory(1))).toEqual([])
+})

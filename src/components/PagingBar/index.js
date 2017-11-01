@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton'
 import type { ScreenLoaded } from '../../types'
 
 export type Props = {
-  screen: ScreenLoaded,
+  screen: $Shape<ScreenLoaded>,
   pageChange: Function,
 }
 

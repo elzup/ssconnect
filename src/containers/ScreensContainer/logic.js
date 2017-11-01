@@ -1,10 +1,10 @@
 // @flow
-import type { ThunkAction, Screen } from '../../types'
+import type { ThunkAction, Screen, Article, Story } from '../../types'
 import _ from 'lodash'
 import moment from 'moment'
 
 import * as client from '../../api/client'
-import { receiveStories } from '../StoriesContainer/actions'
+import { receiveStories, readedStory } from '../StoriesContainer/actions'
 import { receiveBlogs } from '../BlogsContainer/actions'
 import { switchTab } from '../System/actions'
 import { receiveArticles } from '../ArticlesContainer/actions'
@@ -81,5 +81,11 @@ export function deleteSubmit(screenId: number): ThunkAction {
   return async (dispatch, getState) => {
     await dispatch(switchTab(screenId - 1))
     await dispatch(actions.deleteScreenProfile(screenId))
+  }
+}
+
+export function openedArticle(article: Article, story: Story): ThunkAction {
+  return dispatch => {
+    dispatch(readedStory(story.id))
   }
 }

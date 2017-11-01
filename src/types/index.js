@@ -68,6 +68,7 @@ export type BlogById = { [id: number | string]: Blog }
 export type Story = {
   id: number,
   title: string,
+  readed: boolean,
   firstPostedAt: string,
   tagList: string[],
   articles: number[],

@@ -10,7 +10,7 @@ export const Actions = {
 
 export type ReceiveArticles = {
   type: typeof RECEIVE_ARTICLES,
-  articles: Article[],
+  articles: $Shape<Article>[],
 }
 
 export type Action = ReceiveArticles
