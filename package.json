@@ -7,6 +7,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "coveralls":
+      "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "s2s": "s2s",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
@@ -57,9 +59,6 @@
     "storybook-addon-material-ui": "^0.8.2"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --config ./.prettierrc --write",
-      "git add"
-    ]
+    "*.js": ["prettier --config ./.prettierrc --write", "git add"]
   }
 }
