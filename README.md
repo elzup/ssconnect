@@ -1,7 +1,7 @@
-# SSconnect
+# SSconnect [![Build Status](https://travis-ci.org/SSconnect/SSConnectApp.svg?branch=master)](https://travis-ci.org/SSconnect/SSConnectApp) [![Coverage Status](https://coveralls.io/repos/github/SSconnect/ssconnect/badge.svg?branch=master)](https://coveralls.io/github/SSconnect/ssconnect?branch=master)
 
 
-![https://user-images.githubusercontent.com/2284908/32147529-45526bde-bd2c-11e7-904d-5f0277724287.gif](https://user-images.githubusercontent.com/2284908/32147529-45526bde-bd2c-11e7-904d-5f0277724287.gif)
+![ssc](https://user-images.githubusercontent.com/2284908/32294116-994d65f0-bf88-11e7-88d2-e355672f0fe1.gif)
 
 
 ## Application Point
@@ -9,20 +9,15 @@
 * Search profile
 
 
-## Install
+## Contributes
 
-```
-$ yarn
-```
+```sh
+# install
+yarn
 
-## Run s2s
+# run s2s
+yarn run s2s
 
-```
-$ yarn run s2s
-```
-
-## Start
-
-```
-$ yarn start
+# start
+yarn start
 ```
