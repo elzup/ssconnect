@@ -1,0 +1,32 @@
+{
+  "projectName": "ssconnect",
+  "projectOwner": "SSconnect",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "elzup",
+      "name": "elzup",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2284908?v=4",
+      "profile": "https://elzup.com",
+      "contributions": [
+        "code",
+        "design",
+        "ideas",
+        "test"
+      ]
+    },
+    {
+      "login": "atsuo1203",
+      "name": "atsuo",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/22675420?v=4",
+      "profile": "https://github.com/atsuo1203",
+      "contributions": [
+        "ideas"
+      ]
+    }
+  ]
+}
