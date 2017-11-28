@@ -14,7 +14,7 @@ const muiTheme = getMuiTheme({
     // primary3Color: '#ccc',
     // accent1Color: '#fff',
     // accent2Color: '#eee',
-    textColor: 'white',
+    // textColor: 'white',
     // alternateTextColor: '#222',
     // canvasColor: '#fff',
     // borderColor: '#aaa',
