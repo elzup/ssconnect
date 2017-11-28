@@ -21,14 +21,6 @@ export const initialState: State = {
     q: '',
     loaded: false,
   },
-  '2': {
-    id: 2,
-    page: 1,
-    type: 'profile',
-    tag: '',
-    q: '櫻子',
-    loaded: false,
-  },
 }
 
 export default function(state: State = initialState, action: Action): State {
