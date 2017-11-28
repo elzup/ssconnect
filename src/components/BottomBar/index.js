@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import FontAwesome from 'react-fontawesome'
+import FontIcon from 'material-ui/FontIcon'
 import styled from 'styled-components'
 import _ from 'lodash'
 
@@ -52,7 +52,7 @@ function typeConsts(screen: Screen): { iconName: string, label: string } {
     }
     case 'profile': {
       return {
-        iconName: 'tag',
+        iconName: 'star',
         label,
       }
     }
@@ -74,7 +74,7 @@ const BottomBar = ({ screens, switchTab, system }: Props) => (
           <BottomNavigationItem
             key={s.id}
             label={label}
-            icon={<FontAwesome name={iconName} size="2x" />}
+            icon={<FontIcon className="material-icons">{iconName}</FontIcon>}
             onClick={() => switchTab(s.id)}
           />
         )

@@ -1,5 +1,5 @@
 // @flow
-import { combineReducers } from 'redux'
+import { combineReducers } from './config'
 import ArticleById from './containers/ArticleById/reducer'
 import ArticlesContainer from './containers/ArticlesContainer/reducer'
 import BlogById from './containers/BlogById/reducer'

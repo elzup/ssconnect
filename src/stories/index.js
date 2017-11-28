@@ -81,7 +81,6 @@ const screens: Screen[] = [
 ]
 
 const system: System = {
-  rehydrated: true,
   selectedTab: 1,
 }
 

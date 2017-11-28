@@ -3,6 +3,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import Slider from 'material-ui/Slider'
 import FlatButton from 'material-ui/FlatButton'
+import FontIcon from 'material-ui/FontIcon'
 
 import type { ScreenLoaded } from '../../types'
 
@@ -42,8 +43,8 @@ class Component extends React.Component<Props, State> {
       <Wrapper>
         <Controls>
           <FlatButton
-            label="←"
             primary
+            icon={<FontIcon className="material-icons">arrow_back</FontIcon>}
             disabled={pageInfo.prev === false}
             style={{ margin: '15px 0' }}
             onClick={() => {
@@ -58,7 +59,7 @@ class Component extends React.Component<Props, State> {
             max={pageInfo.total}
             step={1}
             defaultValue={pageInfo.page}
-            style={{ width: '100%', margin: '0' }}
+            style={{ width: '100%', margin: '0', height: '66px' }}
             onChange={(_, value) => {
               this.setState({ page: value })
             }}
@@ -68,9 +69,8 @@ class Component extends React.Component<Props, State> {
           />
 
           <FlatButton
-            label="→"
             primary
-            disabled={pageInfo.next === false}
+            icon={<FontIcon className="material-icons">arrow_forward</FontIcon>}
             style={{ margin: '15px 0' }}
             onClick={() => {
               if (pageInfo.next === false) {

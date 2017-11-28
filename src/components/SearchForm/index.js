@@ -3,7 +3,7 @@ import * as React from 'react'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import { List, ListItem } from 'material-ui/List'
-import FontAwesome from 'react-fontawesome'
+import FontIcon from 'material-ui/FontIcon'
 import styled from 'styled-components'
 import type { Tag } from '../../types'
 
@@ -54,7 +54,7 @@ class Component extends React.Component<Props, State> {
           <Inputs>
             <Row>
               <IconWrap>
-                <FontAwesome name="search" />
+                <FontIcon className="material-icons">search</FontIcon>
               </IconWrap>
               <TextField
                 hintText="キーワード・作品・キャラ"
@@ -68,7 +68,7 @@ class Component extends React.Component<Props, State> {
             </Row>
             <Row>
               <IconWrap>
-                <FontAwesome name="tag" />
+                <FontIcon className="material-icons">star</FontIcon>
               </IconWrap>
               <TextField
                 hintText="タグ"
@@ -101,9 +101,11 @@ class Component extends React.Component<Props, State> {
               <ListItem
                 key={tag.id}
                 rightIcon={
-                  <FontAwesome
-                    name={selected ? 'times-circle-o' : 'circle-thin'}
-                  />
+                  <FontIcon className="material-icons">
+                    {selected
+                      ? 'radio_button_checked'
+                      : 'radio_button_unchecked'}
+                  </FontIcon>
                 }
                 primaryText={tag.name}
                 onClick={() => {

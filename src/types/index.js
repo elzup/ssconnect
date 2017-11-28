@@ -12,10 +12,15 @@ type RehydrateAction = {
 export type State = _State
 export type Action = _Action | RehydrateAction
 
+export type Reducer = (state: State, action: Action) => State
+export type Reducers = {
+  [key: string]: Reducer,
+}
+
 export type GetState = () => State
 
 export type ThunkAction = (
-  dispatch: ReduxDispatch,
+  dispatch: ReduxDispatch<*>,
   getState: GetState,
 ) => void | Promise<void>
 
@@ -136,7 +141,6 @@ export type ScreenNoLoaded =
 export type Screen = ScreenLoaded | ScreenNoLoaded
 
 export type System = {
-  rehydrated: boolean,
   selectedTab: number,
 }
 

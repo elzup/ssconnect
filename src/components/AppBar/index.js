@@ -3,7 +3,7 @@
 import * as React from 'react'
 import AppBar from 'material-ui/AppBar'
 import FlatButton from 'material-ui/FlatButton'
-import FontAwesome from 'react-fontawesome'
+import FontIcon from 'material-ui/FontIcon'
 import { getTitle } from '../../utils'
 import type { Screen } from '../../types'
 
@@ -20,7 +20,9 @@ const Component = (props: Props) => {
     }
     return (
       <FlatButton
-        icon={<FontAwesome name="minus" />}
+        icon={
+          <FontIcon className="material-icons">{`indeterminate_check_box`}</FontIcon>
+        }
         onClick={() => {
           deleteSubmit(screen.id)
         }}

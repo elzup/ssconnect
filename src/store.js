@@ -1,9 +1,13 @@
 // @flow
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
+import { persistStore } from 'redux-persist'
+
 import reducer from './reducer'
 import type { Store } from './types'
-import { persistStore, autoRehydrate } from 'redux-persist'
+
+import { loadTags } from './containers/TagById/logic'
+import { loadScreenStoryAll } from './containers/ScreensContainer/logic'
 
 export default () => {
   const middleware = [thunk]
@@ -12,10 +16,13 @@ export default () => {
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
   const composer = !!devtool
-    ? compose(applyMiddleware(...middleware), autoRehydrate(), devtool)
-    : compose(applyMiddleware(...middleware), autoRehydrate())
+    ? compose(applyMiddleware(...middleware), devtool)
+    : compose(applyMiddleware(...middleware))
 
   const store: Store = createStore(reducer, composer)
-  persistStore(store)
+  persistStore(store, null, () => {
+    store.dispatch(loadScreenStoryAll())
+    store.dispatch(loadTags())
+  })
   return store
 }
