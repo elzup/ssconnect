@@ -9,11 +9,11 @@ import BottomBarContainer from '../BottomBarContainer'
 const muiTheme = getMuiTheme({
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    primary1Color: '#870000',
-    // primary2Color: '#ddd',
-    // primary3Color: '#ccc',
-    // accent1Color: '#fff',
-    // accent2Color: '#eee',
+    primary1Color: '#4fc3f7',
+    primary2Color: '#0093c4',
+    primary3Color: '#8bf6ff',
+    accent1Color: '#c7a4ff',
+    accent2Color: '#65499c',
     // textColor: 'white',
     // alternateTextColor: '#222',
     // canvasColor: '#fff',
