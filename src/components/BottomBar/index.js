@@ -1,7 +1,5 @@
 // @flow
 import * as React from 'react'
-import FontAwesome from 'react-fontawesome'
-
 import FontIcon from 'material-ui/FontIcon'
 import styled from 'styled-components'
 import _ from 'lodash'

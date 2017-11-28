@@ -11,7 +11,6 @@ export type Props = {
 
 const Wrapper = styled.div`
   width: 100%;
-  background: #fafafa;
 `
 
 const Cell = styled.div`
