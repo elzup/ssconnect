@@ -141,7 +141,6 @@ export type ScreenNoLoaded =
 export type Screen = ScreenLoaded | ScreenNoLoaded
 
 export type System = {
-  rehydrated: boolean,
   selectedTab: number,
 }
 

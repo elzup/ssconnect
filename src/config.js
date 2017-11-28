@@ -1,14 +1,15 @@
 // @flow
 
-import { combineReducers as _cr } from 'redux'
-import type { Reducer } from './types'
-const { NODE_ENV, REACT_APP_HOGE, REACT_APP_FUGA_URL } = process.env
+import { persistCombineReducers } from 'redux-persist'
+import storage from 'redux-persist/es/storage'
 
-if (REACT_APP_HOGE === null || REACT_APP_FUGA_URL === null || !NODE_ENV) {
-  console.error('Configuration not completed. must setup envioraments.')
-  console.error(process.env)
+import type { Reducer } from './types'
+
+const config = {
+  key: 'root',
+  storage,
 }
 
 export function combineReducers(reducers: Object): Reducer {
-  return _cr(reducers)
+  return persistCombineReducers(config, reducers)
 }
