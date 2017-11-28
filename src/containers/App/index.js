@@ -9,12 +9,12 @@ import BottomBarContainer from '../BottomBarContainer'
 const muiTheme = getMuiTheme({
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    primary1Color: '#444',
+    primary1Color: '#870000',
     // primary2Color: '#ddd',
     // primary3Color: '#ccc',
     // accent1Color: '#fff',
     // accent2Color: '#eee',
-    // textColor: '#000',
+    textColor: 'white',
     // alternateTextColor: '#222',
     // canvasColor: '#fff',
     // borderColor: '#aaa',
