@@ -7,8 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "coveralls":
-      "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "s2s": "s2s",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
@@ -27,7 +26,7 @@
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
-    "redux-persist": "^4.10.1",
+    "redux-persist": "^5.4.0",
     "redux-thunk": "^2.2.0",
     "styled-components": "^2.2.3",
     "superagent": "^3.8.1"
@@ -58,6 +57,9 @@
     "storybook-addon-material-ui": "^0.8.2"
   },
   "lint-staged": {
-    "*.js": ["prettier --config ./.prettierrc --write", "git add"]
+    "*.js": [
+      "prettier --config ./.prettierrc --write",
+      "git add"
+    ]
   }
 }
