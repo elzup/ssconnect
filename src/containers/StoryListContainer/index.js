@@ -16,10 +16,7 @@ type OProps = {
   screen: Screen,
 }
 
-const Wrap = styled.div`
-  height: ${p => p.height}px;
-  overflow-y: scroll;
-`
+const Wrap = styled.div``
 
 class Container extends React.Component<Props> {
   render() {

@@ -11,12 +11,8 @@ export function getArticleCompOldest(state: State, id: number): ArticleComp {
   const story = getStory(state, id)
   const articles = story.articles.map(aid => getArticle(state, aid))
   const oldestArticle = articles.reduce((oa, ca) => {
-    if (oa !== null) {
-      return moment(oa.postedAt).isAfter(moment(ca.postedAt)) ? oa : ca
-    } else {
-      return ca
-    }
-  }, articles[0])
+    return moment(oa.postedAt).isBefore(moment(ca.postedAt)) ? oa : ca
+  })
   return getArticleComp(state, oldestArticle, story)
 }
 
