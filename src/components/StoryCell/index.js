@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 
 const Cell = styled.div`
   padding: 10px;
+  cursor: pointer;
   opacity: ${p => (p.readed ? '.5' : '1')};
 `
 
