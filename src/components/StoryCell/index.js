@@ -33,10 +33,13 @@ const Footer = styled.div`
 `
 
 const TagLabel = styled.div`
-  border: 1px dotted gray;
-  font-size: 0.8em;
+  border: 1px solid gray;
+  font-size: 0.5em;
   padding: 0 4px;
-  border-radius: 5px;
+  border-radius: 3px;
+  &:not(:first-child) {
+    margin-left: 3px;
+  }
 `
 
 const StoryCell = ({ article, openedArticle }: Props) => {
