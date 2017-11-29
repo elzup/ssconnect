@@ -23,6 +23,8 @@ const Component = (props: Props) => {
         icon={
           <FontIcon className="material-icons">{`indeterminate_check_box`}</FontIcon>
         }
+        labelStyle={{ margin: 0 }}
+        style={{ alignItems: 'right' }}
         onClick={() => {
           deleteSubmit(screen.id)
         }}
@@ -35,7 +37,12 @@ const Component = (props: Props) => {
       showMenuIconButton={false}
       title={getTitle(screen)}
       iconElementRight={renderLeftIcon()}
-      style={{ textAlign: 'center' }}
+      iconStyleRight={{ margin: 0 }}
+      style={{ minHeight: '45px' }}
+      titleStyle={{
+        fontSize: '20px',
+        lineHeight: '45px',
+      }}
       iconElementLeft={<span />}
     />
   )

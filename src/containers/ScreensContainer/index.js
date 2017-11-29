@@ -25,6 +25,10 @@ const NavScreenWrap = styled.div`
   flex-direction: column;
 `
 
+const ScrollPane = styled.div`
+  overflow-y: scroll;
+`
+
 class Container extends React.Component<Props> {
   render() {
     const { props } = this
@@ -44,7 +48,7 @@ class Container extends React.Component<Props> {
     return (
       <NavScreenWrap key={screen.id}>
         <AppBar screen={screen} deleteSubmit={this.props.deleteSubmit} />
-        {this.renderScreenMain(screen)}
+        <ScrollPane>{this.renderScreenMain(screen)}</ScrollPane>
       </NavScreenWrap>
     )
   }
