@@ -2,7 +2,7 @@
 import type { Action, Article } from '../../types'
 import { Actions } from '../ArticlesContainer/actionTypes'
 
-export type State = { [id: number]: Article }
+export type State = { [id: number | string]: Article }
 
 export const initialState: State = {}
 
