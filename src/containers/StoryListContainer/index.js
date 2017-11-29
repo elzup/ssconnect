@@ -17,7 +17,6 @@ type OProps = {
 }
 
 const Wrap = styled.div`
-  height: ${p => p.height}px;
   overflow-y: scroll;
 `
 

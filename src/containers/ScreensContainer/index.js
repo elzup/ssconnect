@@ -19,13 +19,10 @@ type Props = {
   deleteSubmit: Function,
 }
 
-const Fixer = styled.div`
-  position: fixed;
-  width: 100%;
-`
-
-const FixerMargin = styled.div`
-  padding: 64px 0 54px;
+const NavScreenWrap = styled.div`
+  height: ${window.innerHeight - 56}px;
+  display: flex;
+  flex-direction: column;
 `
 
 class Container extends React.Component<Props> {
@@ -41,18 +38,14 @@ class Container extends React.Component<Props> {
   }
 
   renderScreen(screen: Screen, display: boolean) {
+    if (!display) {
+      return null
+    }
     return (
-      <div
-        key={screen.id}
-        style={{
-          display: display ? 'block' : 'none',
-        }}
-      >
-        <Fixer>
-          <AppBar screen={screen} deleteSubmit={this.props.deleteSubmit} />
-        </Fixer>
-        <FixerMargin>{this.renderScreenMain(screen)}</FixerMargin>
-      </div>
+      <NavScreenWrap key={screen.id}>
+        <AppBar screen={screen} deleteSubmit={this.props.deleteSubmit} />
+        {this.renderScreenMain(screen)}
+      </NavScreenWrap>
     )
   }
 
