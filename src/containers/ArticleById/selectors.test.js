@@ -8,7 +8,7 @@ const state: $Shape<State> = {
     '1': {
       readed: false,
       id: 1,
-      title: '楓「瑞樹さんって可愛いですよね」　瑞樹「え？」',
+      title: 'タイトル1',
       firstPostedAt: '2017-11-25T14:40:56.000Z',
       tagList: ['シンデレラガールズ'],
       articles: [1, 2, 3, 4],
@@ -52,4 +52,11 @@ const state: $Shape<State> = {
 
 test('getArticleCompOldest', () => {
   expect(selectros.getArticleCompOldest(state, 1).id).toBe(2)
+  const compAarticle = selectros.getArticleComp(
+    state,
+    state.ArticleById[1],
+    state.StoryById[1],
+  )
+  expect(compAarticle.blog.title).toBe('えすえすログ')
+  expect(compAarticle.story.title).toBe('タイトル1')
 })
