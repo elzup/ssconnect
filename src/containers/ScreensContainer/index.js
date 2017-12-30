@@ -27,6 +27,7 @@ const NavScreenWrap = styled.div`
 
 const ScrollPane = styled.div`
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 `
 
 class Container extends React.Component<Props> {
