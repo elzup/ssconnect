@@ -1,99 +1,86 @@
 {
   "name": "ssconnect",
   "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "coveralls":
-      "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "s2s": "s2s",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public",
-    "deploy": "gh-pages -d build",
-    "precommit": "lint-staged"
-  },
-  "homepage": "https://ssconnect.github.io/ssconnect",
   "dependencies": {
-    "autoprefixer": "^7.2.3",
+    "autoprefixer": "^7.2.5",
     "babel-core": "6.26.0",
-    "babel-jest": "^22.0.4",
+    "babel-jest": "^22.1.0",
     "babel-loader": "7.1.2",
-    "babel-preset-react-app": "^3.1.0",
+    "babel-preset-react-app": "^3.1.1",
     "babel-runtime": "^6.26.0",
     "camelcase-keys-recursive": "^0.8.2",
     "case-sensitive-paths-webpack-plugin": "^2.1.1",
     "chalk": "^2.3.0",
-    "css-loader": "^0.28.7",
+    "css-loader": "^0.28.9",
     "dotenv": "^4.0.0",
-    "eslint-config-react-app": "^2.0.1",
     "eslint-loader": "1.9.0",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "^1.1.6",
     "fs-extra": "^5.0.0",
     "html-webpack-plugin": "^2.30.1",
-    "jest": "^22.0.4",
+    "jest": "^22.1.4",
     "lodash": "^4.17.4",
     "material-ui": "^0.20.0",
     "moment": "^2.20.1",
     "normalizr": "^3.2.4",
     "object-assign": "^4.1.1",
-    "postcss-flexbugs-fixes": "^3.2.0",
-    "postcss-loader": "^2.0.9",
+    "postcss-flexbugs-fixes": "^3.3.0",
+    "postcss-loader": "^2.0.10",
     "promise": "^8.0.1",
     "raf": "^3.4.0",
     "react": "^16.2.0",
-    "react-dev-utils": "^4.2.1",
+    "react-dev-utils": "^5.0.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "redux-persist": "^5.4.0",
+    "redux-persist": "^5.5.0",
     "redux-thunk": "^2.2.0",
     "style-loader": "^0.19.1",
-    "styled-components": "^2.4.0",
+    "styled-components": "^3.0.2",
     "superagent": "^3.8.2",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7",
+    "webpack-dev-server": "^2.11.1",
     "webpack-manifest-plugin": "1.3.2",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.36",
-    "@babel/preset-env": "^7.0.0-beta.36",
-    "@storybook/addon-actions": "^3.3.3",
-    "@storybook/addon-links": "^3.3.3",
-    "@storybook/react": "^3.3.3",
-    "babel-eslint": "^8.1.2",
+    "@babel/cli": "^7.0.0-beta.38",
+    "@babel/preset-env": "^7.0.0-beta.38",
+    "@storybook/addon-actions": "^3.3.10",
+    "@storybook/addon-links": "^3.3.10",
+    "@storybook/react": "^3.3.10",
+    "babel-eslint": "^8.2.1",
     "babel-plugin-lodash": "^3.3.2",
     "coveralls": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "enzyme-to-json": "^3.3.0",
-    "eslint": "^4.14.0",
-    "eslint-config-react-app": "^2.0.1",
-    "eslint-plugin-flowtype": "^2.40.1",
+    "enzyme-to-json": "^3.3.1",
+    "eslint": "^4.16.0",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.42.0",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.5.1",
-    "flow-bin": "^0.62.0",
+    "flow-bin": "^0.64.0",
     "gh-pages": "^1.1.0",
     "husky": "^0.14.3",
-    "lint-staged": "^6.0.0",
-    "prettier": "^1.9.2",
+    "lint-staged": "^6.0.1",
+    "prettier": "^1.10.2",
     "react-test-renderer": "^16.2.0",
-    "s2s": "^0.15.0",
-    "s2s-plugins-redux": "^0.4.2",
+    "s2s": "^0.17.0",
+    "s2s-plugins-redux": "^0.4.3",
     "storybook-addon-material-ui": "^0.8.2"
   },
-  "lint-staged": {
-    "*.js": ["prettier --config ./.prettierrc --write", "git add"]
-  },
+  "homepage": "https://ssconnect.github.io/ssconnect",
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
-    "setupFiles": ["<rootDir>/config/polyfills.js"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,mjs}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
     "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
@@ -104,10 +91,11 @@
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)":
-        "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
@@ -121,10 +109,22 @@
       "node"
     ]
   },
-  "babel": {
-    "presets": ["react-app"]
+  "lint-staged": {
+    "*.js": [
+      "prettier --config ./.prettierrc --write",
+      "git add"
+    ]
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js",
+    "build-storybook": "build-storybook -s public",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "deploy": "gh-pages -d build",
+    "precommit": "lint-staged",
+    "s2s": "s2s",
+    "start": "node scripts/start.js",
+    "storybook": "start-storybook -p 9009 -s public",
+    "test": "node scripts/test.js --env=jsdom"
   }
 }

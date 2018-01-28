@@ -10,7 +10,7 @@ export const getArticle = (state: State, id: number) => state.ArticleById[id]
 export function getArticleCompOldest(state: State, id: number): ArticleComp {
   const story = getStory(state, id)
   const articles = story.articles.map(aid => getArticle(state, aid))
-  const oldestArticle = articles.reduce((oa, ca) => {
+  const oldestArticle = articles.filter(_.isObject).reduce((oa, ca) => {
     return moment(oa.postedAt).isBefore(moment(ca.postedAt)) ? oa : ca
   })
   return getArticleComp(state, oldestArticle, story)

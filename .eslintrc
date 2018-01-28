@@ -1,3 +1,4 @@
 {
-  "extends": "react-app"
+  "extends": "react-app",
+  "plugins": ["jsx-a11y"]
 }

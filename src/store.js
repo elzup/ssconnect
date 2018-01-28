@@ -20,7 +20,7 @@ export default () => {
     : compose(applyMiddleware(...middleware))
 
   const store: Store = createStore(reducer, composer)
-  persistStore(store, null, () => {
+  persistStore(store, undefined, () => {
     store.dispatch(loadScreenStoryAll())
     store.dispatch(loadTags())
   })
