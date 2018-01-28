@@ -75,12 +75,8 @@
   },
   "homepage": "https://ssconnect.github.io/ssconnect",
   "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
+    "setupFiles": ["<rootDir>/config/polyfills.js"],
     "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
@@ -91,11 +87,10 @@
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)":
+        "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ],
+    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
@@ -110,17 +105,15 @@
     ]
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --config ./.prettierrc --write",
-      "git add"
-    ]
+    "*.js": ["prettier --config ./.prettierrc --write", "git add"]
   },
   "private": true,
   "scripts": {
     "build": "node scripts/build.js",
     "build-storybook": "build-storybook -s public",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "deploy": "gh-pages -d build",
+    "coveralls":
+      "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "deploy": "npm run build && gh-pages -d build",
     "precommit": "lint-staged",
     "s2s": "s2s",
     "start": "node scripts/start.js",
