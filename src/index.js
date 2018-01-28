@@ -10,10 +10,14 @@ import './initialize'
 
 const store = configureStore()
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root'),
-)
+const root = document.getElementById('root')
+
+if (root !== null) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    root,
+  )
+}
 registerServiceWorker()
