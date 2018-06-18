@@ -1,6 +1,19 @@
 {
   "name": "ssconnect",
   "version": "0.1.0",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "build-storybook": "build-storybook -s public",
+    "coveralls":
+      "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "deploy": "up production",
+    "deploy:url": "up url production",
+    "precommit": "lint-staged",
+    "s2s": "s2s",
+    "start": "node scripts/start.js",
+    "storybook": "start-storybook -p 9009 -s public",
+    "test": "node scripts/test.js --env=jsdom"
+  },
   "dependencies": {
     "autoprefixer": "^7.2.5",
     "babel-core": "6.26.0",
@@ -73,7 +86,7 @@
     "s2s-plugins-redux": "^0.4.3",
     "storybook-addon-material-ui": "^0.8.2"
   },
-  "homepage": "https://ssconnect.github.io/ssconnect",
+  "homepage": "https://ssconnect.elzup.org",
   "jest": {
     "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
     "setupFiles": ["<rootDir>/config/polyfills.js"],
@@ -107,17 +120,5 @@
   "lint-staged": {
     "*.js": ["prettier --config ./.prettierrc --write", "git add"]
   },
-  "private": true,
-  "scripts": {
-    "build": "node scripts/build.js",
-    "build-storybook": "build-storybook -s public",
-    "coveralls":
-      "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "deploy": "npm run build && gh-pages -d build",
-    "precommit": "lint-staged",
-    "s2s": "s2s",
-    "start": "node scripts/start.js",
-    "storybook": "start-storybook -p 9009 -s public",
-    "test": "node scripts/test.js --env=jsdom"
-  }
+  "private": true
 }
