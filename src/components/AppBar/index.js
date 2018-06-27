@@ -25,7 +25,9 @@ const Component = (props: Props) => {
         </Typography>
         <div>
           {screen.type === 'profile' && (
-            <Button onClick={deleteSubmit(screen.id)}>x</Button>
+            <Button color="inherit" onClick={deleteSubmit(screen.id)}>
+              x
+            </Button>
           )}
         </div>
       </Toolbar>

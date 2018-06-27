@@ -30,6 +30,7 @@ const Controls = styled.div`
 
 const Infos = styled.div`
   text-align: center;
+  display: flex;
 `
 
 class Component extends React.Component<Props, State> {
@@ -51,7 +52,6 @@ class Component extends React.Component<Props, State> {
             step={1}
             value={this.state.page}
             defaultValue={pageInfo.page}
-            style={{ width: '100%', margin: '0', height: '66px' }}
             onChange={(_, value) => {
               this.setState({ page: value })
             }}
@@ -64,17 +64,20 @@ class Component extends React.Component<Props, State> {
           <Button
             color="primary"
             disabled={pageInfo.prev === false}
-            style={{ margin: '15px 0' }}
+            size="small"
             onClick={() => {
               pageChange(screen, pageInfo.prev)
             }}
           >
             <PrevIcon />
           </Button>
-          {this.state.page}/{pageInfo.total}
+          <div style={{ flex: 1, marginTop: '20px' }}>
+            {this.state.page}/{pageInfo.total}
+          </div>
           <Button
             color="primary"
             style={{ margin: '15px 0' }}
+            size="small"
             onClick={() => {
               pageChange(screen, pageInfo.next)
             }}
