@@ -1,9 +1,17 @@
 // @flow
 import * as React from 'react'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
-import { List, ListItem } from 'material-ui/List'
-import FontIcon from 'material-ui/FontIcon'
+
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import Typography from '@material-ui/core/Typography'
+
+import SearchIcon from '@material-ui/icons/Search'
+import StarIcon from '@material-ui/icons/Star'
+import RadioCheckedIcon from '@material-ui/icons/RadioButtonChecked'
+import RadioUnCheckedIcon from '@material-ui/icons/RadioButtonUnchecked'
+
 import styled from 'styled-components'
 import type { Tag } from '../../types'
 
@@ -54,42 +62,37 @@ class Component extends React.Component<Props, State> {
           <Inputs>
             <Row>
               <IconWrap>
-                <FontIcon className="material-icons">search</FontIcon>
+                <SearchIcon />
               </IconWrap>
               <TextField
-                hintText="キーワード・作品・キャラ"
-                value={state.qText}
-                onChange={(event: Object, newValue: string) => {
-                  this.setState({
-                    qText: newValue,
-                  })
+                label="キーワード・作品・キャラ"
+                onChange={(e, qText) => {
+                  this.setState({ qText })
                 }}
               />
             </Row>
             <Row>
               <IconWrap>
-                <FontIcon className="material-icons">star</FontIcon>
+                <StarIcon />
               </IconWrap>
               <TextField
-                hintText="タグ"
-                value={state.tagText}
-                onChange={(event: Object, newValue: string) => {
-                  console.log(newValue)
-                  this.setState({
-                    tagText: newValue,
-                  })
+                label="タグ"
+                onChange={(e, tagText) => {
+                  this.setState({ tagText: tagText })
                 }}
               />
             </Row>
           </Inputs>
-          <RaisedButton
-            primary
+          <Button
+            color="primary"
+            variant="contained"
             style={{ margin: 5, height: 50, width: 50 }}
-            label="検索"
             onClick={() => {
               props.searchSubmit(state.qText, state.tagText)
             }}
-          />
+          >
+            検索
+          </Button>
         </Row>
         <p>タグ数:{props.tags.length}</p>
         <p>絞り込み:{filteredTags.length}</p>
@@ -100,19 +103,22 @@ class Component extends React.Component<Props, State> {
             return (
               <ListItem
                 key={tag.id}
-                rightIcon={
-                  <FontIcon className="material-icons">
-                    {selected
-                      ? 'radio_button_checked'
-                      : 'radio_button_unchecked'}
-                  </FontIcon>
-                }
-                primaryText={tag.name}
                 onClick={() => {
                   this.setState({ tagText: selected ? '' : tag.name })
                 }}
-                secondaryText={`(${tag.taggingsCount})`}
-              />
+              >
+                <div style={{ width: '100%', display: 'flex' }}>
+                  <div style={{ flex: 1 }}>
+                    <Typography variant="body1">{tag.name}</Typography>
+                    <Typography variant="body2">
+                      ({tag.taggingsCount})
+                    </Typography>
+                  </div>
+                  <div style={{ flex: 0 }}>
+                    {selected ? <RadioCheckedIcon /> : <RadioUnCheckedIcon />}
+                  </div>
+                </div>
+              </ListItem>
             )
           })}
         </List>

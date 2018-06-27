@@ -1,9 +1,11 @@
 // @flow
 import * as React from 'react'
 import styled from 'styled-components'
-import Slider from 'material-ui/Slider'
-import FlatButton from 'material-ui/FlatButton'
-import FontIcon from 'material-ui/FontIcon'
+import Button from '@material-ui/core/Button'
+import Slider from '@material-ui/lab/Slider'
+
+import PrevIcon from '@material-ui/icons/ArrowBack'
+import NextIcon from '@material-ui/icons/ArrowForward'
 
 import type { ScreenLoaded } from '../../types'
 
@@ -23,6 +25,7 @@ const Wrapper = styled.div`
 const Controls = styled.div`
   display: flex;
   width: 100%;
+  padding: 20px;
 `
 
 const Infos = styled.div`
@@ -42,46 +45,42 @@ class Component extends React.Component<Props, State> {
     return (
       <Wrapper>
         <Controls>
-          <FlatButton
-            primary
-            icon={<FontIcon className="material-icons">arrow_back</FontIcon>}
-            disabled={pageInfo.prev === false}
-            style={{ margin: '15px 0' }}
-            onClick={() => {
-              if (pageInfo.prev === false) {
-                return
-              }
-              pageChange(screen, pageInfo.prev)
-            }}
-          />
           <Slider
-            min={0}
+            min={1}
             max={pageInfo.total}
             step={1}
+            value={this.state.page}
             defaultValue={pageInfo.page}
             style={{ width: '100%', margin: '0', height: '66px' }}
             onChange={(_, value) => {
               this.setState({ page: value })
             }}
-            onDragStop={() => {
+            onDragEnd={() => {
               pageChange(screen, this.state.page)
-            }}
-          />
-
-          <FlatButton
-            primary
-            icon={<FontIcon className="material-icons">arrow_forward</FontIcon>}
-            style={{ margin: '15px 0' }}
-            onClick={() => {
-              if (pageInfo.next === false) {
-                return
-              }
-              pageChange(screen, pageInfo.next)
             }}
           />
         </Controls>
         <Infos>
+          <Button
+            color="primary"
+            disabled={pageInfo.prev === false}
+            style={{ margin: '15px 0' }}
+            onClick={() => {
+              pageChange(screen, pageInfo.prev)
+            }}
+          >
+            <PrevIcon />
+          </Button>
           {this.state.page}/{pageInfo.total}
+          <Button
+            color="primary"
+            style={{ margin: '15px 0' }}
+            onClick={() => {
+              pageChange(screen, pageInfo.next)
+            }}
+          >
+            <NextIcon />
+          </Button>
         </Infos>
       </Wrapper>
     )

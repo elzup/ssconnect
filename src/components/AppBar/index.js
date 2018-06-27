@@ -1,9 +1,11 @@
 // @flow
 
 import * as React from 'react'
-import AppBar from 'material-ui/AppBar'
-import FlatButton from 'material-ui/FlatButton'
-import FontIcon from 'material-ui/FontIcon'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+
 import { getTitle } from '../../utils'
 import type { Screen } from '../../types'
 
@@ -14,37 +16,20 @@ type Props = {
 
 const Component = (props: Props) => {
   const { screen, deleteSubmit } = props
-  const renderLeftIcon = () => {
-    if (screen.type !== 'profile') {
-      return null
-    }
-    return (
-      <FlatButton
-        icon={
-          <FontIcon className="material-icons">{`indeterminate_check_box`}</FontIcon>
-        }
-        labelStyle={{ margin: 0 }}
-        style={{ alignItems: 'right' }}
-        onClick={() => {
-          deleteSubmit(screen.id)
-        }}
-      />
-    )
-  }
 
   return (
-    <AppBar
-      showMenuIconButton={false}
-      title={getTitle(screen)}
-      iconElementRight={renderLeftIcon()}
-      iconStyleRight={{ margin: 0 }}
-      style={{ minHeight: '45px' }}
-      titleStyle={{
-        fontSize: '20px',
-        lineHeight: '45px',
-      }}
-      iconElementLeft={<span />}
-    />
+    <AppBar position="static" color="primary">
+      <Toolbar color="inherit">
+        <Typography variant="title" color="inherit" style={{ flex: 1 }}>
+          {getTitle(screen)}
+        </Typography>
+        <div>
+          {screen.type === 'profile' && (
+            <Button onClick={deleteSubmit(screen.id)}>x</Button>
+          )}
+        </div>
+      </Toolbar>
+    </AppBar>
   )
 }
 

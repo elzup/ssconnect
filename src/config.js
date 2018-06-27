@@ -1,15 +1,14 @@
 // @flow
 
 import { persistCombineReducers } from 'redux-persist'
-import storage from 'redux-persist/es/storage'
-
+import storage from 'redux-persist/lib/storage'
 import type { Reducer } from './types'
 
-const config = {
-  key: 'root',
+const storageConfig = {
+  key: 'primary',
   storage,
 }
 
-export function combineReducers(reducers: Object): Reducer {
-  return persistCombineReducers(config, reducers)
+export default function combineReducers(reducers: Object): Reducer {
+  return persistCombineReducers(storageConfig, reducers)
 }

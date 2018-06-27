@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react'
-import FontIcon from 'material-ui/FontIcon'
 import styled from 'styled-components'
 import _ from 'lodash'
 
-import {
-  BottomNavigation,
-  BottomNavigationItem,
-} from 'material-ui/BottomNavigation'
+import BottomNavigation from '@material-ui/core/BottomNavigation'
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
+import HomeIcon from '@material-ui/icons/Home'
+import SearchIcon from '@material-ui/icons/Search'
+import StarIcon from '@material-ui/icons/Star'
 
 import type { Screen, System } from '../../types'
 
@@ -35,30 +35,30 @@ function getTitle(screen: Screen): string {
   return ''
 }
 
-function typeConsts(screen: Screen): { iconName: string, label: string } {
+function typeConsts(screen: Screen): { icon: any, label: string } {
   const label = getTitle(screen)
   switch (screen.type) {
     case 'new': {
       return {
-        iconName: 'home',
+        icon: <HomeIcon />,
         label,
       }
     }
     case 'search': {
       return {
-        iconName: 'search',
+        icon: <SearchIcon />,
         label,
       }
     }
     case 'profile': {
       return {
-        iconName: 'star',
+        icon: <StarIcon />,
         label,
       }
     }
     default: {
       return {
-        iconName: '',
+        icon: null,
         label,
       }
     }
@@ -67,14 +67,14 @@ function typeConsts(screen: Screen): { iconName: string, label: string } {
 
 const BottomBar = ({ screens, switchTab, system }: Props) => (
   <Wrapper>
-    <BottomNavigation selectedIndex={system.selectedTab}>
+    <BottomNavigation value={system.selectedTab}>
       {screens.map(s => {
-        const { iconName, label } = typeConsts(s)
+        const { icon, label } = typeConsts(s)
         return (
-          <BottomNavigationItem
+          <BottomNavigationAction
             key={s.id}
             label={label}
-            icon={<FontIcon className="material-icons">{iconName}</FontIcon>}
+            icon={icon}
             onClick={() => switchTab(s.id)}
           />
         )

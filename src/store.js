@@ -1,13 +1,19 @@
 // @flow
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import { persistStore } from 'redux-persist'
+import { persistStore, persistReducer } from 'redux-persist'
 
 import reducer from './reducer'
-import type { Store } from './types'
+import storage from 'redux-persist/lib/storage'
 
-import { loadTags } from './containers/TagById/logic'
-import { loadScreenStoryAll } from './containers/ScreensContainer/logic'
+// import type { Store } from './types'
+// import { loadTags } from './containers/TagById/logic'
+// import { loadScreenStoryAll } from './containers/ScreensContainer/logic'
+
+const persistConfig = {
+  key: 'primary',
+  storage,
+}
 
 export default () => {
   const middleware = [thunk]
@@ -16,13 +22,18 @@ export default () => {
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
   const composer = !!devtool
-    ? compose(applyMiddleware(...middleware), devtool)
+    ? compose(
+        applyMiddleware(...middleware),
+        devtool,
+      )
     : compose(applyMiddleware(...middleware))
 
-  const store: Store = createStore(reducer, composer)
-  persistStore(store, undefined, () => {
-    store.dispatch(loadScreenStoryAll())
-    store.dispatch(loadTags())
-  })
-  return store
+  const persistedReducer = persistReducer(persistConfig, reducer)
+  const store = createStore(persistedReducer, composer)
+  const persistor = persistStore(store)
+  // persistStore(store, undefined, () => {
+  //   store.dispatch(loadScreenStoryAll())
+  //   store.dispatch(loadTags())
+  // })
+  return { store, persistor }
 }

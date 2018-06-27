@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import { connect, type Connector } from 'react-redux'
+import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import SearchForm from '../SearchFormContainer'
@@ -74,6 +74,9 @@ const ms = (state: State) => ({
   system: state.System,
 })
 
-const conn: Connector<{}, Props> = connect(ms, { deleteSubmit })
+const conn = connect(
+  ms,
+  { deleteSubmit },
+)
 
 export default conn(Container)
