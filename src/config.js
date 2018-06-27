@@ -9,6 +9,6 @@ const storageConfig = {
   storage,
 }
 
-export default function combineReducers(reducers: Object): Reducer {
+export function combineReducers(reducers: Object): Reducer {
   return persistCombineReducers(storageConfig, reducers)
 }

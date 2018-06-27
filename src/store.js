@@ -6,10 +6,6 @@ import { persistStore, persistReducer } from 'redux-persist'
 import reducer from './reducer'
 import storage from 'redux-persist/lib/storage'
 
-// import type { Store } from './types'
-// import { loadTags } from './containers/TagById/logic'
-// import { loadScreenStoryAll } from './containers/ScreensContainer/logic'
-
 const persistConfig = {
   key: 'primary',
   storage,
@@ -31,9 +27,5 @@ export default () => {
   const persistedReducer = persistReducer(persistConfig, reducer)
   const store = createStore(persistedReducer, composer)
   const persistor = persistStore(store)
-  // persistStore(store, undefined, () => {
-  //   store.dispatch(loadScreenStoryAll())
-  //   store.dispatch(loadTags())
-  // })
   return { store, persistor }
 }

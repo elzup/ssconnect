@@ -11,12 +11,17 @@ import LoadingIndicator from '../../components/LoadingIndicator'
 import StoryListContainer from '../StoryListContainer'
 import AppBar from '../../components/AppBar'
 
+import { loadTags } from '../TagById/logic'
+import { loadScreenStoryAll } from '../ScreensContainer/logic'
+
 import styled from 'styled-components'
 
 type Props = {
   screens: Screen[],
   system: System,
   deleteSubmit: Function,
+  loadTags: Function,
+  loadScreenStoryAll: Function,
 }
 
 const NavScreenWrap = styled.div`
@@ -31,6 +36,11 @@ const ScrollPane = styled.div`
 `
 
 class Container extends React.Component<Props> {
+  componentDidMount() {
+    this.props.loadTags()
+    this.props.loadScreenStoryAll()
+  }
+
   render() {
     const { props } = this
     return (
@@ -76,7 +86,11 @@ const ms = (state: State) => ({
 
 const conn = connect(
   ms,
-  { deleteSubmit },
+  {
+    deleteSubmit,
+    loadTags,
+    loadScreenStoryAll,
+  },
 )
 
 export default conn(Container)
