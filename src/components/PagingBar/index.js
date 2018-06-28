@@ -6,11 +6,10 @@ import Slider from '@material-ui/lab/Slider'
 
 import PrevIcon from '@material-ui/icons/ArrowBack'
 import NextIcon from '@material-ui/icons/ArrowForward'
-
-import type { ScreenLoaded } from '../../types'
+import type { PageInfo } from '../../types'
 
 export type Props = {
-  screen: $Shape<ScreenLoaded>,
+  pageInfo: PageInfo,
   pageChange: Function,
 }
 
@@ -37,12 +36,11 @@ class Component extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      page: props.screen.pageInfo.page,
+      page: props.pageInfo.page,
     }
   }
   render() {
-    const { screen, pageChange } = this.props
-    const { pageInfo } = screen
+    const { pageInfo, pageChange } = this.props
     return (
       <Wrapper>
         <Controls>
@@ -56,7 +54,7 @@ class Component extends React.Component<Props, State> {
               this.setState({ page: value })
             }}
             onDragEnd={() => {
-              pageChange(screen, this.state.page)
+              pageChange({ page: this.state.page })
             }}
           />
         </Controls>
@@ -66,7 +64,7 @@ class Component extends React.Component<Props, State> {
             disabled={pageInfo.prev === false}
             size="small"
             onClick={() => {
-              pageChange(screen, pageInfo.prev)
+              pageChange({ page: pageInfo.prev })
             }}
           >
             <PrevIcon />
@@ -79,7 +77,7 @@ class Component extends React.Component<Props, State> {
             style={{ margin: '15px 0' }}
             size="small"
             onClick={() => {
-              pageChange(screen, pageInfo.next)
+              pageChange({ page: pageInfo.next })
             }}
           >
             <NextIcon />

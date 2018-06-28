@@ -1,48 +1,13 @@
 // @flow
-import type { PageInfo } from '../../types'
+import type { ScreenStore } from '../../types'
 
-import {
-  LOADED_SCREEN_STORIES,
-  PAGE_CHANGE,
-  MAKE_SCREEN_PROFILE,
-  DELETE_SCREEN_PROFILE,
-} from './actionTypes'
-import type {
-  LoadedScreenStories,
-  PageChange,
-  MakeScreenProfile,
-  DeleteScreenProfile,
-} from './actionTypes'
+import { SAVE_SCREEN } from './actionTypes'
+import type { SaveScreen } from './actionTypes'
 
-export function loadedScreenStories(
-  screenId: number,
-  storyIds: number[],
-  pageInfo: PageInfo,
-): LoadedScreenStories {
+export function saveScreen(key: string, screenStore: ScreenStore): SaveScreen {
   return {
-    type: LOADED_SCREEN_STORIES,
-    screenId,
-    storyIds,
-    pageInfo,
-  }
-}
-export function pageChange(screenId: number, newPage: number): PageChange {
-  return {
-    type: PAGE_CHANGE,
-    screenId,
-    newPage,
-  }
-}
-export function makeScreenProfile(q: string, tag: string): MakeScreenProfile {
-  return {
-    type: MAKE_SCREEN_PROFILE,
-    q,
-    tag,
-  }
-}
-export function deleteScreenProfile(screenId: number): DeleteScreenProfile {
-  return {
-    type: DELETE_SCREEN_PROFILE,
-    screenId,
+    type: SAVE_SCREEN,
+    key,
+    screenStore,
   }
 }

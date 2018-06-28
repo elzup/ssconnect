@@ -54,12 +54,12 @@ function permitQuery(screen: Screen): QueryParams {
   }
 }
 
-type GetStoriesCallback = ({
+type GetStoriesCallback = {
   stories: Story[],
   articles: Article[],
   blogs: Blog[],
   pageInfo: PageInfo,
-}) => void
+}
 
 export async function getStories(
   screen: Screen,

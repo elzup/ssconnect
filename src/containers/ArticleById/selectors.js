@@ -1,13 +1,13 @@
 // @flow
-import type { State, Story, ArticleComp, Article } from '../../types'
+import type { State, Story, ArticleComp, Article, ID } from '../../types'
 import { getBlog } from '../BlogById/selectors'
 import { getStory } from '../StoryById/selectors'
 import _ from 'lodash'
 import moment from 'moment'
 
-export const getArticle = (state: State, id: number) => state.ArticleById[id]
+export const getArticle = (state: State, id: ID) => state.ArticleById[id]
 
-export function getArticleCompOldest(state: State, id: number): ArticleComp {
+export function getArticleCompOldest(state: State, id: ID): ArticleComp {
   const story = getStory(state, id)
   const articles = story.articles.map(aid => getArticle(state, aid))
   const oldestArticle = articles.filter(_.isObject).reduce((oa, ca) => {

@@ -1,8 +1,8 @@
 // @flow
-import type { Action } from '../../types'
+import type { Action, ID } from '../../types'
 import { Actions } from './actionTypes'
 
-export type State = number[]
+export type State = ID[]
 
 export const initialState: State = []
 

@@ -9,7 +9,7 @@ import { receiveBlogs } from '../BlogsContainer/actions'
 import { switchTab } from '../System/actions'
 import { receiveArticles } from '../ArticlesContainer/actions'
 import * as actions from './actions'
-import * as selectors from './selectors'
+import { toId } from '../../utils'
 
 export function loadScreenStoryAll(): ThunkAction {
   return (dispatch, getState) => {
@@ -20,7 +20,7 @@ export function loadScreenStoryAll(): ThunkAction {
 }
 
 export function loadScreenStory(screen: Screen): ThunkAction {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     const res = await client.getStories(screen).catch(err => {
       console.log(err)
       return false
@@ -41,30 +41,32 @@ export function loadScreenStory(screen: Screen): ThunkAction {
       )
       .map(story => story.id)
 
-    dispatch(actions.loadedScreenStories(screen.id, storyIds, pageInfo))
-  }
-}
-
-export function pageChange(screen: Screen, newPage: number): ThunkAction {
-  return async (dispatch, getState) => {
-    await dispatch(actions.pageChange(screen.id, newPage))
-    dispatch(loadScreenStory(getState().ScreensContainer[screen.id]))
+    const key = toId(screen)
+    const prev = getState().ScreensContainer[key] || { pages: [] }
+    const screenStore = {
+      pages: {
+        ...prev.pages,
+        [pageInfo.page]: storyIds,
+      },
+      total: pageInfo.total,
+    }
+    dispatch(actions.saveScreen(key, screenStore))
   }
 }
 
 export function searchSubmit(q: string, tag: string): ThunkAction {
   return async (dispatch, getState) => {
-    await dispatch(actions.makeScreenProfile(q, tag))
-    const screen = selectors.getNewScreen(getState())
-    dispatch(switchTab(screen.id))
-    dispatch(loadScreenStory(screen))
+    // await dispatch(actions.makeScreenProfile(q, tag))
+    // const screen = selectors.getNewScreen(getState())
+    // dispatch(switchTab(screen.id))
+    // dispatch(loadScreenStory(screen))
   }
 }
 
 export function deleteSubmit(screenId: number): ThunkAction {
   return async (dispatch, getState) => {
     await dispatch(switchTab(screenId - 1))
-    await dispatch(actions.deleteScreenProfile(screenId))
+    // await dispatch(actions.deleteScreenProfile(screenId))
   }
 }
 

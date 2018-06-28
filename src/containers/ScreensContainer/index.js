@@ -1,87 +1,47 @@
 // @flow
 import * as React from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
+import queryString from 'query-string'
 
 import { deleteSubmit } from './logic'
 
-import type { State, Screen, System } from '../../types'
-import LoadingIndicator from '../../components/LoadingIndicator'
+import type { State, Screen } from '../../types'
 import StoryListContainer from '../StoryListContainer'
 import AppBar from '../../components/AppBar'
 
-import { loadTags } from '../TagById/logic'
-import { loadScreenStoryAll } from '../ScreensContainer/logic'
-
-import styled from 'styled-components'
-
-type Props = {
-  screens: Screen[],
-  system: System,
-  deleteSubmit: Function,
-  loadTags: Function,
-  loadScreenStoryAll: Function,
+type OProps = {
+  location: Location,
 }
 
-const NavScreenWrap = styled.div`
-  height: ${window.innerHeight - 56}px;
-  display: flex;
-  flex-direction: column;
-`
-
-const ScrollPane = styled.div`
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-`
+type Props = {
+  screen: Screen,
+  deleteSubmit: Function,
+}
 
 class Container extends React.Component<Props> {
-  componentDidMount() {
-    this.props.loadTags()
-    this.props.loadScreenStoryAll()
-  }
-
   render() {
     const { props } = this
     return (
       <div>
-        {props.screens.map(screen =>
-          this.renderScreen(screen, props.system.selectedTab === screen.id),
-        )}
+        <AppBar title={'debug'} deleteSubmit={props.deleteSubmit} />
+        <StoryListContainer screen={props.screen} />
       </div>
     )
   }
-
-  renderScreen(screen: Screen, display: boolean) {
-    if (!display) {
-      return null
-    }
-    return (
-      <NavScreenWrap key={screen.id}>
-        <AppBar screen={screen} deleteSubmit={this.props.deleteSubmit} />
-        <ScrollPane>{this.renderScreenMain(screen)}</ScrollPane>
-      </NavScreenWrap>
-    )
-  }
-
-  renderScreenMain(screen: Screen) {
-    if (!screen.loaded) {
-      return <LoadingIndicator key={screen.id} />
-    }
-    return <StoryListContainer key={screen.id} screen={screen} />
-  }
 }
 
-const ms = (state: State) => ({
-  screens: _.values(state.ScreensContainer),
-  system: state.System,
-})
+const ms = (state: State, op: OProps) => {
+  const parsed = queryString.parse(op.location.search)
+  const { q = '', tag = '', page = 1 } = parsed
+  return {
+    screen: { q, tag, page },
+  }
+}
 
 const conn = connect(
   ms,
   {
     deleteSubmit,
-    loadTags,
-    loadScreenStoryAll,
   },
 )
 

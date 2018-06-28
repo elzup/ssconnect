@@ -1,5 +1,5 @@
 // @flow
-import type { Story } from '../../types'
+import type { Story, ID } from '../../types'
 
 export const RECEIVE_STORIES: 'StoriesContainer/RECEIVE_STORIES' =
   'StoriesContainer/RECEIVE_STORIES'
@@ -18,7 +18,7 @@ export type ReceiveStories = {
 
 export type ReadedStory = {
   type: typeof READED_STORY,
-  storyId: number,
+  storyId: ID,
 }
 
 export type Action = ReceiveStories | ReadedStory

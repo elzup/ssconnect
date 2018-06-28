@@ -1,45 +1,51 @@
 // @flow
 import * as React from 'react'
-import { connect, type Connector } from 'react-redux'
-import type { State, Screen } from '../../types'
+import { connect } from 'react-redux'
+import type { State, Screen, ID, PageInfo } from '../../types'
 import StoryCellContainer from '../StoryCellContainer'
 import PagingBar from '../../components/PagingBar'
-import styled from 'styled-components'
-import { pageChange } from '../ScreensContainer/logic'
+import * as screenSelector from '../ScreensContainer/selectors'
+
+import { loadScreenStory } from '../ScreensContainer/logic'
 
 type Props = {
   screen: Screen,
-  pageChange: Function,
+  storyIds: ID[],
+  pageInfo: PageInfo,
+  loadScreenStory: typeof loadScreenStory,
 }
 
 type OProps = {
   screen: Screen,
 }
 
-const Wrap = styled.div``
-
 class Container extends React.Component<Props> {
+  componentDidMount() {
+    this.props.loadScreenStory(this.props.screen)
+  }
   render() {
     const { props } = this
-    if (!props.screen.loaded) {
-      return null
-    }
     return (
-      <Wrap>
-        <PagingBar screen={props.screen} pageChange={props.pageChange} />
-        {props.screen.storyIds.map(id => (
-          <StoryCellContainer key={id} storyId={id} />
-        ))}
-        <PagingBar screen={props.screen} pageChange={props.pageChange} />
-      </Wrap>
+      <div>
+        <PagingBar pageInfo={props.pageInfo} pageChange={() => {}} />
+        {props.storyIds.map(id => <StoryCellContainer key={id} storyId={id} />)}
+        <PagingBar pageInfo={props.pageInfo} pageChange={() => {}} />
+      </div>
     )
   }
 }
 
-const ms = (state: State, ownProps: OProps) => ownProps
+const ms = (state: State, op: OProps) => {
+  return {
+    ...op,
+    storyIds: screenSelector.getStoryIds(state, op.screen),
+    pageInfo: screenSelector.getPageInfo(state, op.screen),
+  }
+}
 
-const conn: Connector<OProps, Props> = connect(ms, {
-  pageChange,
-})
+const conn = connect(
+  ms,
+  { loadScreenStory },
+)
 
 export default conn(Container)

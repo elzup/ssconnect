@@ -8,7 +8,9 @@ import AppBar from '../../components/AppBar'
 
 import { loadTags } from '../TagById/logic'
 
-type Props = {}
+type Props = {
+  loadTags: typeof loadTags,
+}
 
 class Container extends React.Component<Props> {
   componentDidMount() {
