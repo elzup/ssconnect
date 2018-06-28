@@ -1,6 +1,5 @@
 // @flow
 import type { ThunkAction, Screen, Article, Story } from '../../types'
-import _ from 'lodash'
 import moment from 'moment'
 
 import * as client from '../../api/client'
@@ -10,14 +9,6 @@ import { switchTab } from '../System/actions'
 import { receiveArticles } from '../ArticlesContainer/actions'
 import * as actions from './actions'
 import { toId } from '../../utils'
-
-export function loadScreenStoryAll(): ThunkAction {
-  return (dispatch, getState) => {
-    _.each(getState().ScreensContainer, screen => {
-      dispatch(loadScreenStory(screen))
-    })
-  }
-}
 
 export function loadScreenStory(screen: Screen): ThunkAction {
   return async (dispatch, getState) => {

@@ -30,7 +30,7 @@ export function getPageInfo(state: State, screen: Screen): PageInfo {
   return {
     total,
     page,
-    next: page < total ? page + 1 : false,
-    prev: page > 2 ? page - 1 : false,
+    next: page + 1 > total ? false : page + 1,
+    prev: page - 1 === 0 ? false : page - 1,
   }
 }

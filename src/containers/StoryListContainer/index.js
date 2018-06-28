@@ -7,6 +7,7 @@ import { withRouter, type RouterHistory } from 'react-router-dom'
 import queryString from 'query-string'
 
 import PagingBar from '../../components/PagingBar'
+import PageInfoBlock from '../../components/PagingBar/PageInfoBlock'
 import * as screenSelector from '../ScreensContainer/selectors'
 
 import { loadScreenStory } from '../ScreensContainer/logic'
@@ -38,17 +39,10 @@ class Container extends React.Component<Props> {
     const { props } = this
     return (
       <div>
-        <PagingBar
-          key={1}
-          pageInfo={props.pageInfo}
-          pageChange={this.pageChange}
-        />
+        <PagingBar pageInfo={props.pageInfo} pageChange={this.pageChange} />
+        <PageInfoBlock pageInfo={props.pageInfo} pageChange={this.pageChange} />
         {props.storyIds.map(id => <StoryCellContainer key={id} storyId={id} />)}
-        <PagingBar
-          key={2}
-          pageInfo={props.pageInfo}
-          pageChange={this.pageChange}
-        />
+        <PageInfoBlock pageInfo={props.pageInfo} pageChange={this.pageChange} />
       </div>
     )
   }
