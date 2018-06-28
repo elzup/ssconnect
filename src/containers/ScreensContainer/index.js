@@ -3,7 +3,6 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import SearchForm from '../SearchFormContainer'
 import { deleteSubmit } from './logic'
 
 import type { State, Screen, System } from '../../types'
@@ -67,13 +66,6 @@ class Container extends React.Component<Props> {
   renderScreenMain(screen: Screen) {
     if (!screen.loaded) {
       return <LoadingIndicator key={screen.id} />
-    }
-    if (screen.type === 'search') {
-      return (
-        <div>
-          <SearchForm />
-        </div>
-      )
     }
     return <StoryListContainer key={screen.id} screen={screen} />
   }
