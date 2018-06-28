@@ -7,7 +7,8 @@ import { deleteSubmit } from './logic'
 
 import type { State, Screen } from '../../types'
 import StoryListContainer from '../StoryListContainer'
-import AppBar from '../../components/AppBar'
+import AppBar from '../AppBar'
+import Drawer from '../Drawer'
 
 type OProps = {
   location: Location,
@@ -25,6 +26,7 @@ class Container extends React.Component<Props> {
       <div>
         <AppBar title={'debug'} deleteSubmit={props.deleteSubmit} />
         <StoryListContainer screen={props.screen} />
+        <Drawer />
       </div>
     )
   }

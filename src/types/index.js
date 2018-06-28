@@ -103,6 +103,9 @@ export type ScreenStoreById = {
 
 export type System = {
   selectedTab: number,
+  drawer: {
+    open: boolean,
+  },
 }
 
 export type Tag = {

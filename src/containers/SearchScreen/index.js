@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 
 import type { State } from '../../types'
 import SearchForm from './SearchForm'
-import AppBar from '../../components/AppBar'
+import AppBar from '../AppBar'
+import Drawer from '../Drawer'
 
 import { loadTags } from '../TagById/logic'
 
@@ -22,6 +23,7 @@ class Container extends React.Component<Props> {
       <div>
         <AppBar title={'検索'} />
         <SearchForm />
+        <Drawer />
       </div>
     )
   }
