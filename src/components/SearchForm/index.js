@@ -66,8 +66,8 @@ class Component extends React.Component<Props, State> {
               </IconWrap>
               <TextField
                 label="キーワード・作品・キャラ"
-                onChange={(e, qText) => {
-                  this.setState({ qText })
+                onChange={e => {
+                  this.setState({ qText: e.target.value })
                 }}
               />
             </Row>
@@ -77,8 +77,8 @@ class Component extends React.Component<Props, State> {
               </IconWrap>
               <TextField
                 label="タグ"
-                onChange={(e, tagText) => {
-                  this.setState({ tagText: tagText })
+                onChange={e => {
+                  this.setState({ tagText: e.target.value })
                 }}
               />
             </Row>
