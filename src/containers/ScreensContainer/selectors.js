@@ -12,7 +12,7 @@ export const getStoryIds = (state: State, screen: Screen) => {
   if (!s) {
     return []
   }
-  return s.pages[screen.page]
+  return s.pages[screen.page] || []
 }
 
 export function getPageInfo(state: State, screen: Screen): PageInfo {
