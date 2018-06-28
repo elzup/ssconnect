@@ -51,6 +51,8 @@
     "promise": "8.0.1",
     "query-string": "^6.1.0",
     "raf": "3.4.0",
+    "rc-slider": "^8.6.1",
+    "rc-tooltip": "^3.7.2",
     "react": "^16.4.1",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.1",

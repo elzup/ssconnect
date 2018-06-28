@@ -34,7 +34,7 @@ const ms = (state: State, op: OProps) => {
   const parsed = queryString.parse(op.location.search)
   const { q = '', tag = '', page = 1 } = parsed
   return {
-    screen: { q, tag, page },
+    screen: { q, tag, page: Number(page) },
   }
 }
 

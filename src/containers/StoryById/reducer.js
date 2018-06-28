@@ -21,10 +21,7 @@ function reduceStory(state: Story, action: Action): Story {
   }
 }
 
-export default function(
-  state: State = initialState,
-  action: Action,
-): Exact<State> {
+export default function(state: State = initialState, action: Action): State {
   switch (action.type) {
     case Actions.RECEIVE_STORIES:
       return {

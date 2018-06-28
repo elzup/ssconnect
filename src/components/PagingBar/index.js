@@ -2,24 +2,23 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import Button from '@material-ui/core/Button'
-import Slider from '@material-ui/lab/Slider'
+import Typography from '@material-ui/core/Typography'
 
 import PrevIcon from '@material-ui/icons/ArrowBack'
 import NextIcon from '@material-ui/icons/ArrowForward'
+import Slider, { Handle } from 'rc-slider'
+import Tooltip from 'rc-tooltip'
+
 import type { PageInfo } from '../../types'
 
 export type Props = {
   pageInfo: PageInfo,
-  pageChange: Function,
+  pageChange: ({ page: number }) => void,
 }
 
 export type State = {
   page: number,
 }
-
-const Wrapper = styled.div`
-  width: 100%;
-`
 
 const Controls = styled.div`
   display: flex;
@@ -28,63 +27,77 @@ const Controls = styled.div`
 `
 
 const Infos = styled.div`
-  text-align: center;
   display: flex;
+  text-align: center;
+  width: 100%;
 `
-
-class Component extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      page: props.pageInfo.page,
-    }
-  }
-  render() {
-    const { pageInfo, pageChange } = this.props
-    return (
-      <Wrapper>
-        <Controls>
-          <Slider
-            min={1}
-            max={pageInfo.total}
-            step={1}
-            value={this.state.page}
-            defaultValue={pageInfo.page}
-            onChange={(_, value) => {
-              this.setState({ page: value })
-            }}
-            onDragEnd={() => {
-              pageChange({ page: this.state.page })
-            }}
-          />
-        </Controls>
-        <Infos>
-          <Button
-            color="primary"
-            disabled={pageInfo.prev === false}
-            size="small"
-            onClick={() => {
-              pageChange({ page: pageInfo.prev })
-            }}
-          >
-            <PrevIcon />
-          </Button>
-          <div style={{ flex: 1, marginTop: '20px' }}>
-            {this.state.page}/{pageInfo.total}
-          </div>
-          <Button
-            color="primary"
-            style={{ margin: '15px 0' }}
-            size="small"
-            onClick={() => {
-              pageChange({ page: pageInfo.next })
-            }}
-          >
-            <NextIcon />
-          </Button>
-        </Infos>
-      </Wrapper>
-    )
-  }
+const handle = props => {
+  const { value, dragging, index, ...restProps } = props
+  return (
+    <Tooltip
+      prefixCls="rc-slider-tooltip"
+      overlay={value}
+      visible={dragging}
+      placement="top"
+      key={index}
+    >
+      <Handle value={value} {...restProps} />
+    </Tooltip>
+  )
 }
-export default Component
+
+const PagingBar = (props: Props) => (
+  <div>
+    <Controls>
+      <Slider
+        min={1}
+        max={props.pageInfo.total}
+        defaultValue={props.pageInfo.page}
+        trackStyle={{ backgroundColor: 'gray', height: 5 }}
+        handleStyle={{
+          borderColor: 'gray',
+          height: 28,
+          width: 28,
+          marginLeft: -14,
+          marginTop: -14,
+          backgroundColor: 'white',
+        }}
+        railStyle={{ height: 5 }}
+        handle={handle}
+        onAfterChange={page => {
+          props.pageChange({ page })
+        }}
+      />
+    </Controls>
+    <Infos>
+      <Button
+        color="primary"
+        disabled={props.pageInfo.prev === false}
+        size="small"
+        onClick={() => {
+          props.pageChange({ page: props.pageInfo.prev || 0 })
+        }}
+      >
+        <PrevIcon />
+      </Button>
+      <Typography
+        variant="headline"
+        component={'h2'}
+        style={{ flex: 1, paddingTop: '13px' }}
+      >
+        {props.pageInfo.page}/{props.pageInfo.total}
+      </Typography>
+      <Button
+        color="primary"
+        style={{}}
+        size="small"
+        onClick={() => {
+          props.pageChange({ page: props.pageInfo.next || 0 })
+        }}
+      >
+        <NextIcon />
+      </Button>
+    </Infos>
+  </div>
+)
+export default PagingBar
