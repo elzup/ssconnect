@@ -44,13 +44,13 @@ const IconWrap = styled.div`
 `
 
 class Component extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      qText: '',
-      tagText: '',
-    }
+  searchRef: ?HTMLInputElement
+
+  state = {
+    qText: '',
+    tagText: '',
   }
+
   render() {
     const { props, state } = this
     const filteredTags = props.tags.filter(
@@ -66,6 +66,9 @@ class Component extends React.Component<Props, State> {
               </IconWrap>
               <TextField
                 label="キーワード・作品・キャラ"
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 onChange={e => {
                   this.setState({ qText: e.target.value })
                 }}
@@ -77,6 +80,12 @@ class Component extends React.Component<Props, State> {
               </IconWrap>
               <TextField
                 label="タグ"
+                inputRef={r => {
+                  this.searchRef = r
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 onChange={e => {
                   this.setState({ tagText: e.target.value })
                 }}
@@ -104,7 +113,11 @@ class Component extends React.Component<Props, State> {
               <ListItem
                 key={tag.id}
                 onClick={() => {
-                  this.setState({ tagText: selected ? '' : tag.name })
+                  const tagText = selected ? '' : tag.name
+                  this.setState({ tagText })
+                  if (this.searchRef) {
+                    this.searchRef.value = tagText
+                  }
                 }}
               >
                 <div style={{ width: '100%', display: 'flex' }}>
