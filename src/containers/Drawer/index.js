@@ -14,6 +14,8 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import Divider from '@material-ui/core/Divider'
 import TrendingUpIcon from '@material-ui/icons/TrendingUp'
 import SearchIcon from '@material-ui/icons/Search'
+import CodeIcon from '@material-ui/icons/Code'
+import AuthorIcon from '@material-ui/icons/ThumbUp'
 
 import { toggleDrawer } from '../System/actions'
 import { getBookmarks } from '../Bookmarks/selectors'
@@ -76,6 +78,23 @@ class Drawer extends React.Component<Props> {
                 </Link>
               </ListItem>
             ))}
+            <Divider />
+            <ListItem>
+              <ListItemIcon>
+                <CodeIcon />
+              </ListItemIcon>
+              <a href="https://github.com/elzup/ssconnect">
+                <ListItemText>コード</ListItemText>
+              </a>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <AuthorIcon />
+              </ListItemIcon>
+              <a href="https://elzup.com">
+                <ListItemText>アプリ開発者</ListItemText>
+              </a>
+            </ListItem>
           </List>
         </div>
       </SwipeableDrawer>
