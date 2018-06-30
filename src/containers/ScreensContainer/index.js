@@ -46,7 +46,7 @@ class Container extends React.Component<Props> {
 const ms = (state: State, op: OProps) => {
   const parsed = queryString.parse(op.location.search)
   const { q = '', tag = '', page = 1 } = parsed
-  const screen = buildScreen(q, tag, page)
+  const screen = buildScreen(q, tag, Number(page))
   return {
     screen,
     bookmarked: bookmarked(state, screen),

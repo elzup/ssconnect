@@ -9,7 +9,7 @@ export const initialState: State = []
 export default function(state: State = initialState, action: Action): State {
   switch (action.type) {
     case Actions.ADD_BOOKMARK:
-      return [...state, action.key]
+      return [action.key, ...state]
 
     case Actions.REMOVE_BOOKMARK:
       const { key } = action

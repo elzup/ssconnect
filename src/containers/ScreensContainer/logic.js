@@ -8,6 +8,7 @@ import { receiveBlogs } from '../BlogsContainer/actions'
 import { switchTab } from '../System/actions'
 import { receiveArticles } from '../ArticlesContainer/actions'
 import * as actions from './actions'
+import * as bookmarkActions from '../Bookmarks/logic'
 import { toId } from '../../utils'
 
 export function loadScreenStory(screen: Screen): ThunkAction {
@@ -41,6 +42,7 @@ export function loadScreenStory(screen: Screen): ThunkAction {
       },
       total: pageInfo.total,
     }
+    dispatch(bookmarkActions.checkUpdate(screen))
     dispatch(actions.saveScreen(key, screenStore))
   }
 }

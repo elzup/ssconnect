@@ -15,3 +15,13 @@ export function toggleBookmark(screen: Screen): ThunkAction {
     }
   }
 }
+
+export function checkUpdate(screen: Screen): ThunkAction {
+  return (dispatch, getState) => {
+    const key = toId(screen)
+    if (selectors.bookmarked(getState(), screen)) {
+      dispatch(actions.removeBookmark(key))
+      dispatch(actions.addBookmark(key, screen))
+    }
+  }
+}
