@@ -1,10 +1,9 @@
 // @flow
 import type { Screen } from '../../types'
 
-export const ADD_BOOKMARK: 'BookmarkScreen/ADD_BOOKMARK' =
-  'BookmarkScreen/ADD_BOOKMARK'
-export const REMOVE_BOOKMARK: 'BookmarkScreen/REMOVE_BOOKMARK' =
-  'BookmarkScreen/REMOVE_BOOKMARK'
+export const ADD_BOOKMARK: 'Bookmarks/ADD_BOOKMARK' = 'Bookmarks/ADD_BOOKMARK'
+export const REMOVE_BOOKMARK: 'Bookmarks/REMOVE_BOOKMARK' =
+  'Bookmarks/REMOVE_BOOKMARK'
 
 export const Actions = {
   ADD_BOOKMARK,

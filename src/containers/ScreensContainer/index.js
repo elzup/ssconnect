@@ -10,12 +10,15 @@ import StoryListContainer from '../StoryListContainer'
 import AppBar from '../AppBar'
 import Drawer from '../Drawer'
 
+import { bookmarked } from '../Bookmarks/selectors'
+
 type OProps = {
   location: Location,
 }
 
 type Props = {
   screen: Screen,
+  bookmarked: boolean,
   deleteSubmit: Function,
 }
 
@@ -24,7 +27,14 @@ class Container extends React.Component<Props> {
     const { props } = this
     return (
       <div>
-        <AppBar title={'debug'} deleteSubmit={props.deleteSubmit} />
+        <AppBar
+          title={props.screen.tag}
+          deleteSubmit={props.deleteSubmit}
+          bookmark={{
+            screen: props.screen,
+            bookmarked: props.bookmarked,
+          }}
+        />
         <StoryListContainer screen={props.screen} />
         <Drawer />
       </div>
@@ -35,8 +45,10 @@ class Container extends React.Component<Props> {
 const ms = (state: State, op: OProps) => {
   const parsed = queryString.parse(op.location.search)
   const { q = '', tag = '', page = 1 } = parsed
+  const screen: Screen = { q, tag, page: Number(page) }
   return {
-    screen: { q, tag, page: Number(page) },
+    screen,
+    bookmarked: bookmarked(state, screen),
   }
 }
 

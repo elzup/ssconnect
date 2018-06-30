@@ -17,12 +17,12 @@ import type { Tag } from '../../types'
 
 export type Props = {
   tags: Tag[],
-  searchSubmit: Function,
+  searchSubmit: ({ q: string, tag: string }) => void,
 }
 
 type State = {
-  qText: string,
-  tagText: string,
+  q: string,
+  tag: string,
 }
 
 const Wrapper = styled.div`
@@ -47,14 +47,14 @@ class Component extends React.Component<Props, State> {
   searchRef: ?HTMLInputElement
 
   state = {
-    qText: '',
-    tagText: '',
+    q: '',
+    tag: '',
   }
 
   render() {
     const { props, state } = this
     const filteredTags = props.tags.filter(
-      tag => tag.name.indexOf(state.tagText) !== -1,
+      tag => tag.name.indexOf(state.tag) !== -1,
     )
     return (
       <Wrapper>
@@ -70,7 +70,7 @@ class Component extends React.Component<Props, State> {
                   shrink: true,
                 }}
                 onChange={e => {
-                  this.setState({ qText: e.target.value })
+                  this.setState({ q: e.target.value })
                 }}
               />
             </Row>
@@ -87,7 +87,7 @@ class Component extends React.Component<Props, State> {
                   shrink: true,
                 }}
                 onChange={e => {
-                  this.setState({ tagText: e.target.value })
+                  this.setState({ tag: e.target.value })
                 }}
               />
             </Row>
@@ -97,7 +97,7 @@ class Component extends React.Component<Props, State> {
             variant="contained"
             style={{ margin: 5, height: 50, width: 50 }}
             onClick={() => {
-              props.searchSubmit(state.qText, state.tagText)
+              props.searchSubmit({ q: state.q, tag: state.tag })
             }}
           >
             検索
@@ -106,26 +106,24 @@ class Component extends React.Component<Props, State> {
         <p>タグ数:{props.tags.length}</p>
         <p>絞り込み:{filteredTags.length}</p>
         <List>
-          {filteredTags.map(tag => {
+          {filteredTags.map(t => {
             // HACKME
-            const selected = tag.name === state.tagText
+            const selected = t.name === state.tag
             return (
               <ListItem
-                key={tag.id}
+                key={t.id}
                 onClick={() => {
-                  const tagText = selected ? '' : tag.name
-                  this.setState({ tagText })
+                  const tag = selected ? '' : t.name
+                  this.setState({ tag })
                   if (this.searchRef) {
-                    this.searchRef.value = tagText
+                    this.searchRef.value = tag
                   }
                 }}
               >
                 <div style={{ width: '100%', display: 'flex' }}>
                   <div style={{ flex: 1 }}>
-                    <Typography variant="body1">{tag.name}</Typography>
-                    <Typography variant="body2">
-                      ({tag.taggingsCount})
-                    </Typography>
+                    <Typography variant="body1">{t.name}</Typography>
+                    <Typography variant="body2">({t.taggingsCount})</Typography>
                   </div>
                   <div style={{ flex: 0 }}>
                     {selected ? <RadioCheckedIcon /> : <RadioUnCheckedIcon />}

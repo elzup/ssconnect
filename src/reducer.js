@@ -4,7 +4,8 @@ import ArticleById from './containers/ArticleById/reducer'
 import ArticlesContainer from './containers/ArticlesContainer/reducer'
 import BlogById from './containers/BlogById/reducer'
 import BlogsContainer from './containers/BlogsContainer/reducer'
-import BookmarkScreen from './containers/BookmarkScreen/reducer'
+import BookmarkById from './containers/BookmarkById/reducer'
+import Bookmarks from './containers/Bookmarks/reducer'
 import ScreensContainer from './containers/ScreensContainer/reducer'
 import StoriesContainer from './containers/StoriesContainer/reducer'
 import StoryById from './containers/StoryById/reducer'
@@ -16,7 +17,8 @@ export default combineReducers({
   ArticlesContainer,
   BlogById,
   BlogsContainer,
-  BookmarkScreen,
+  BookmarkById,
+  Bookmarks,
   ScreensContainer,
   StoriesContainer,
   StoryById,

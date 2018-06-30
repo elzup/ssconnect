@@ -3,11 +3,15 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import type { State, Screen } from '../../types'
 
+import { Link } from 'react-router-dom'
+
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
+import Divider from '@material-ui/core/Divider'
 
 import { toggleDrawer } from '../System/actions'
+import { getBookmarks } from '../Bookmarks/selectors'
 
 type Props = {
   open: boolean,
@@ -27,11 +31,28 @@ class Drawer extends React.Component<Props> {
         <div
           tabIndex={0}
           role="button"
+          style={{
+            width: '300px',
+          }}
           onClick={props.toggleDrawer}
           onKeyDown={props.toggleDrawer}
         >
           <List>
-            {props.screens.map(screen => <ListItem>{screen.q}</ListItem>)}
+            <ListItem>
+              <Link to="/">新着</Link>
+            </ListItem>
+            <ListItem>
+              <Link to="/search">検索</Link>
+            </ListItem>
+            <Divider />
+            {props.screens.map((screen, i) => (
+              <ListItem key={i}>
+                <Link
+                  to={`?q=${screen.q}&tag=${screen.tag}&page=${screen.page}`}
+                />
+                {screen.q}
+              </ListItem>
+            ))}
           </List>
         </div>
       </SwipeableDrawer>
@@ -41,7 +62,7 @@ class Drawer extends React.Component<Props> {
 
 const ms = (state: State) => ({
   open: state.System.drawer.open,
-  screens: [],
+  screens: getBookmarks(state),
 })
 
 const conn = connect(

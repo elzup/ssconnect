@@ -45,15 +45,6 @@ export function loadScreenStory(screen: Screen): ThunkAction {
   }
 }
 
-export function searchSubmit(q: string, tag: string): ThunkAction {
-  return async (dispatch, getState) => {
-    // await dispatch(actions.makeScreenProfile(q, tag))
-    // const screen = selectors.getNewScreen(getState())
-    // dispatch(switchTab(screen.id))
-    // dispatch(loadScreenStory(screen))
-  }
-}
-
 export function deleteSubmit(screenId: number): ThunkAction {
   return async (dispatch, getState) => {
     await dispatch(switchTab(screenId - 1))
