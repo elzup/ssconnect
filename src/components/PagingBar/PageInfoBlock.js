@@ -24,12 +24,16 @@ const Infos = styled.div`
   width: 100%;
 `
 
+const buttonStyle = {
+  marginBottom: '20px',
+}
+
 const PageInfoBlock = (props: Props) => (
   <Infos>
     <Button
+      style={buttonStyle}
       color="primary"
       disabled={props.pageInfo.prev === false}
-      size="small"
       onClick={() => {
         props.pageChange({ page: props.pageInfo.prev || 0 })
       }}
@@ -44,8 +48,8 @@ const PageInfoBlock = (props: Props) => (
       {props.pageInfo.page}/{props.pageInfo.total}
     </Typography>
     <Button
+      style={buttonStyle}
       color="primary"
-      size="small"
       disabled={props.pageInfo.next === false}
       onClick={() => {
         props.pageChange({ page: props.pageInfo.next || 0 })

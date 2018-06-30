@@ -3,7 +3,6 @@
 import * as React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 
@@ -40,12 +39,12 @@ const Component = (props: Props) => {
         </Typography>
         <div>
           {bookmark && (
-            <Button
+            <IconButton
               color="inherit"
               onClick={() => props.toggleBookmark(bookmark.screen)}
             >
               {bookmark.bookmarked ? <StarIcon /> : <StarBorderIcon />}
-            </Button>
+            </IconButton>
           )}
         </div>
       </Toolbar>
