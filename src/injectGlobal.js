@@ -19,4 +19,9 @@ body {
   src: local('Material Icons'), local('MaterialIcons-Regular');
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 `

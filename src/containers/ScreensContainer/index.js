@@ -9,6 +9,7 @@ import type { State, Screen } from '../../types'
 import StoryListContainer from '../StoryListContainer'
 import AppBar from '../AppBar'
 import Drawer from '../Drawer'
+import { buildScreen } from '../../utils'
 
 import { bookmarked } from '../Bookmarks/selectors'
 
@@ -28,7 +29,7 @@ class Container extends React.Component<Props> {
     return (
       <div>
         <AppBar
-          title={props.screen.tag}
+          title={props.screen.label}
           deleteSubmit={props.deleteSubmit}
           bookmark={{
             screen: props.screen,
@@ -45,7 +46,7 @@ class Container extends React.Component<Props> {
 const ms = (state: State, op: OProps) => {
   const parsed = queryString.parse(op.location.search)
   const { q = '', tag = '', page = 1 } = parsed
-  const screen: Screen = { q, tag, page: Number(page) }
+  const screen = buildScreen(q, tag, page)
   return {
     screen,
     bookmarked: bookmarked(state, screen),

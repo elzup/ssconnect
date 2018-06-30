@@ -8,7 +8,12 @@ import { Link } from 'react-router-dom'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListSubheader from '@material-ui/core/ListSubheader'
 import Divider from '@material-ui/core/Divider'
+import TrendingUpIcon from '@material-ui/icons/TrendingUp'
+import SearchIcon from '@material-ui/icons/Search'
 
 import { toggleDrawer } from '../System/actions'
 import { getBookmarks } from '../Bookmarks/selectors'
@@ -39,18 +44,36 @@ class Drawer extends React.Component<Props> {
         >
           <List>
             <ListItem>
-              <Link to="/">新着</Link>
+              <ListItemIcon>
+                <TrendingUpIcon />
+              </ListItemIcon>
+              <Link to="/">
+                <ListItemText>新着</ListItemText>
+              </Link>
             </ListItem>
+
             <ListItem>
-              <Link to="/search">検索</Link>
+              <ListItemIcon>
+                <SearchIcon />
+              </ListItemIcon>
+              <Link to="/search">
+                <ListItemText>検索</ListItemText>
+              </Link>
             </ListItem>
             <Divider />
+            <ListSubheader>お気に入り</ListSubheader>
+            {props.screens.length === 0 && (
+              <ListItem>
+                <ListItemText>----</ListItemText>
+              </ListItem>
+            )}
             {props.screens.map((screen, i) => (
               <ListItem key={i}>
                 <Link
-                  to={`?q=${screen.q}&tag=${screen.tag}&page=${screen.page}`}
-                />
-                {screen.q}
+                  to={`/?q=${screen.q}&tag=${screen.tag}&page=${screen.page}`}
+                >
+                  <ListItemText>{screen.label}</ListItemText>
+                </Link>
               </ListItem>
             ))}
           </List>

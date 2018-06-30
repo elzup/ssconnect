@@ -76,20 +76,12 @@ export type ArticleComp = {
 
 export type StoryById = { [id: ID]: Story }
 
-export type ScreenNoLoadedProp = {
-  loaded: false,
-}
-
-export type ScreenLoadedProp = {
-  loaded: true,
-  storyIds: number[],
-  pageInfo: PageInfo,
-}
-
 export type Screen = {
   page: number,
   q: string,
   tag: string,
+  id: string,
+  label: string,
 }
 
 export type ScreenStore = {
