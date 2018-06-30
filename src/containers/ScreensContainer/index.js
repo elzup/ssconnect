@@ -1,79 +1,63 @@
 // @flow
 import * as React from 'react'
-import { connect, type Connector } from 'react-redux'
-import _ from 'lodash'
+import { connect } from 'react-redux'
+import queryString from 'query-string'
 
-import SearchForm from '../SearchFormContainer'
 import { deleteSubmit } from './logic'
 
-import type { State, Screen, System } from '../../types'
-import LoadingIndicator from '../../components/LoadingIndicator'
+import type { State, Screen } from '../../types'
 import StoryListContainer from '../StoryListContainer'
-import AppBar from '../../components/AppBar'
+import AppBar from '../AppBar'
+import Drawer from '../Drawer'
+import { buildScreen } from '../../utils'
 
-import styled from 'styled-components'
+import { bookmarked } from '../Bookmarks/selectors'
 
-type Props = {
-  screens: Screen[],
-  system: System,
-  deleteSubmit: Function,
+type OProps = {
+  location: Location,
 }
 
-const NavScreenWrap = styled.div`
-  height: ${window.innerHeight - 56}px;
-  display: flex;
-  flex-direction: column;
-`
-
-const ScrollPane = styled.div`
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-`
+type Props = {
+  screen: Screen,
+  bookmarked: boolean,
+  deleteSubmit: Function,
+}
 
 class Container extends React.Component<Props> {
   render() {
     const { props } = this
     return (
       <div>
-        {props.screens.map(screen =>
-          this.renderScreen(screen, props.system.selectedTab === screen.id),
-        )}
+        <AppBar
+          title={props.screen.label}
+          deleteSubmit={props.deleteSubmit}
+          bookmark={{
+            screen: props.screen,
+            bookmarked: props.bookmarked,
+          }}
+        />
+        <StoryListContainer screen={props.screen} />
+        <Drawer />
       </div>
     )
   }
+}
 
-  renderScreen(screen: Screen, display: boolean) {
-    if (!display) {
-      return null
-    }
-    return (
-      <NavScreenWrap key={screen.id}>
-        <AppBar screen={screen} deleteSubmit={this.props.deleteSubmit} />
-        <ScrollPane>{this.renderScreenMain(screen)}</ScrollPane>
-      </NavScreenWrap>
-    )
-  }
-
-  renderScreenMain(screen: Screen) {
-    if (!screen.loaded) {
-      return <LoadingIndicator key={screen.id} />
-    }
-    if (screen.type === 'search') {
-      return (
-        <div>
-          <SearchForm />
-        </div>
-      )
-    }
-    return <StoryListContainer key={screen.id} screen={screen} />
+const ms = (state: State, op: OProps) => {
+  const parsed = queryString.parse(op.location.search)
+  const { q = '', tag = '', page = 1 } = parsed
+  const screen = buildScreen(q, tag, Number(page))
+  return {
+    screen,
+    bookmarked: bookmarked(state, screen),
   }
 }
 
-const ms = (state: State) => ({
-  screens: _.values(state.ScreensContainer),
-  system: state.System,
-})
-
-const conn: Connector<{}, Props> = connect(ms, { deleteSubmit })
+const conn = connect(
+  ms,
+  {
+    deleteSubmit,
+  },
+)
 
 export default conn(Container)

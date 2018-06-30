@@ -1,8 +1,36 @@
 // @flow
-import type { State } from '../../types'
+import type { State, Screen, PageInfo } from '../../types'
 
-export const getActiveScreen = (state: State) =>
-  state.ScreensContainer[state.System.selectedTab]
+import { toId } from '../../utils'
 
-export const getNewScreen = (state: State) =>
-  state.ScreensContainer[Object.keys(state.ScreensContainer).length - 1]
+export const getScreenStore = (state: State, screen: Screen) => {
+  return state.ScreensContainer[toId(screen)]
+}
+
+export const getStoryIds = (state: State, screen: Screen) => {
+  const s = getScreenStore(state, screen)
+  if (!s) {
+    return []
+  }
+  return s.pages[screen.page] || []
+}
+
+export function getPageInfo(state: State, screen: Screen): PageInfo {
+  const s = getScreenStore(state, screen)
+  if (!s) {
+    return {
+      total: 0,
+      page: 0,
+      next: false,
+      prev: false,
+    }
+  }
+  const { total } = s
+  const { page } = screen
+  return {
+    total,
+    page,
+    next: page + 1 > total ? false : page + 1,
+    prev: page - 1 === 0 ? false : page - 1,
+  }
+}

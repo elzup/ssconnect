@@ -6,10 +6,7 @@ export type State = { [id: number]: Tag }
 
 export const initialState: State = {}
 
-export default function(
-  state: State = initialState,
-  action: Action,
-): Exact<State> {
+export default function(state: State = initialState, action: Action): State {
   switch (action.type) {
     case Actions.RECEIVE_TAGS:
       return {

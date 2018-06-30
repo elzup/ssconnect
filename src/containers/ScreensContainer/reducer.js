@@ -1,71 +1,20 @@
 // @flow
 
-import type { Action, Screen } from '../../types'
+import type { Action, ScreenStoreById } from '../../types'
 import { Actions } from './actionTypes'
-import _ from 'lodash'
 
-export type State = { [id: number | string]: Screen }
+export type State = ScreenStoreById
 
-export const initialState: State = {
-  '0': {
-    id: 0,
-    page: 1,
-    type: 'new',
-    loaded: false,
-  },
-  '1': {
-    id: 1,
-    page: 1,
-    type: 'search',
-    tag: '',
-    q: '',
-    loaded: false,
-  },
-}
+export const initialState: State = {}
 
 export default function(state: State = initialState, action: Action): State {
   switch (action.type) {
-    case Actions.DELETE_SCREEN_PROFILE:
-      return _.omit(state, [`${action.screenId}`])
-
-    case Actions.MAKE_SCREEN_PROFILE:
-      const id = Object.keys(state).length
+    case Actions.SAVE_SCREEN:
       return {
         ...state,
-        [id]: {
-          id: id,
-          type: 'profile',
-          page: 1,
-          tag: action.tag,
-          q: action.q,
-          loaded: false,
-        },
+        [action.key]: action.screenStore,
       }
 
-    case Actions.PAGE_CHANGE: {
-      const { newPage, screenId } = action
-      return {
-        ...state,
-        [screenId]: {
-          ..._.omit(state[screenId], ['storyIds', 'pageInfo']),
-          page: newPage,
-          loaded: false,
-        },
-      }
-    }
-
-    case Actions.LOADED_SCREEN_STORIES: {
-      const { screenId, storyIds, pageInfo } = action
-      return {
-        ...state,
-        [screenId]: {
-          ..._.omit(state[screenId], ['storyIds', 'pageInfo']),
-          storyIds: storyIds,
-          pageInfo: pageInfo,
-          loaded: true,
-        },
-      }
-    }
     default:
       return state
   }

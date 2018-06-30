@@ -1,15 +1,12 @@
 // @flow
-import type { Action, Blog } from '../../types'
+import type { Action, Blog, ID } from '../../types'
 import { Actions } from '../BlogsContainer/actionTypes'
 
-export type State = { [id: number | string]: Blog }
+export type State = { [id: ID]: Blog }
 
 export const initialState: State = {}
 
-export default function(
-  state: State = initialState,
-  action: Action,
-): Exact<State> {
+export default function(state: State = initialState, action: Action): State {
   switch (action.type) {
     case Actions.RECEIVE_BLOGS:
       return {

@@ -1,28 +1,34 @@
 // @flow
 import * as React from 'react'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
-import { List, ListItem } from 'material-ui/List'
-import FontIcon from 'material-ui/FontIcon'
+
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import Typography from '@material-ui/core/Typography'
+import InputAdornment from '@material-ui/core/InputAdornment'
+
+import SearchIcon from '@material-ui/icons/Search'
+import StarIcon from '@material-ui/icons/Star'
+import RadioCheckedIcon from '@material-ui/icons/RadioButtonChecked'
+import RadioUnCheckedIcon from '@material-ui/icons/RadioButtonUnchecked'
+
 import styled from 'styled-components'
 import type { Tag } from '../../types'
 
 export type Props = {
   tags: Tag[],
-  searchSubmit: Function,
+  searchSubmit: ({ q: string, tag: string }) => void,
 }
 
 type State = {
-  qText: string,
-  tagText: string,
+  q: string,
+  tag: string,
+  filteredTags: Tag[],
 }
 
 const Wrapper = styled.div`
   padding: 10px;
-`
-
-const Inputs = styled.div`
-  width: 70%;
 `
 
 const Row = styled.div`
@@ -30,89 +36,112 @@ const Row = styled.div`
   justify-content: space-between;
 `
 
-const IconWrap = styled.div`
-  margin: 15px auto;
-  width: 2em;
-`
-
 class Component extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      qText: '',
-      tagText: '',
-    }
+  searchRef: ?HTMLInputElement
+
+  state = {
+    q: '',
+    tag: '',
+    filteredTags: [],
   }
+
+  componentDidMount() {
+    this.setState({ filteredTags: this.props.tags })
+  }
+
+  filterTag = (tag: string) => {
+    const tl = tag.toLowerCase()
+    const filteredTags = this.props.tags.filter(
+      t => t.name.toLowerCase().indexOf(tl) !== -1,
+    )
+    this.setState({ filteredTags })
+  }
+
   render() {
     const { props, state } = this
-    const filteredTags = props.tags.filter(
-      tag => tag.name.indexOf(state.tagText) !== -1,
-    )
     return (
       <Wrapper>
         <Row>
-          <Inputs>
-            <Row>
-              <IconWrap>
-                <FontIcon className="material-icons">search</FontIcon>
-              </IconWrap>
-              <TextField
-                hintText="キーワード・作品・キャラ"
-                value={state.qText}
-                onChange={(event: Object, newValue: string) => {
-                  this.setState({
-                    qText: newValue,
-                  })
-                }}
-              />
-            </Row>
-            <Row>
-              <IconWrap>
-                <FontIcon className="material-icons">star</FontIcon>
-              </IconWrap>
-              <TextField
-                hintText="タグ"
-                value={state.tagText}
-                onChange={(event: Object, newValue: string) => {
-                  console.log(newValue)
-                  this.setState({
-                    tagText: newValue,
-                  })
-                }}
-              />
-            </Row>
-          </Inputs>
-          <RaisedButton
-            primary
-            style={{ margin: 5, height: 50, width: 50 }}
-            label="検索"
-            onClick={() => {
-              props.searchSubmit(state.qText, state.tagText)
-            }}
-          />
+          <div>
+            <TextField
+              label="キーワード・作品・キャラ"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              onChange={e => {
+                this.setState({ q: e.target.value })
+              }}
+            />
+            <TextField
+              label="タグ"
+              inputRef={r => {
+                this.searchRef = r
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={e => {
+                const tag = e.target.value
+                this.setState({ tag })
+                this.filterTag(tag)
+              }}
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <StarIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
         </Row>
+        <Button
+          color="primary"
+          variant="contained"
+          fullWidth
+          onClick={() => {
+            props.searchSubmit({ q: state.q, tag: state.tag })
+          }}
+        >
+          検索
+        </Button>
         <p>タグ数:{props.tags.length}</p>
-        <p>絞り込み:{filteredTags.length}</p>
+        <p>絞り込み:{state.filteredTags.length}</p>
         <List>
-          {filteredTags.map(tag => {
+          {state.filteredTags.map(t => {
             // HACKME
-            const selected = tag.name === state.tagText
+            const selected = t.name === state.tag
             return (
               <ListItem
-                key={tag.id}
-                rightIcon={
-                  <FontIcon className="material-icons">
-                    {selected
-                      ? 'radio_button_checked'
-                      : 'radio_button_unchecked'}
-                  </FontIcon>
-                }
-                primaryText={tag.name}
+                key={t.id}
                 onClick={() => {
-                  this.setState({ tagText: selected ? '' : tag.name })
+                  const tag = selected ? '' : t.name
+                  this.setState({ tag })
+                  this.filterTag(tag)
+                  if (this.searchRef) {
+                    this.searchRef.value = tag
+                  }
                 }}
-                secondaryText={`(${tag.taggingsCount})`}
-              />
+              >
+                <div style={{ width: '100%', display: 'flex' }}>
+                  <div style={{ flex: 1 }}>
+                    <Typography variant="body1">{t.name}</Typography>
+                    <Typography variant="body2">({t.taggingsCount})</Typography>
+                  </div>
+                  <div style={{ flex: 0 }}>
+                    {selected ? <RadioCheckedIcon /> : <RadioUnCheckedIcon />}
+                  </div>
+                </div>
+              </ListItem>
             )
           })}
         </List>

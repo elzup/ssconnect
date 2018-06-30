@@ -1,12 +1,12 @@
 // @flow
-import { connect, type Connector } from 'react-redux'
-import type { State } from '../../types'
-import StoryCell, { type Props } from '../../components/StoryCell'
+import { connect } from 'react-redux'
+import type { State, ID } from '../../types'
+import StoryCell from '../../components/StoryCell'
 import { getArticleCompOldest } from '../ArticleById/selectors'
 import { openedArticle } from '../ScreensContainer/logic'
 
 type OProps = {
-  storyId: number,
+  storyId: ID,
 }
 
 const ms = (state: State, ownProps: OProps) => ({
@@ -16,9 +16,12 @@ const ms = (state: State, ownProps: OProps) => ({
 // TODO
 const onClickAction = () => {}
 
-const conn: Connector<OProps, Props> = connect(ms, {
-  onClickAction,
-  openedArticle,
-})
+const conn = connect(
+  ms,
+  {
+    onClickAction,
+    openedArticle,
+  },
+)
 
 export default conn(StoryCell)

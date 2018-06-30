@@ -5,15 +5,7 @@ import { normalizeStories } from './normalize'
 import request from 'superagent'
 import _ from 'lodash'
 
-import type {
-  Story,
-  Blog,
-  Tag,
-  QueryParams,
-  PageInfo,
-  Screen,
-  Article,
-} from '../types'
+import type { Story, Blog, Tag, PageInfo, Screen, Article } from '../types'
 
 const UseHeader = {
   page: 'x-page',
@@ -33,39 +25,17 @@ const baseHeaders = {
   'Content-Type': 'application/json',
 }
 
-function permitQuery(screen: Screen): QueryParams {
-  switch (screen.type) {
-    case 'new': {
-      const { page } = screen
-      return { page, tag: '', q: '' }
-    }
-    case 'search': {
-      const { page, tag, q } = screen
-      return { page, tag, q }
-    }
-    case 'profile': {
-      const { page, tag, q } = screen
-      return { page, tag, q }
-    }
-    default: {
-      // NOTE: Why can remove?
-      return { page: 0, tag: '', q: '' }
-    }
-  }
-}
-
-type GetStoriesCallback = ({
+type GetStoriesCallback = {
   stories: Story[],
   articles: Article[],
   blogs: Blog[],
   pageInfo: PageInfo,
-}) => void
+}
 
 export async function getStories(
-  screen: Screen,
+  params: Screen,
   timeout: number = TIMEOUT,
 ): Promise<GetStoriesCallback> {
-  const params = permitQuery(screen)
   const storiesRequest = request
     .get(host + '/v1/stories')
     .query(params)

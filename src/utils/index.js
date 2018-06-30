@@ -1,16 +1,24 @@
 // @flow
-import _ from 'lodash'
 import type { Screen } from '../types'
 
-export function getTitle(screen: Screen): string {
-  switch (screen.type) {
-    case 'new':
-      return '新着'
-    case 'search':
-      return '検索'
-    case 'profile':
-      return _.compact([screen.q, screen.tag]).join(' | ')
-    default:
-      return ''
+export const toId = (screen: Screen) => `${screen.q}----${screen.tag}`
+
+export function buildScreen(q: string, tag: string, page: number): Screen {
+  if (q === '' && tag === '') {
+    // news
+    return {
+      tag,
+      page,
+      q,
+      id: `news`,
+      label: `新着`,
+    }
+  }
+  return {
+    tag,
+    page,
+    q,
+    id: `${q}----${tag}`,
+    label: `${q}#${tag}`,
   }
 }

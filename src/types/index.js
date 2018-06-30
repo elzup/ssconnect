@@ -29,28 +29,6 @@ type ThunkDispatch<A> = ThunkAction => A
 export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
 export type Store = ReduxStore<State, Action, Dispatch>
 
-// Shopping Cart
-type BaseProduct = {
-  id: number,
-  title: string,
-  price: number,
-}
-
-export type Product = BaseProduct & {
-  inventory: number,
-}
-
-export type ProductInCart = BaseProduct & {
-  quantity: number,
-}
-
-export type QuantityById = { [id: number]: number }
-
-export type Cart = {
-  addedIds: number[],
-  quantityById: QuantityById,
-}
-
 export type PageInfo = {
   page: number,
   total: number,
@@ -63,15 +41,16 @@ export type QueryParams = {
   tag: string,
   q: string,
 }
+export type ID = number | string
 
 export type Blog = {|
-  id: number,
+  id: ID,
   title: string,
 |}
-export type BlogById = { [id: number | string]: Blog }
+export type BlogById = { [id: ID]: Blog }
 
 export type Story = {
-  id: number,
+  id: ID,
   title: string,
   readed: boolean,
   firstPostedAt: string,
@@ -80,72 +59,49 @@ export type Story = {
 }
 
 export type Article = {
-  id: number,
+  id: ID,
   postedAt: string,
   blog: number,
   url: string,
 }
-export type ArticleById = { [id: number | string]: Article }
+export type ArticleById = { [id: ID]: Article }
 
 export type ArticleComp = {
-  id: number,
+  id: ID,
   postedAt: string,
   url: string,
   blog: Blog,
   story: Story,
 }
 
-export type StoryById = { [id: number | string]: Story }
+export type StoryById = { [id: ID]: Story }
 
-export type ScreenNoLoadedProp = {
-  loaded: false,
-}
-
-export type ScreenLoadedProp = {
-  loaded: true,
-  storyIds: number[],
-  pageInfo: PageInfo,
-}
-
-export type ScreenBase = {
-  id: number,
+export type Screen = {
   page: number,
-}
-
-export type ScreenProfile = ScreenBase & {
-  type: 'profile',
   q: string,
   tag: string,
+  id: string,
+  label: string,
 }
 
-export type ScreenSearch = ScreenBase & {
-  type: 'search',
-  q: string,
-  tag: string,
+export type ScreenStore = {
+  pages: { [page: number]: ID[] },
+  total: number,
 }
 
-export type ScreenNews = ScreenBase & {
-  type: 'new',
+export type ScreenStoreById = {
+  [id: string]: ScreenStore,
 }
-
-export type ScreenLoaded =
-  | (ScreenProfile & ScreenLoadedProp)
-  | (ScreenSearch & ScreenLoadedProp)
-  | (ScreenNews & ScreenLoaded)
-
-export type ScreenNoLoaded =
-  | (ScreenProfile & ScreenNoLoaded)
-  | (ScreenSearch & ScreenNoLoaded)
-  | (ScreenNews & ScreenNoLoaded)
-
-export type Screen = ScreenLoaded | ScreenNoLoaded
 
 export type System = {
   selectedTab: number,
+  drawer: {
+    open: boolean,
+  },
 }
 
 export type Tag = {
-  id: number,
+  id: ID,
   name: string,
   taggingsCount: number,
 }
