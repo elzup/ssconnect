@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Typography from '@material-ui/core/Typography'
+import InputAdornment from '@material-ui/core/InputAdornment'
 
 import SearchIcon from '@material-ui/icons/Search'
 import StarIcon from '@material-ui/icons/Star'
@@ -23,24 +24,16 @@ export type Props = {
 type State = {
   q: string,
   tag: string,
+  filteredTags: Tag[],
 }
 
 const Wrapper = styled.div`
   padding: 10px;
 `
 
-const Inputs = styled.div`
-  width: 70%;
-`
-
 const Row = styled.div`
   display: flex;
   justify-content: space-between;
-`
-
-const IconWrap = styled.div`
-  margin: 15px auto;
-  width: 2em;
 `
 
 class Component extends React.Component<Props, State> {
@@ -49,64 +42,82 @@ class Component extends React.Component<Props, State> {
   state = {
     q: '',
     tag: '',
+    filteredTags: [],
+  }
+
+  componentDidMount() {
+    this.setState({ filteredTags: this.props.tags })
+  }
+
+  filterTag = (tag: string) => {
+    const tl = tag.toLowerCase()
+    const filteredTags = this.props.tags.filter(
+      t => t.name.toLowerCase().indexOf(tl) !== -1,
+    )
+    this.setState({ filteredTags })
   }
 
   render() {
     const { props, state } = this
-    const filteredTags = props.tags.filter(
-      tag => tag.name.indexOf(state.tag) !== -1,
-    )
     return (
       <Wrapper>
         <Row>
-          <Inputs>
-            <Row>
-              <IconWrap>
-                <SearchIcon />
-              </IconWrap>
-              <TextField
-                label="キーワード・作品・キャラ"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onChange={e => {
-                  this.setState({ q: e.target.value })
-                }}
-              />
-            </Row>
-            <Row>
-              <IconWrap>
-                <StarIcon />
-              </IconWrap>
-              <TextField
-                label="タグ"
-                inputRef={r => {
-                  this.searchRef = r
-                }}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onChange={e => {
-                  this.setState({ tag: e.target.value })
-                }}
-              />
-            </Row>
-          </Inputs>
-          <Button
-            color="primary"
-            variant="contained"
-            style={{ margin: 5, height: 50, width: 50 }}
-            onClick={() => {
-              props.searchSubmit({ q: state.q, tag: state.tag })
-            }}
-          >
-            検索
-          </Button>
+          <div>
+            <TextField
+              label="キーワード・作品・キャラ"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              onChange={e => {
+                this.setState({ q: e.target.value })
+              }}
+            />
+            <TextField
+              label="タグ"
+              inputRef={r => {
+                this.searchRef = r
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={e => {
+                const tag = e.target.value
+                this.setState({ tag })
+                this.filterTag(tag)
+              }}
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <StarIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
         </Row>
+        <Button
+          color="primary"
+          variant="contained"
+          fullWidth
+          onClick={() => {
+            props.searchSubmit({ q: state.q, tag: state.tag })
+          }}
+        >
+          検索
+        </Button>
         <p>タグ数:{props.tags.length}</p>
-        <p>絞り込み:{filteredTags.length}</p>
+        <p>絞り込み:{state.filteredTags.length}</p>
         <List>
-          {filteredTags.map(t => {
+          {state.filteredTags.map(t => {
             // HACKME
             const selected = t.name === state.tag
             return (
@@ -115,6 +126,7 @@ class Component extends React.Component<Props, State> {
                 onClick={() => {
                   const tag = selected ? '' : t.name
                   this.setState({ tag })
+                  this.filterTag(tag)
                   if (this.searchRef) {
                     this.searchRef.value = tag
                   }

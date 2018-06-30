@@ -32,6 +32,12 @@ const theme = createMuiTheme({
         marginRight: '5px',
       },
     },
+    MuiFormControl: {
+      root: {
+        marginTop: '5px',
+        marginBottom: '5px',
+      },
+    },
   },
 })
 export default theme
