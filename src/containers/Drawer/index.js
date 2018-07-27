@@ -45,7 +45,7 @@ class Drawer extends React.Component<Props> {
           onKeyDown={props.toggleDrawer}
         >
           <List>
-            <ListItem>
+            <ListItem button>
               <ListItemIcon>
                 <TrendingUpIcon />
               </ListItemIcon>
@@ -54,7 +54,7 @@ class Drawer extends React.Component<Props> {
               </Link>
             </ListItem>
 
-            <ListItem>
+            <ListItem button>
               <ListItemIcon>
                 <SearchIcon />
               </ListItemIcon>
@@ -65,7 +65,7 @@ class Drawer extends React.Component<Props> {
             <Divider />
             <ListSubheader>お気に入り</ListSubheader>
             {props.screens.length === 0 && (
-              <ListItem>
+              <ListItem button>
                 <ListItemText>----</ListItemText>
               </ListItem>
             )}
@@ -79,7 +79,7 @@ class Drawer extends React.Component<Props> {
               </ListItem>
             ))}
             <Divider />
-            <ListItem>
+            <ListItem button>
               <ListItemIcon>
                 <CodeIcon />
               </ListItemIcon>
@@ -87,7 +87,7 @@ class Drawer extends React.Component<Props> {
                 <ListItemText>コード</ListItemText>
               </a>
             </ListItem>
-            <ListItem>
+            <ListItem button>
               <ListItemIcon>
                 <AuthorIcon />
               </ListItemIcon>
