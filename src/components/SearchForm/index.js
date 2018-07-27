@@ -18,11 +18,10 @@ import type { Tag } from '../../types'
 
 export type Props = {
   tags: Tag[],
-  searchSubmit: ({ q: string, tag: string }) => void,
+  searchSubmit: ({ tag: string }) => void,
 }
 
 type State = {
-  q: string,
   tag: string,
   filteredTags: Tag[],
 }
@@ -38,9 +37,9 @@ const Row = styled.div`
 
 class Component extends React.Component<Props, State> {
   searchRef: ?HTMLInputElement
+  tagRef: ?HTMLInputElement
 
   state = {
-    q: '',
     tag: '',
     filteredTags: [],
   }
@@ -65,6 +64,9 @@ class Component extends React.Component<Props, State> {
           <div>
             <TextField
               label="キーワード・作品・キャラ"
+              inputRef={r => {
+                this.searchRef = r
+              }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -76,14 +78,11 @@ class Component extends React.Component<Props, State> {
                   </InputAdornment>
                 ),
               }}
-              onChange={e => {
-                this.setState({ q: e.target.value })
-              }}
             />
             <TextField
               label="タグ"
               inputRef={r => {
-                this.searchRef = r
+                this.tagRef = r
               }}
               InputLabelProps={{
                 shrink: true,
@@ -109,7 +108,10 @@ class Component extends React.Component<Props, State> {
           variant="contained"
           fullWidth
           onClick={() => {
-            props.searchSubmit({ q: state.q, tag: state.tag })
+            if (!this.searchRef) {
+              return
+            }
+            props.searchSubmit({ q: this.searchRef.value, tag: state.tag })
           }}
         >
           検索
@@ -127,8 +129,8 @@ class Component extends React.Component<Props, State> {
                   const tag = selected ? '' : t.name
                   this.setState({ tag })
                   this.filterTag(tag)
-                  if (this.searchRef) {
-                    this.searchRef.value = tag
+                  if (this.tagRef) {
+                    this.tagRef.value = tag
                   }
                 }}
               >
