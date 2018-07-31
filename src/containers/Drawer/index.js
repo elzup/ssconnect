@@ -26,6 +26,8 @@ type Props = {
   toggleDrawer: typeof toggleDrawer,
 }
 
+const A = p => <a {...p}>{p.children}</a>
+
 class Drawer extends React.Component<Props> {
   render() {
     const { props } = this
@@ -45,28 +47,24 @@ class Drawer extends React.Component<Props> {
           onKeyDown={props.toggleDrawer}
         >
           <List>
-            <ListItem button>
+            <ListItem button component={Link} to="/">
               <ListItemIcon>
                 <TrendingUpIcon />
               </ListItemIcon>
-              <Link to="/">
-                <ListItemText>新着</ListItemText>
-              </Link>
+              <ListItemText>新着</ListItemText>
             </ListItem>
 
-            <ListItem button>
+            <ListItem button component={Link} to="/search">
               <ListItemIcon>
                 <SearchIcon />
               </ListItemIcon>
-              <Link to="/search">
-                <ListItemText>検索</ListItemText>
-              </Link>
+              <ListItemText>検索</ListItemText>
             </ListItem>
             <Divider />
             <ListSubheader>お気に入り</ListSubheader>
             {props.screens.length === 0 && (
-              <ListItem button>
-                <ListItemText>----</ListItemText>
+              <ListItem>
+                <ListItemText>---</ListItemText>
               </ListItem>
             )}
             {props.screens.map((screen, i) => (
@@ -79,21 +77,21 @@ class Drawer extends React.Component<Props> {
               </ListItem>
             ))}
             <Divider />
-            <ListItem button>
+            <ListItem
+              button
+              component={A}
+              href="https://github.com/elzup/ssconnect"
+            >
               <ListItemIcon>
                 <CodeIcon />
               </ListItemIcon>
-              <a href="https://github.com/elzup/ssconnect">
-                <ListItemText>コード</ListItemText>
-              </a>
+              <ListItemText>コード</ListItemText>
             </ListItem>
-            <ListItem button>
+            <ListItem button component={A} href="https://elzup.com">
               <ListItemIcon>
                 <AuthorIcon />
               </ListItemIcon>
-              <a href="https://elzup.com">
-                <ListItemText>アプリ開発者</ListItemText>
-              </a>
+              <ListItemText>アプリ開発者</ListItemText>
             </ListItem>
           </List>
         </div>
