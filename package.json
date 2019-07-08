@@ -94,7 +94,7 @@
     "s2s-plugins-redux": "^0.4.5",
     "storybook-addon-material-ui": "^0.8.2"
   },
-  "homepage": "https://ssconnect.elzup.org",
+  "homepage": "https://ssconnect.anozon.me",
   "lint-staged": {
     "*.js": [
       "prettier --config ./.prettierrc --write",

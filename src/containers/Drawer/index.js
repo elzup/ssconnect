@@ -87,7 +87,7 @@ class Drawer extends React.Component<Props> {
               </ListItemIcon>
               <ListItemText>コード</ListItemText>
             </ListItem>
-            <ListItem button component={A} href="https://elzup.com">
+            <ListItem button component={A} href="https://anozon.me">
               <ListItemIcon>
                 <AuthorIcon />
               </ListItemIcon>
