@@ -47,7 +47,7 @@
     "redux-persist": "5.10.0",
     "redux-thunk": "2.3.0",
     "s2s": "0.20.1",
-    "s2s-plugins-redux": "0.4.8",
+    "s2s-plugins-redux": "1.0.1",
     "storybook-addon-material-ui": "0.8.11",
     "styled-components": "3.4.10"
   },
